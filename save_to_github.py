@@ -2,6 +2,7 @@
 import os
 import json
 from flask import Flask, request, jsonify, Response
+from flask_cors import CORS
 from github import Github
 from datetime import datetime
 
@@ -13,6 +14,7 @@ CSV_VIAJES_PATH = 'datos/viajes.csv'
 CSV_DINERO_PATH = 'datos/dinero.csv'
 
 app = Flask(__name__)
+CORS(app)
 
 def get_github_repo():
     g = Github(GITHUB_TOKEN)
