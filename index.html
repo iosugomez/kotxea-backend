@@ -458,7 +458,7 @@
                         </div>
                     </div>
                     <div class="grupo-form">
-                        <label for="dinero-viaje">Sortutako dirua (€)</label>
+                        <label for="dinero-viaje">Dirusaria (€)</label>
                         <input type="number" id="dinero-viaje" placeholder="0.00" step="0.01" min="0" aria-label="Dinero generado en euros">
                     </div>
                     <div class="botones-form">
@@ -684,12 +684,12 @@
                                     if (Array.isArray(datos)) {
                                         Storage.setRegistros(datos);
                                         SistemaRegistro.actualizarVistas();
-                                        alert('Datos restaurados desde la nube');
+                                        alert('Datuak hodeitik berreskuratu dira');
                                     } else {
-                                        alert('No hay datos en la nube');
+                                        alert('Hodeian ez dago daturik');
                                     }
                                 })
-                                .catch(() => alert('Error al restaurar desde la nube'));
+                                .catch(() => alert('Errorea hodeitik berreskuratzen'));
                         }
                 // ===== GUARDAR EN LA NUBE =====
                 function guardarEnLaNube() {
@@ -702,12 +702,12 @@
                     .then(res => res.json())
                     .then(data => {
                         if (data.status === 'ok') {
-                            alert('Datos guardados en la nube correctamente');
+                            alert('Datuak hodeian ondo gorde dira');
                         } else {
-                            alert('Error al guardar en la nube: ' + (data.error || '')); 
+                            alert('Errorea hodeian gordetzean: ' + (data.error || '')); 
                         }
                     })
-                    .catch(err => alert('Error de red al guardar en la nube'));
+                    .catch(err => alert('Errorea sarea erabiliz hodeian gordetzean'));
                 }
         // ===== CONFIGURACIÓN INICIAL =====
         const PARTICIPANTES = ['Iosu', 'Lide', 'Asier', 'Itziar'];
@@ -910,21 +910,21 @@
                 }
 
                 historial.innerHTML = registros.reverse().map(reg => {
-                    const detalleDinero = reg.dinero > 0 ? `<div class="movimiento-detalles"><strong>💵 Dinero:</strong> ${reg.dinero.toFixed(2)} €</div>` : '';
+                    const detalleDinero = reg.dinero > 0 ? `<div class="movimiento-detalles"><strong>💵 Dirusaria:</strong> ${reg.dinero.toFixed(2)} €</div>` : '';
                     
                     return `
                         <div class="movimiento">
                             <div class="movimiento-info">
                                 <div class="movimiento-detalles">
-                                    <strong>🚗 Conductor:</strong> ${reg.conductor}
+                                    <strong>🚗 Gidaria:</strong> ${reg.conductor}
                                 </div>
                                 <div class="movimiento-detalles">
-                                    <strong>🚗 Pasajeros:</strong> ${reg.pasajeros.join(', ')}
+                                    <strong>🚗 Bidaiariak:</strong> ${reg.pasajeros.join(', ')}
                                 </div>
                                 ${detalleDinero}
                                 <div class="movimiento-fecha">${new Date(reg.fecha).toLocaleDateString('es-ES')}</div>
                             </div>
-                            <button class="btn-eliminar" onclick="SistemaRegistro.eliminar(${reg.id})">Eliminar</button>
+                            <button class="btn-eliminar" onclick="SistemaRegistro.eliminar(${reg.id})">Ezabatu</button>
                         </div>
                     `;
                 }).join('');
