@@ -1,8 +1,9 @@
 Persona,Saldo (€)
-Iosu,-4.67
-Lide,0.00
-Asier,2.33
-Itziar,2.33
+Iosu,-2.67
+Lide,-6.00
+Asier,4.33
+Itziar,4.33
 
 Fecha,Conductor,Pasajeros,Dinero Total,Dinero por Persona
 2025-12-16,Iosu,"Asier|Itziar",7.00,2.33
+2025-12-16,Lide,"Iosu|Asier|Itziar",8.00,2.00
