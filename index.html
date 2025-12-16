@@ -609,10 +609,11 @@
                 <h2>Configuración y Control</h2>
                 
                 <div style="margin-bottom: 20px;">
-                    <h3 style="color: #333; margin-bottom: 10px;">Exportar Datos</h3>
+                    <h3 style="color: #333; margin-bottom: 10px;">Exportar y Guardar Datos</h3>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                         <button class="btn-exito" id="btn-exportar-viajes">📊 Descargar CSV - Viajes</button>
                         <button class="btn-exito" id="btn-exportar-dinero">📊 Descargar CSV - Dinero</button>
+                        <button class="btn-primario" id="btn-guardar-nube">☁️ Guardar en la nube</button>
                     </div>
                 </div>
 
@@ -640,6 +641,24 @@
     </div>
 
     <script>
+                // ===== GUARDAR EN LA NUBE =====
+                function guardarEnLaNube() {
+                    const datos = Storage.getRegistros();
+                    fetch('https://kotxea-backend.onrender.com/save', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(datos)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'ok') {
+                            alert('Datos guardados en la nube correctamente');
+                        } else {
+                            alert('Error al guardar en la nube: ' + (data.error || '')); 
+                        }
+                    })
+                    .catch(err => alert('Error de red al guardar en la nube'));
+                }
         // ===== CONFIGURACIÓN INICIAL =====
         const PARTICIPANTES = ['Iosu', 'Lide', 'Asier', 'Itziar'];
         const Storage = {
@@ -901,6 +920,8 @@
 
         // ===== EVENT LISTENERS =====
         document.addEventListener('DOMContentLoaded', () => {
+                        // Botón Guardar en la nube
+                        document.getElementById('btn-guardar-nube').addEventListener('click', guardarEnLaNube);
             // Establecer fecha actual por defecto
             const hoy = new Date().toISOString().split('T')[0];
             document.getElementById('fecha-viaje').value = hoy;
