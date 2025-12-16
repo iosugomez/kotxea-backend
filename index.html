@@ -710,30 +710,34 @@
 
         // ===== SISTEMA COMBINADO VIAJES + DINERO =====
         const SistemaRegistro = {
-            guardar: () => {
-                const fecha = document.getElementById('fecha-viaje').value;
-                const conductor = document.getElementById('conductor-viaje').value;
-                const pasajeros = Array.from(document.querySelectorAll('.pasajero-viaje:checked')).map(el => el.value);
-                const dinero = parseFloat(document.getElementById('dinero-viaje').value) || 0;
-                // Validaciones
-                if (!fecha) { SistemaRegistro.mostrarAlerta('Por favor, selecciona una fecha', 'error'); return; }
-                if (!conductor) { SistemaRegistro.mostrarAlerta('Por favor, selecciona un conductor', 'error'); return; }
-                if (pasajeros.length === 0) { SistemaRegistro.mostrarAlerta('Selecciona al menos un pasajero', 'error'); return; }
-                // Guardar registro
-                const registro = { id: Date.now(), fecha, conductor, pasajeros, dinero };
-                const registros = Storage.getRegistros();
-                registros.push(registro);
-                Storage.setRegistros(registros);
-                SistemaRegistro.mostrarAlerta('Registro guardado correctamente', 'exito');
-                SistemaRegistro.limpiarFormulario();
-                SistemaRegistro.actualizarVistas();
-            },
+        guardar: () => {
+            const fecha = document.getElementById('fecha-viaje').value;
+            const conductor = document.getElementById('conductor-viaje').value;
+            const pasajeros = Array.from(document.querySelectorAll('.pasajero-viaje:checked')).map(el => el.value);
+            const dinero = parseFloat(document.getElementById('dinero-viaje').value) || 0;
+            // Validaciones
+            if (!fecha) { SistemaRegistro.mostrarAlerta('Por favor, selecciona una fecha', 'error'); return; }
+            if (!conductor) { SistemaRegistro.mostrarAlerta('Por favor, selecciona un conductor', 'error'); return; }
+            if (pasajeros.length === 0) { SistemaRegistro.mostrarAlerta('Selecciona al menos un pasajero', 'error'); return; }
+            // Guardar registro
+            const registro = { id: Date.now(), fecha, conductor, pasajeros, dinero };
+            const registros = Storage.getRegistros();
+            registros.push(registro);
+            Storage.setRegistros(registros);
+            SistemaRegistro.mostrarAlerta('Registro guardado correctamente', 'exito');
+            SistemaRegistro.limpiarFormulario();
+            SistemaRegistro.actualizarVistas();
+            // Guardar automáticamente en la nube
+            guardarEnLaNube();
+        },
 
             eliminar: (id) => {
                 const registros = Storage.getRegistros();
                 const filtrados = registros.filter(r => r.id !== id);
                 Storage.setRegistros(filtrados);
                 SistemaRegistro.actualizarVistas();
+                // Guardar automáticamente en la nube
+                guardarEnLaNube();
             },
 
             calcularSaldosViajes: () => {
