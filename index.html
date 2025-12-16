@@ -718,10 +718,14 @@
                 PARTICIPANTES.forEach(p => saldos[p] = 0);
                 const registros = Storage.getRegistros();
                 registros.forEach(reg => {
+                    const totalPersonas = reg.pasajeros.length + 1;
                     if (reg.dinero > 0 && reg.pasajeros.length > 0) {
-                        saldos[reg.conductor] += reg.dinero;
-                        const dineroPorPasajero = reg.dinero / reg.pasajeros.length;
-                        reg.pasajeros.forEach(pasajero => { saldos[pasajero] -= dineroPorPasajero; });
+                        const deudaPorPersona = reg.dinero / totalPersonas;
+                        // El conductor debe a cada pasajero
+                        saldos[reg.conductor] -= deudaPorPersona * reg.pasajeros.length;
+                        reg.pasajeros.forEach(pasajero => {
+                            saldos[pasajero] += deudaPorPersona;
+                        });
                     }
                 });
                 return saldos;
