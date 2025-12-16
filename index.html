@@ -787,6 +787,10 @@
                     saldos[reg.conductor] += (1 - costoPorPersona);
                     reg.pasajeros.forEach(pasajero => { saldos[pasajero] -= costoPorPersona; });
                 });
+                // Truncar a dos decimales
+                Object.keys(saldos).forEach(p => {
+                    saldos[p] = Math.trunc(saldos[p] * 100) / 100;
+                });
                 return saldos;
             },
             calcularSaldosDinero: () => {
