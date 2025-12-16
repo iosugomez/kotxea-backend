@@ -776,8 +776,10 @@
             },
 
             calcularSaldosViajes: () => {
-                const saldos = {};
-                PARTICIPANTES.forEach(p => saldos[p] = 0);
+                // Valores iniciales base
+                const base = { 'Iosu': -0.14, 'Asier': 0.34, 'Itziar': -0.27, 'Lide': 0.07 };
+                const saldos = { ...base };
+                PARTICIPANTES.forEach(p => { if (!(p in saldos)) saldos[p] = 0; });
                 const registros = Storage.getRegistros();
                 registros.forEach(reg => {
                     const totalPersonas = reg.pasajeros.length + 1;
