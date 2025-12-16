@@ -641,24 +641,7 @@
                         Esta acción borrará todos los datos del mes actual de ambos sistemas (Dinero y Viajes). No se puede deshacer.
                     </p>
                     <button class="btn-peligro" id="btn-reiniciar-mes">🗑️ Reiniciar Mes (Borrar Todo)</button>
-                <!-- Tabla de pagos externos agregados por el usuario -->
-                <div style="margin-top: 20px;">
-                    <h2>Pagos mínimos introducidos</h2>
-                    <div class="resumen">
-                        <table class="tabla-resumen">
-                            <thead>
-                                <tr>
-                                    <th>Deudor</th>
-                                    <th>Acreedor</th>
-                                    <th>Cantidad (€)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tabla-pagos-minimos-externos">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                </div>
+                </div> 
             </div>
         </div>
     </div>
@@ -855,64 +838,8 @@
             },
 
             actualizarTablaPagosMinimos: () => {
-                const saldos = SistemaRegistro.calcularSaldosDinero();
-                
-                // Calcular pagos mínimos localmente
-                const deudores = [];
-                const acreedores = [];
-                for (const [p, s] of Object.entries(saldos)) {
-                    if (Math.round(s * 100) / 100 < 0) {
-                        deudores.push([p, Math.round(-s * 100) / 100]);
-                    } else if (Math.round(s * 100) / 100 > 0) {
-                        acreedores.push([p, Math.round(s * 100) / 100]);
-                    }
-                }
-
-                const pagos = [];
-                let i = 0, j = 0;
-                while (i < deudores.length && j < acreedores.length) {
-                    const [deudor, debe] = deudores[i];
-                    const [acreedor, cobra] = acreedores[j];
-                    const pago = Math.min(debe, cobra);
-                    pagos.push({ deudor, acreedor, cantidad: Math.round(pago * 100) / 100 });
-                    
-                    deudores[i][1] -= pago;
-                    acreedores[j][1] -= pago;
-                    
-                    if (Math.abs(deudores[i][1]) < 0.01) i++;
-                    if (Math.abs(acreedores[j][1]) < 0.01) j++;
-                }
-
+                const pagos = SistemaRegistro._PAGOS_EXTERNOS || [];
                 const tabla = document.getElementById('tabla-pagos-minimos');
-                tabla.innerHTML = '';
-
-                if (pagos.length === 0) {
-                    tabla.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #999;">No hay deudas pendientes</td></tr>';
-                } else {
-                    pagos.forEach(pago => {
-                        const fila = `
-                            <tr>
-                                <td style="color: #e74c3c; font-weight: bold;">${pago.deudor}</td>
-                                <td style="color: #27ae60; font-weight: bold;">${pago.acreedor}</td>
-                                <td style="color: #f39c12; font-weight: bold;">${pago.cantidad.toFixed(2)} €</td>
-                            </tr>
-                        `;
-                        tabla.innerHTML += fila;
-                    });
-                }
-                // También actualizar la tabla de pagos externos (si existen)
-                SistemaRegistro.actualizarTablaPagosExternos && SistemaRegistro.actualizarTablaPagosExternos();
-            },
-
-            // Pagos externos predefinidos (pueden venir de una importación o ser editados)
-            _PAGOS_EXTERNOS: [
-                { deudor: 'Iosu', acreedor: 'Asier', cantidad: 2.33 },
-                { deudor: 'Iosu', acreedor: 'Itziar', cantidad: 2.33 }
-            ],
-
-            actualizarTablaPagosExternos: () => {
-                const pagos = SistemaRegistro._PAGOS_EXTERNOS;
-                const tabla = document.getElementById('tabla-pagos-minimos-externos');
                 if (!tabla) return;
 
                 // Agregar cantidades con la misma pareja deudor-acreedor
@@ -935,6 +862,11 @@
 
                 tabla.innerHTML = filas || '<tr><td colspan="3" style="text-align: center; color: #999;">No hay pagos introducidos</td></tr>';
             },
+
+            _PAGOS_EXTERNOS: [
+                { deudor: 'Iosu', acreedor: 'Asier', cantidad: 2.33 },
+                { deudor: 'Iosu', acreedor: 'Itziar', cantidad: 2.33 }
+            ],
 
             actualizarHistorial: () => {
                 const registros = Storage.getRegistros();
