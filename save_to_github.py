@@ -52,6 +52,35 @@ def generar_csv_dinero(registros):
     csv = 'Persona,Saldo (€)\n'
     for p, s in saldos.items():
         csv += f'{p},{s:.2f}\n'
+
+    # --- Cálculo de pagos mínimos tipo Tricount ---
+    deudores = []
+    acreedores = []
+    for p, s in saldos.items():
+        if round(s, 2) < 0:
+            deudores.append([p, round(-s, 2)])
+        elif round(s, 2) > 0:
+            acreedores.append([p, round(s, 2)])
+
+    pagos = []
+    i, j = 0, 0
+    while i < len(deudores) and j < len(acreedores):
+        deudor, debe = deudores[i]
+        acreedor, cobra = acreedores[j]
+        pago = min(debe, cobra)
+        pagos.append((deudor, acreedor, pago))
+        deudores[i][1] -= pago
+        acreedores[j][1] -= pago
+        if abs(deudores[i][1]) < 0.01:
+            i += 1
+        if abs(acreedores[j][1]) < 0.01:
+            j += 1
+
+    if pagos:
+        csv += '\nPagos mínimos para saldar deudas:\nDeudor,Acreedor,Cantidad (€)\n'
+        for deudor, acreedor, cantidad in pagos:
+            csv += f'{deudor},{acreedor},{cantidad:.2f}\n'
+
     csv += '\nFecha,Conductor,Pasajeros,Dinero Total,Dinero por Persona\n'
     for reg in registros:
         if reg['dinero'] > 0 and len(reg['pasajeros']) > 0:
@@ -90,6 +119,31 @@ def save_data():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+def calcular_pagos_minimos(saldos):
+    """Calcula los pagos mínimos tipo Tricount para saldar deudas"""
+    deudores = []
+    acreedores = []
+    for p, s in saldos.items():
+        if round(s, 2) < 0:
+            deudores.append([p, round(-s, 2)])
+        elif round(s, 2) > 0:
+            acreedores.append([p, round(s, 2)])
+    
+    pagos = []
+    i, j = 0, 0
+    while i < len(deudores) and j < len(acreedores):
+        deudor, debe = deudores[i]
+        acreedor, cobra = acreedores[j]
+        pago = min(debe, cobra)
+        pagos.append({'de': deudor, 'para': acreedor, 'cantidad': round(pago, 2)})
+        deudores[i][1] -= pago
+        acreedores[j][1] -= pago
+        if abs(deudores[i][1]) < 0.01:
+            i += 1
+        if abs(acreedores[j][1]) < 0.01:
+            j += 1
+    return pagos
+
 def get_file_content(repo, path):
     try:
         contents = repo.get_contents(path)
@@ -120,6 +174,27 @@ def get_csv_dinero():
     if content:
         return Response(content, mimetype='text/csv')
     return '', 404
+
+@app.route('/pagos-minimos', methods=['POST'])
+def pagos_minimos():
+    """Calcula y retorna los pagos mínimos para saldar deudas"""
+    data = request.json
+    if not data or not isinstance(data, list):
+        return jsonify({'error': 'No data provided'}), 400
+    
+    participantes = ['Iosu', 'Lide', 'Asier', 'Itziar']
+    saldos = {p: 0 for p in participantes}
+    
+    for reg in data:
+        total = len(reg.get('pasajeros', [])) + 1
+        if reg.get('dinero', 0) > 0 and len(reg.get('pasajeros', [])) > 0:
+            deuda = reg['dinero'] / total
+            saldos[reg['conductor']] -= deuda * len(reg['pasajeros'])
+            for p in reg['pasajeros']:
+                saldos[p] += deuda
+    
+    pagos = calcular_pagos_minimos(saldos)
+    return jsonify({'pagos': pagos, 'saldos': saldos})
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

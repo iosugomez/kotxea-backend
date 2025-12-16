@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor Coche Compartido</title>
+    <title>Kotxea Gipuzkoan Barrena</title>
     <style>
         * {
             margin: 0;
@@ -597,6 +597,23 @@
                     </div>
                 </div>
 
+                <div style="margin-top: 30px;">
+                    <h2>Pagos Mínimos para Saldar Deudas (Tricount)</h2>
+                    <div class="resumen">
+                        <table class="tabla-resumen">
+                            <thead>
+                                <tr>
+                                    <th>Deudor</th>
+                                    <th>Acreedor</th>
+                                    <th>Cantidad (€)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-pagos-minimos">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <h2>Historial de Registros</h2>
                 <div class="historial" id="historial-registro">
                 </div>
@@ -815,6 +832,57 @@
                     `;
                     tabla.innerHTML += fila;
                 });
+                
+                // Actualizar tabla de pagos mínimos
+                SistemaRegistro.actualizarTablaPagosMinimos();
+            },
+
+            actualizarTablaPagosMinimos: () => {
+                const saldos = SistemaRegistro.calcularSaldosDinero();
+                
+                // Calcular pagos mínimos localmente
+                const deudores = [];
+                const acreedores = [];
+                for (const [p, s] of Object.entries(saldos)) {
+                    if (Math.round(s * 100) / 100 < 0) {
+                        deudores.push([p, Math.round(-s * 100) / 100]);
+                    } else if (Math.round(s * 100) / 100 > 0) {
+                        acreedores.push([p, Math.round(s * 100) / 100]);
+                    }
+                }
+
+                const pagos = [];
+                let i = 0, j = 0;
+                while (i < deudores.length && j < acreedores.length) {
+                    const [deudor, debe] = deudores[i];
+                    const [acreedor, cobra] = acreedores[j];
+                    const pago = Math.min(debe, cobra);
+                    pagos.push({ deudor, acreedor, cantidad: Math.round(pago * 100) / 100 });
+                    
+                    deudores[i][1] -= pago;
+                    acreedores[j][1] -= pago;
+                    
+                    if (Math.abs(deudores[i][1]) < 0.01) i++;
+                    if (Math.abs(acreedores[j][1]) < 0.01) j++;
+                }
+
+                const tabla = document.getElementById('tabla-pagos-minimos');
+                tabla.innerHTML = '';
+
+                if (pagos.length === 0) {
+                    tabla.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #999;">No hay deudas pendientes</td></tr>';
+                } else {
+                    pagos.forEach(pago => {
+                        const fila = `
+                            <tr>
+                                <td style="color: #e74c3c; font-weight: bold;">${pago.deudor}</td>
+                                <td style="color: #27ae60; font-weight: bold;">${pago.acreedor}</td>
+                                <td style="color: #f39c12; font-weight: bold;">${pago.cantidad.toFixed(2)} €</td>
+                            </tr>
+                        `;
+                        tabla.innerHTML += fila;
+                    });
+                }
             },
 
             actualizarHistorial: () => {
