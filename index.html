@@ -692,7 +692,6 @@
                 SistemaRegistro.mostrarAlerta('Registro guardado correctamente', 'exito');
                 SistemaRegistro.limpiarFormulario();
                 SistemaRegistro.actualizarVistas();
-                SistemaRegistro.exportarCSVs();
             },
 
             eliminar: (id) => {
@@ -700,7 +699,6 @@
                 const filtrados = registros.filter(r => r.id !== id);
                 Storage.setRegistros(filtrados);
                 SistemaRegistro.actualizarVistas();
-                SistemaRegistro.exportarCSVs();
             },
 
             calcularSaldosViajes: () => {
