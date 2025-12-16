@@ -423,13 +423,12 @@
 
         <!-- TABS -->
         <div class="tabs">
-            <button class="tab-btn active" data-tab="viajes">🚙 Viajes</button>
-            <button class="tab-btn" data-tab="dinero">💵 Dinero</button>
+            <button class="tab-btn active" data-tab="registro">🚗💵 Registro Completo</button>
             <button class="tab-btn" data-tab="configuracion">⚙️ Configuración</button>
         </div>
 
-        <!-- TAB VIAJES -->
-        <div id="viajes" class="tab-content active">
+        <!-- TAB REGISTRO COMPLETO -->
+        <div id="registro" class="tab-content active">
             <!-- FORMULARIO DINERO -->
             <div class="seccion">
                 <h2>Registrar Movimiento de Dinero</h2>
@@ -541,7 +540,7 @@
                     </div>
 
                     <div class="grupo-form">
-                        <label>Pasajeros</label>
+                        <label>Pasajeros (además del conductor)</label>
                         <div class="checkboxes">
                             <div class="checkbox-item">
                                 <input type="checkbox" id="pasajero-iosu" value="Iosu" class="pasajero-viaje">
@@ -562,15 +561,20 @@
                         </div>
                     </div>
 
+                    <div class="grupo-form">
+                        <label for="dinero-viaje">Dinero Generado (€) - Opcional</label>
+                        <input type="number" id="dinero-viaje" placeholder="0.00" step="0.01" min="0">
+                    </div>
+
                     <div class="botones-form">
-                        <button class="btn-primario" id="btn-guardar-viaje">💾 Guardar Viaje</button>
-                        <button class="btn-secundario" id="btn-limpiar-viaje">🔄 Limpiar Formulario</button>
+                        <button class="btn-primario" id="btn-guardar-registro">💾 Guardar</button>
+                        <button class="btn-secundario" id="btn-limpiar-registro">🔄 Limpiar</button>
                     </div>
                 </div>
-                <div id="alerta-viaje"></div>
+                <div id="alerta-registro"></div>
             </div>
 
-            <!-- RESUMEN VIAJES -->
+            <!-- RESUMEN VIAJES Y DINERO -->
             <div class="seccion">
                 <h2>Resumen de Saldos - Viajes</h2>
                 <div class="resumen">
@@ -586,8 +590,22 @@
                     </table>
                 </div>
 
-                <h2>Historial de Viajes</h2>
-                <div class="historial" id="historial-viajes">
+                <h2>Resumen de Saldos - Dinero</h2>
+                <div class="resumen">
+                    <table class="tabla-resumen">
+                        <thead>
+                            <tr>
+                                <th>Persona</th>
+                                <th>Saldo (€)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-saldos-dinero">
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Historial de Registros</h2>
+                <div class="historial" id="historial-registro">
                 </div>
             </div>
         </div>
@@ -600,8 +618,8 @@
                 <div style="margin-bottom: 20px;">
                     <h3 style="color: #333; margin-bottom: 10px;">Exportar Datos</h3>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn-exito" id="btn-exportar-dinero">📊 Exportar CSV - Dinero</button>
-                        <button class="btn-exito" id="btn-exportar-viajes">📊 Exportar CSV - Viajes</button>
+                        <button class="btn-exito" id="btn-exportar-viajes">📊 Descargar CSV - Viajes</button>
+                        <button class="btn-exito" id="btn-exportar-dinero">📊 Descargar CSV - Dinero</button>
                     </div>
                 </div>
 
@@ -634,15 +652,11 @@
 
         // ===== UTILIDADES DE ALMACENAMIENTO =====
         const Storage = {
-            getMovimientosDinero: () => JSON.parse(localStorage.getItem('movimientosDinero')) || [],
-            setMovimientosDinero: (data) => localStorage.setItem('movimientosDinero', JSON.stringify(data)),
-
-            getViajes: () => JSON.parse(localStorage.getItem('viajes')) || [],
-            setViajes: (data) => localStorage.setItem('viajes', JSON.stringify(data)),
+            getRegistros: () => JSON.parse(localStorage.getItem('registros')) || [],
+            setRegistros: (data) => localStorage.setItem('registros', JSON.stringify(data)),
 
             limpiarTodo: () => {
-                localStorage.removeItem('movimientosDinero');
-                localStorage.removeItem('viajes');
+                localStorage.removeItem('registros');
             }
         };
 
@@ -658,88 +672,127 @@
             });
         });
 
-        // ===== SISTEMA DE DINERO =====
-        const SistemaDinero = {
+        // ===== SISTEMA COMBINADO VIAJES + DINERO =====
+        const SistemaRegistro = {
             guardar: () => {
-                const fecha = document.getElementById('fecha-dinero').value;
-                const importe = parseFloat(document.getElementById('importe-dinero').value);
-                const generadores = Array.from(document.querySelectorAll('.generador-dinero:checked')).map(el => el.value);
-                const repartos = Array.from(document.querySelectorAll('.reparto-dinero:checked')).map(el => el.value);
+                const fecha = document.getElementById('fecha-viaje').value;
+                const conductor = document.getElementById('conductor-viaje').value;
+                const pasajeros = Array.from(document.querySelectorAll('.pasajero-viaje:checked')).map(el => el.value);
+                const dinero = parseFloat(document.getElementById('dinero-viaje').value) || 0;
 
                 // Validaciones
                 if (!fecha) {
-                    SistemaDinero.mostrarAlerta('Por favor, selecciona una fecha', 'error');
+                    SistemaRegistro.mostrarAlerta('Por favor, selecciona una fecha', 'error');
                     return;
                 }
-                if (isNaN(importe) || importe <= 0) {
-                    SistemaDinero.mostrarAlerta('Por favor, ingresa un importe válido', 'error');
+                if (!conductor) {
+                    SistemaRegistro.mostrarAlerta('Por favor, selecciona un conductor', 'error');
                     return;
                 }
-                if (generadores.length === 0) {
-                    SistemaDinero.mostrarAlerta('Selecciona al menos un generador de dinero', 'error');
-                    return;
-                }
-                if (repartos.length === 0) {
-                    SistemaDinero.mostrarAlerta('Selecciona al menos una persona para el reparto', 'error');
+                if (pasajeros.length === 0) {
+                    SistemaRegistro.mostrarAlerta('Selecciona al menos un pasajero', 'error');
                     return;
                 }
 
-                // Calcular reparto
-                const imporePorPersona = importe / repartos.length;
-
-                const movimiento = {
+                const registro = {
                     id: Date.now(),
                     fecha,
-                    importe,
-                    generadores,
-                    repartos,
-                    imporePorPersona
+                    conductor,
+                    pasajeros,
+                    dinero
                 };
 
-                const movimientos = Storage.getMovimientosDinero();
-                movimientos.push(movimiento);
-                Storage.setMovimientosDinero(movimientos);
+                const registros = Storage.getRegistros();
+                registros.push(registro);
+                Storage.setRegistros(registros);
 
-                SistemaDinero.mostrarAlerta('Movimiento guardado correctamente', 'exito');
-                SistemaDinero.limpiarFormulario();
-                SistemaDinero.actualizarVistas();
+                SistemaRegistro.mostrarAlerta('Registro guardado correctamente', 'exito');
+                SistemaRegistro.limpiarFormulario();
+                SistemaRegistro.actualizarVistas();
+                SistemaRegistro.exportarCSVs();
             },
 
             eliminar: (id) => {
-                const movimientos = Storage.getMovimientosDinero();
-                const filtrados = movimientos.filter(m => m.id !== id);
-                Storage.setMovimientosDinero(filtrados);
-                SistemaDinero.actualizarVistas();
+                const registros = Storage.getRegistros();
+                const filtrados = registros.filter(r => r.id !== id);
+                Storage.setRegistros(filtrados);
+                SistemaRegistro.actualizarVistas();
+                SistemaRegistro.exportarCSVs();
             },
 
-            calcularSaldos: () => {
+            calcularSaldosViajes: () => {
                 const saldos = {};
                 PARTICIPANTES.forEach(p => saldos[p] = 0);
 
-                const movimientos = Storage.getMovimientosDinero();
-                movimientos.forEach(mov => {
-                    // Cada generador "recibe" dinero (positivo)
-                    const dineroGenerador = mov.importe / mov.generadores.length;
-                    mov.generadores.forEach(gen => {
-                        saldos[gen] += dineroGenerador;
-                    });
+                const registros = Storage.getRegistros();
+                registros.forEach(reg => {
+                    // Total de personas en el viaje (conductor + pasajeros)
+                    const totalPersonas = reg.pasajeros.length + 1;
+                    // Cada persona paga 1 / total
+                    const costoPorPersona = 1 / totalPersonas;
 
-                    // Cada persona en el reparto "paga" (negativo)
-                    mov.repartos.forEach(rep => {
-                        saldos[rep] -= mov.imporePorPersona;
+                    // El conductor gana 1 viaje menos su parte
+                    saldos[reg.conductor] += (1 - costoPorPersona);
+
+                    // Cada pasajero pierde su parte
+                    reg.pasajeros.forEach(pasajero => {
+                        saldos[pasajero] -= costoPorPersona;
                     });
                 });
 
                 return saldos;
             },
 
-            actualizarVistas: () => {
-                SistemaDinero.actualizarTablaSaldos();
-                SistemaDinero.actualizarHistorial();
+            calcularSaldosDinero: () => {
+                const saldos = {};
+                PARTICIPANTES.forEach(p => saldos[p] = 0);
+
+                const registros = Storage.getRegistros();
+                registros.forEach(reg => {
+                    if (reg.dinero > 0) {
+                        // El conductor "recibe" el dinero generado
+                        saldos[reg.conductor] += reg.dinero;
+
+                        // Se reparte equitativamente entre los pasajeros
+                        const dineroPorPasajero = reg.dinero / reg.pasajeros.length;
+                        reg.pasajeros.forEach(pasajero => {
+                            saldos[pasajero] -= dineroPorPasajero;
+                        });
+                    }
+                });
+
+                return saldos;
             },
 
-            actualizarTablaSaldos: () => {
-                const saldos = SistemaDinero.calcularSaldos();
+            actualizarVistas: () => {
+                SistemaRegistro.actualizarTablaSaldosViajes();
+                SistemaRegistro.actualizarTablaSaldosDinero();
+                SistemaRegistro.actualizarHistorial();
+            },
+
+            actualizarTablaSaldosViajes: () => {
+                const saldos = SistemaRegistro.calcularSaldosViajes();
+                const tabla = document.getElementById('tabla-saldos-viajes');
+                tabla.innerHTML = '';
+
+                // Ordenar de más negativo a más positivo
+                const ordenados = Object.entries(saldos).sort((a, b) => a[1] - b[1]);
+
+                ordenados.forEach(([persona, saldo]) => {
+                    const claseBalance = saldo > 0 ? 'saldo-positivo' : (saldo < 0 ? 'saldo-negativo' : 'saldo-cero');
+                    
+                    const fila = `
+                        <tr>
+                            <td>${persona}</td>
+                            <td class="${claseBalance}">${saldo > 0 ? '+' : ''}${saldo.toFixed(3)} viajes</td>
+                        </tr>
+                    `;
+                    tabla.innerHTML += fila;
+                });
+            },
+
+            actualizarTablaSaldosDinero: () => {
+                const saldos = SistemaRegistro.calcularSaldosDinero();
                 const tabla = document.getElementById('tabla-saldos-dinero');
                 tabla.innerHTML = '';
 
@@ -758,202 +811,45 @@
             },
 
             actualizarHistorial: () => {
-                const movimientos = Storage.getMovimientosDinero();
-                const historial = document.getElementById('historial-dinero');
+                const registros = Storage.getRegistros();
+                const historial = document.getElementById('historial-registro');
                 
-                if (movimientos.length === 0) {
-                    historial.innerHTML = '<p style="color: #999; text-align: center;">No hay movimientos registrados</p>';
+                if (registros.length === 0) {
+                    historial.innerHTML = '<p style="color: #999; text-align: center;">No hay registros</p>';
                     return;
                 }
 
-                historial.innerHTML = movimientos.reverse().map(mov => `
-                    <div class="movimiento">
-                        <div class="movimiento-info">
-                            <div class="movimiento-detalles">
-                                <strong>${mov.importe.toFixed(2)} €</strong> - Generadores: ${mov.generadores.join(', ')}
-                            </div>
-                            <div class="movimiento-detalles">
-                                Reparto: ${mov.repartos.join(', ')} (${mov.imporePorPersona.toFixed(2)} € c/u)
-                            </div>
-                            <div class="movimiento-fecha">${new Date(mov.fecha).toLocaleDateString('es-ES')}</div>
-                        </div>
-                        <button class="btn-eliminar" onclick="SistemaDinero.eliminar(${mov.id})">Eliminar</button>
-                    </div>
-                `).join('');
-            },
-
-            limpiarFormulario: () => {
-                const hoy = new Date().toISOString().split('T')[0];
-                document.getElementById('fecha-dinero').value = hoy;
-                document.getElementById('importe-dinero').value = '';
-                document.querySelectorAll('.generador-dinero, .reparto-dinero').forEach(el => el.checked = false);
-            },
-
-            mostrarAlerta: (mensaje, tipo) => {
-                const alertaDiv = document.getElementById('alerta-dinero');
-                const claseAlerta = tipo === 'exito' ? 'alerta-exito' : 'alerta-error';
-                alertaDiv.innerHTML = `<div class="alerta ${claseAlerta}">${mensaje}</div>`;
-                setTimeout(() => {
-                    alertaDiv.innerHTML = '';
-                }, 3000);
-            },
-
-            exportarCSV: () => {
-                const saldos = SistemaDinero.calcularSaldos();
-                const movimientos = Storage.getMovimientosDinero();
-
-                let csv = 'RESUMEN DE SALDOS\n';
-                csv += 'Persona,Saldo (€)\n';
-                Object.entries(saldos).forEach(([persona, saldo]) => {
-                    csv += `${persona},${saldo.toFixed(2)}\n`;
-                });
-
-                csv += '\n\nHISTORIAL DE MOVIMIENTOS\n';
-                csv += 'Fecha,Importe,Generadores,Repartos,Importe por Persona\n';
-                movimientos.forEach(mov => {
-                    csv += `${mov.fecha},"${mov.importe.toFixed(2)}","${mov.generadores.join('|')}","${mov.repartos.join('|')}","${mov.imporePorPersona.toFixed(2)}"\n`;
-                });
-
-                SistemaDinero.descargarCSV(csv, 'dinero');
-            },
-
-            descargarCSV: (csv, nombre) => {
-                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = `${nombre}_${new Date().toISOString().split('T')[0]}.csv`;
-                link.click();
-            }
-        };
-
-        // ===== SISTEMA DE VIAJES =====
-        const SistemaViajes = {
-            guardar: () => {
-                const fecha = document.getElementById('fecha-viaje').value;
-                const conductor = document.getElementById('conductor-viaje').value;
-                const pasajeros = Array.from(document.querySelectorAll('.pasajero-viaje:checked')).map(el => el.value);
-
-                // Validaciones
-                if (!fecha) {
-                    SistemaViajes.mostrarAlerta('Por favor, selecciona una fecha', 'error');
-                    return;
-                }
-                if (!conductor) {
-                    SistemaViajes.mostrarAlerta('Por favor, selecciona un conductor', 'error');
-                    return;
-                }
-                if (pasajeros.length === 0) {
-                    SistemaViajes.mostrarAlerta('Selecciona al menos un pasajero', 'error');
-                    return;
-                }
-
-                const viaje = {
-                    id: Date.now(),
-                    fecha,
-                    conductor,
-                    pasajeros,
-                    numPasajeros: pasajeros.length
-                };
-
-                const viajes = Storage.getViajes();
-                viajes.push(viaje);
-                Storage.setViajes(viajes);
-
-                SistemaViajes.mostrarAlerta('Viaje guardado correctamente', 'exito');
-                SistemaViajes.limpiarFormulario();
-                SistemaViajes.actualizarVistas();
-            },
-
-            eliminar: (id) => {
-                const viajes = Storage.getViajes();
-                const filtrados = viajes.filter(v => v.id !== id);
-                Storage.setViajes(filtrados);
-                SistemaViajes.actualizarVistas();
-            },
-
-            calcularSaldos: () => {
-                const saldos = {};
-                PARTICIPANTES.forEach(p => saldos[p] = 0);
-
-                const viajes = Storage.getViajes();
-                viajes.forEach(viaje => {
-                    // Total de personas en el viaje (conductor + pasajeros)
-                    const totalPersonas = viaje.pasajeros.length + 1;
-                    // Cada persona paga 1 / total
-                    const costoPorPersona = 1 / totalPersonas;
-
-                    // El conductor gana 1 viaje menos su parte
-                    saldos[viaje.conductor] += (1 - costoPorPersona);
-
-                    // Cada pasajero pierde su parte
-                    viaje.pasajeros.forEach(pasajero => {
-                        saldos[pasajero] -= costoPorPersona;
-                    });
-                });
-
-                return saldos;
-            },
-
-            actualizarVistas: () => {
-                SistemaViajes.actualizarTablaSaldos();
-                SistemaViajes.actualizarHistorial();
-            },
-
-            actualizarTablaSaldos: () => {
-                const saldos = SistemaViajes.calcularSaldos();
-                const tabla = document.getElementById('tabla-saldos-viajes');
-                tabla.innerHTML = '';
-
-                // Ordenar de más negativo a más positivo
-                const ordenados = Object.entries(saldos).sort((a, b) => a[1] - b[1]);
-
-                ordenados.forEach(([persona, saldo]) => {
-                    const claseBalance = saldo > 0 ? 'saldo-positivo' : (saldo < 0 ? 'saldo-negativo' : 'saldo-cero');
+                historial.innerHTML = registros.reverse().map(reg => {
+                    const detalleDinero = reg.dinero > 0 ? `<div class="movimiento-detalles"><strong>💵 Dinero:</strong> ${reg.dinero.toFixed(2)} €</div>` : '';
                     
-                    const fila = `
-                        <tr>
-                            <td>${persona}</td>
-                            <td class="${claseBalance}">${saldo > 0 ? '+' : ''}${saldo} viajes</td>
-                        </tr>
-                    `;
-                    tabla.innerHTML += fila;
-                });
-            },
-
-            actualizarHistorial: () => {
-                const viajes = Storage.getViajes();
-                const historial = document.getElementById('historial-viajes');
-                
-                if (viajes.length === 0) {
-                    historial.innerHTML = '<p style="color: #999; text-align: center;">No hay viajes registrados</p>';
-                    return;
-                }
-
-                historial.innerHTML = viajes.reverse().map(viaje => `
-                    <div class="movimiento">
-                        <div class="movimiento-info">
-                            <div class="movimiento-detalles">
-                                <strong>Conductor:</strong> ${viaje.conductor}
+                    return `
+                        <div class="movimiento">
+                            <div class="movimiento-info">
+                                <div class="movimiento-detalles">
+                                    <strong>🚗 Conductor:</strong> ${reg.conductor}
+                                </div>
+                                <div class="movimiento-detalles">
+                                    <strong>🚗 Pasajeros:</strong> ${reg.pasajeros.join(', ')}
+                                </div>
+                                ${detalleDinero}
+                                <div class="movimiento-fecha">${new Date(reg.fecha).toLocaleDateString('es-ES')}</div>
                             </div>
-                            <div class="movimiento-detalles">
-                                <strong>Pasajeros:</strong> ${viaje.pasajeros.join(', ')}
-                            </div>
-                            <div class="movimiento-fecha">${new Date(viaje.fecha).toLocaleDateString('es-ES')}</div>
+                            <button class="btn-eliminar" onclick="SistemaRegistro.eliminar(${reg.id})">Eliminar</button>
                         </div>
-                        <button class="btn-eliminar" onclick="SistemaViajes.eliminar(${viaje.id})">Eliminar</button>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             },
 
             limpiarFormulario: () => {
                 const hoy = new Date().toISOString().split('T')[0];
                 document.getElementById('fecha-viaje').value = hoy;
                 document.getElementById('conductor-viaje').value = '';
+                document.getElementById('dinero-viaje').value = '';
                 document.querySelectorAll('.pasajero-viaje').forEach(el => el.checked = false);
             },
 
             mostrarAlerta: (mensaje, tipo) => {
-                const alertaDiv = document.getElementById('alerta-viaje');
+                const alertaDiv = document.getElementById('alerta-registro');
                 const claseAlerta = tipo === 'exito' ? 'alerta-exito' : 'alerta-error';
                 alertaDiv.innerHTML = `<div class="alerta ${claseAlerta}">${mensaje}</div>`;
                 setTimeout(() => {
@@ -961,25 +857,52 @@
                 }, 3000);
             },
 
-            exportarCSV: () => {
-                const saldos = SistemaViajes.calcularSaldos();
-                const viajes = Storage.getViajes();
+            exportarCSVs: () => {
+                SistemaRegistro.exportarCSVViajes();
+                SistemaRegistro.exportarCSVDinero();
+            },
 
-                let csv = 'RESUMEN DE SALDOS\n';
-                csv += 'Persona,Balance de Viajes\n';
+            exportarCSVViajes: () => {
+                const saldos = SistemaRegistro.calcularSaldosViajes();
+                const registros = Storage.getRegistros();
+
+                let csv = 'RESUMEN DE SALDOS - VIAJES\n';
+                csv += 'Persona,Balance\n';
                 
                 const ordenados = Object.entries(saldos).sort((a, b) => a[1] - b[1]);
                 ordenados.forEach(([persona, saldo]) => {
-                    csv += `${persona},${saldo}\n`;
+                    csv += `${persona},${saldo.toFixed(3)}\n`;
                 });
 
                 csv += '\n\nHISTORIAL DE VIAJES\n';
                 csv += 'Fecha,Conductor,Pasajeros,Número de Pasajeros\n';
-                viajes.forEach(viaje => {
-                    csv += `${viaje.fecha},${viaje.conductor},"${viaje.pasajeros.join('|')}",${viaje.numPasajeros}\n`;
+                registros.forEach(reg => {
+                    csv += `${reg.fecha},${reg.conductor},"${reg.pasajeros.join('|')}",${reg.pasajeros.length}\n`;
                 });
 
-                SistemaViajes.descargarCSV(csv, 'viajes');
+                SistemaRegistro.descargarCSV(csv, 'viajes');
+            },
+
+            exportarCSVDinero: () => {
+                const saldos = SistemaRegistro.calcularSaldosDinero();
+                const registros = Storage.getRegistros();
+
+                let csv = 'RESUMEN DE SALDOS - DINERO\n';
+                csv += 'Persona,Saldo (€)\n';
+                Object.entries(saldos).forEach(([persona, saldo]) => {
+                    csv += `${persona},${saldo.toFixed(2)}\n`;
+                });
+
+                csv += '\n\nHISTORIAL DE DINERO\n';
+                csv += 'Fecha,Conductor,Pasajeros,Dinero Total,Dinero por Pasajero\n';
+                registros.forEach(reg => {
+                    if (reg.dinero > 0) {
+                        const dineroPorPasajero = reg.dinero / reg.pasajeros.length;
+                        csv += `${reg.fecha},${reg.conductor},"${reg.pasajeros.join('|')}","${reg.dinero.toFixed(2)}","${dineroPorPasajero.toFixed(2)}"\n`;
+                    }
+                });
+
+                SistemaRegistro.descargarCSV(csv, 'dinero');
             },
 
             descargarCSV: (csv, nombre) => {
@@ -1013,20 +936,15 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Establecer fecha actual por defecto
             const hoy = new Date().toISOString().split('T')[0];
-            document.getElementById('fecha-dinero').value = hoy;
             document.getElementById('fecha-viaje').value = hoy;
 
-            // Botones Dinero
-            document.getElementById('btn-guardar-dinero').addEventListener('click', SistemaDinero.guardar);
-            document.getElementById('btn-limpiar-dinero').addEventListener('click', SistemaDinero.limpiarFormulario);
-
-            // Botones Viajes
-            document.getElementById('btn-guardar-viaje').addEventListener('click', SistemaViajes.guardar);
-            document.getElementById('btn-limpiar-viaje').addEventListener('click', SistemaViajes.limpiarFormulario);
+            // Botones Registro Combinado
+            document.getElementById('btn-guardar-registro').addEventListener('click', SistemaRegistro.guardar);
+            document.getElementById('btn-limpiar-registro').addEventListener('click', SistemaRegistro.limpiarFormulario);
 
             // Botones Exportar
-            document.getElementById('btn-exportar-dinero').addEventListener('click', SistemaDinero.exportarCSV);
-            document.getElementById('btn-exportar-viajes').addEventListener('click', SistemaViajes.exportarCSV);
+            document.getElementById('btn-exportar-viajes').addEventListener('click', SistemaRegistro.exportarCSVViajes);
+            document.getElementById('btn-exportar-dinero').addEventListener('click', SistemaRegistro.exportarCSVDinero);
 
             // Botón Reiniciar Mes
             document.getElementById('btn-reiniciar-mes').addEventListener('click', () => {
@@ -1035,8 +953,7 @@
                     '¿Estás seguro de que quieres borrar todos los datos? Esta acción no se puede deshacer.',
                     () => {
                         Storage.limpiarTodo();
-                        SistemaDinero.actualizarVistas();
-                        SistemaViajes.actualizarVistas();
+                        SistemaRegistro.actualizarVistas();
                         alert('✅ Todos los datos han sido eliminados');
                     }
                 );
@@ -1046,8 +963,7 @@
             document.getElementById('btn-cancelar').addEventListener('click', Modal.cerrar);
 
             // Actualizar vistas iniciales
-            SistemaDinero.actualizarVistas();
-            SistemaViajes.actualizarVistas();
+            SistemaRegistro.actualizarVistas();
         });
     </script>
 </body>
