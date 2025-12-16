@@ -1,6 +1,6 @@
 [
   {
-    "id": 1765882843912,
+    "id": 1765884131615,
     "fecha": "2025-12-16",
     "conductor": "Iosu",
     "pasajeros": [
@@ -8,36 +8,5 @@
       "Itziar"
     ],
     "dinero": 7
-  },
-  {
-    "id": 1765882952340,
-    "fecha": "2025-12-16",
-    "conductor": "Asier",
-    "pasajeros": [
-      "Iosu",
-      "Itziar"
-    ],
-    "dinero": 10
-  },
-  {
-    "id": 1765882984387,
-    "fecha": "2025-12-16",
-    "conductor": "Itziar",
-    "pasajeros": [
-      "Iosu",
-      "Lide",
-      "Asier"
-    ],
-    "dinero": 14
-  },
-  {
-    "id": 1765883127049,
-    "fecha": "2025-12-16",
-    "conductor": "Itziar",
-    "pasajeros": [
-      "Iosu",
-      "Asier"
-    ],
-    "dinero": 8
   }
 ]
