@@ -613,6 +613,7 @@
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                         <button class="btn-exito" id="btn-exportar-viajes">📊 Descargar CSV - Viajes</button>
                         <button class="btn-exito" id="btn-exportar-dinero">📊 Descargar CSV - Dinero</button>
+                                                <button class="btn-primario" id="btn-restaurar-nube">☁️ Restaurar desde la nube</button>
                         <button class="btn-primario" id="btn-guardar-nube">☁️ Guardar en la nube</button>
                     </div>
                 </div>
@@ -641,6 +642,21 @@
     </div>
 
     <script>
+                        // ===== RESTAURAR DESDE LA NUBE =====
+                        function restaurarDesdeNube() {
+                            fetch('https://kotxea-backend.onrender.com/datos')
+                                .then(res => res.json())
+                                .then(datos => {
+                                    if (Array.isArray(datos)) {
+                                        Storage.setRegistros(datos);
+                                        SistemaRegistro.actualizarVistas();
+                                        alert('Datos restaurados desde la nube');
+                                    } else {
+                                        alert('No hay datos en la nube');
+                                    }
+                                })
+                                .catch(() => alert('Error al restaurar desde la nube'));
+                        }
                 // ===== GUARDAR EN LA NUBE =====
                 function guardarEnLaNube() {
                     const datos = Storage.getRegistros();
@@ -920,6 +936,10 @@
 
         // ===== EVENT LISTENERS =====
         document.addEventListener('DOMContentLoaded', () => {
+                                    // Botón Restaurar desde la nube
+                                    document.getElementById('btn-restaurar-nube').addEventListener('click', restaurarDesdeNube);
+                                    // Restaurar automáticamente al iniciar
+                                    restaurarDesdeNube();
                         // Botón Guardar en la nube
                         document.getElementById('btn-guardar-nube').addEventListener('click', guardarEnLaNube);
             // Establecer fecha actual por defecto
