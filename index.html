@@ -861,41 +861,44 @@
             },
 
             actualizarTablaPagosMinimos: () => {
-                const pagos = SistemaRegistro._PAGOS_EXTERNOS || [];
-                // Encontrar todas las tablas donde queremos mostrar los pagos (DINERO y REGISTRO)
+                // Calcular pagos mínimos automáticamente a partir de los saldos de dinero (Tricount style)
+                const saldos = SistemaRegistro.calcularSaldosDinero();
+                const deudores = [];
+                const acreedores = [];
+                Object.entries(saldos).forEach(([persona, saldo]) => {
+                    if (saldo < -0.01) deudores.push({ nombre: persona, saldo: -saldo });
+                    else if (saldo > 0.01) acreedores.push({ nombre: persona, saldo });
+                });
+                // Algoritmo de pagos mínimos
+                const pagos = [];
+                let i = 0, j = 0;
+                while (i < deudores.length && j < acreedores.length) {
+                    const deudor = deudores[i];
+                    const acreedor = acreedores[j];
+                    const cantidad = Math.min(deudor.saldo, acreedor.saldo);
+                    pagos.push({ deudor: deudor.nombre, acreedor: acreedor.nombre, cantidad });
+                    deudor.saldo -= cantidad;
+                    acreedor.saldo -= cantidad;
+                    if (Math.abs(deudor.saldo) < 0.01) i++;
+                    if (Math.abs(acreedor.saldo) < 0.01) j++;
+                }
+                // Mostrar en ambas tablas
                 const tablas = [
                     document.getElementById('tabla-pagos-minimos'),
                     document.getElementById('tabla-pagos-minimos-registro')
                 ].filter(Boolean);
-                if (tablas.length === 0) return;
-
-                // Agregar cantidades con la misma pareja deudor-acreedor
-                const agregados = {};
-                pagos.forEach(p => {
-                    const key = `${p.deudor}||${p.acreedor}`;
-                    agregados[key] = (agregados[key] || 0) + (parseFloat(p.cantidad) || 0);
-                });
-
-                const filas = Object.entries(agregados).map(([key, cantidad]) => {
-                    const [deudor, acreedor] = key.split('||');
-                    return `
-                        <tr>
-                            <td style="color: #e74c3c; font-weight: bold;">${deudor}</td>
-                            <td style="color: #27ae60; font-weight: bold;">${acreedor}</td>
-                            <td style="color: #f39c12; font-weight: bold;">${(Math.round(cantidad * 100) / 100).toFixed(2)} €</td>
-                        </tr>
-                    `;
-                }).join('');
-
-                const contenido = filas || '<tr><td colspan="3" style="text-align: center; color: #999;">No hay pagos introducidos</td></tr>';
+                const filas = pagos.map(p => `
+                    <tr>
+                        <td style="color: #e74c3c; font-weight: bold;">${p.deudor}</td>
+                        <td style="color: #27ae60; font-weight: bold;">${p.acreedor}</td>
+                        <td style="color: #f39c12; font-weight: bold;">${p.cantidad.toFixed(2)} €</td>
+                    </tr>
+                `).join('');
+                const contenido = filas || '<tr><td colspan="3" style="text-align: center; color: #999;">No hay pagos mínimos</td></tr>';
                 tablas.forEach(tabla => tabla.innerHTML = contenido);
-
             },
 
-            _PAGOS_EXTERNOS: [
-                { deudor: 'Iosu', acreedor: 'Asier', cantidad: 2.33 },
-                { deudor: 'Iosu', acreedor: 'Itziar', cantidad: 2.33 }
-            ],
+            // _PAGOS_EXTERNOS eliminado: ahora todo es automático
 
             actualizarHistorial: () => {
                 const registros = Storage.getRegistros();
