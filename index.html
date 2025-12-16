@@ -459,14 +459,14 @@
                     </div>
                     <div class="grupo-form">
                         <label for="dinero-viaje">Dinero generado (€)</label>
-                        <input type="number" id="dinero-viaje" placeholder="0.00" step="0.01" min="0">
+                        <input type="number" id="dinero-viaje" placeholder="0.00" step="0.01" min="0" aria-label="Dinero generado en euros">
                     </div>
                     <div class="botones-form">
-                        <button class="btn-primario" id="btn-guardar-registro">💾 Guardar</button>
-                        <button class="btn-secundario" id="btn-limpiar-registro">🔄 Limpiar</button>
+                        <button class="btn-primario" id="btn-guardar-registro" type="button" title="Guardar registro">💾 Guardar</button>
+                        <button class="btn-secundario" id="btn-limpiar-registro" type="button" title="Limpiar formulario">🔄 Limpiar</button>
                     </div>
                 </div>
-                <div id="alerta-registro"></div>
+                <div id="alerta-registro" role="alert" aria-live="polite"></div>
             </div>
             <div class="seccion">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -691,7 +691,7 @@
             PARTICIPANTES.forEach(p => {
                 if (p !== conductor) {
                     const id = 'pasajero-' + p.toLowerCase();
-                    cont.innerHTML += `<div class="checkbox-item"><input type="checkbox" id="${id}" value="${p}" class="pasajero-viaje"><label for="${id}">${p}</label></div>`;
+                    cont.innerHTML += `<div class="checkbox-item"><input type="checkbox" id="${id}" value="${p}" class="pasajero-viaje" aria-label="Pasajero ${p}"><label for="${id}">${p}</label></div>`;
                 }
             });
         }
@@ -732,6 +732,7 @@
         },
 
             eliminar: (id) => {
+                if (!confirm('¿Seguro que quieres eliminar este registro?')) return;
                 const registros = Storage.getRegistros();
                 const filtrados = registros.filter(r => r.id !== id);
                 Storage.setRegistros(filtrados);
@@ -851,13 +852,16 @@
                 document.getElementById('fecha-viaje').value = hoy;
                 document.getElementById('conductor-viaje').value = '';
                 document.getElementById('dinero-viaje').value = '';
-                document.querySelectorAll('.pasajero-viaje').forEach(el => el.checked = false);
+                setTimeout(() => {
+                    document.querySelectorAll('.pasajero-viaje').forEach(el => el.checked = false);
+                }, 10);
             },
 
             mostrarAlerta: (mensaje, tipo) => {
                 const alertaDiv = document.getElementById('alerta-registro');
                 const claseAlerta = tipo === 'exito' ? 'alerta-exito' : 'alerta-error';
                 alertaDiv.innerHTML = `<div class="alerta ${claseAlerta}">${mensaje}</div>`;
+                alertaDiv.focus && alertaDiv.focus();
                 setTimeout(() => {
                     alertaDiv.innerHTML = '';
                 }, 3000);
