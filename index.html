@@ -423,13 +423,13 @@
 
         <!-- TABS -->
         <div class="tabs">
-            <button class="tab-btn active" data-tab="dinero">💵 Dinero</button>
-            <button class="tab-btn" data-tab="viajes">🚙 Viajes</button>
+            <button class="tab-btn active" data-tab="viajes">🚙 Viajes</button>
+            <button class="tab-btn" data-tab="dinero">💵 Dinero</button>
             <button class="tab-btn" data-tab="configuracion">⚙️ Configuración</button>
         </div>
 
-        <!-- TAB DINERO -->
-        <div id="dinero" class="tab-content active">
+        <!-- TAB VIAJES -->
+        <div id="viajes" class="tab-content active">
             <!-- FORMULARIO DINERO -->
             <div class="seccion">
                 <h2>Registrar Movimiento de Dinero</h2>
@@ -518,8 +518,8 @@
             </div>
         </div>
 
-        <!-- TAB VIAJES -->
-        <div id="viajes" class="tab-content">
+        <!-- TAB DINERO -->
+        <div id="dinero" class="tab-content">
             <!-- FORMULARIO VIAJES -->
             <div class="seccion">
                 <h2>Registrar Viaje</h2>
@@ -877,12 +877,17 @@
 
                 const viajes = Storage.getViajes();
                 viajes.forEach(viaje => {
-                    // Conductor pierde N viajes (N = número de pasajeros)
-                    saldos[viaje.conductor] -= viaje.numPasajeros;
+                    // Total de personas en el viaje (conductor + pasajeros)
+                    const totalPersonas = viaje.pasajeros.length + 1;
+                    // Cada persona paga 1 / total
+                    const costoPorPersona = 1 / totalPersonas;
 
-                    // Cada pasajero gana 1 viaje
+                    // El conductor gana 1 viaje menos su parte
+                    saldos[viaje.conductor] += (1 - costoPorPersona);
+
+                    // Cada pasajero pierde su parte
                     viaje.pasajeros.forEach(pasajero => {
-                        saldos[pasajero] += 1;
+                        saldos[pasajero] -= costoPorPersona;
                     });
                 });
 
