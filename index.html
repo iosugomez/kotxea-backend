@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="eu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -421,30 +421,30 @@
         <header>
             <h1>🚗 Kotxea Gipuzkoan barrena</h1>
             <div class="participantes-info">
-                Participantes: <strong>Iosu, Lide, Asier, Itziar</strong>
+                Parte-hartzaileak: <strong>Iosu, Lide, Asier, Itziar</strong>
             </div>
         </header>
 
         <!-- TABS -->
         <div class="tabs">
-            <button class="tab-btn active" data-tab="registro">🚗💵 Registro</button>
-            <button class="tab-btn" data-tab="configuracion">⚙️ Configuración</button>
+            <button class="tab-btn active" data-tab="registro">🚗💵 Erregistroa</button>
+            <button class="tab-btn" data-tab="configuracion">⚙️ Konfigurazioa</button>
         </div>
 
         <!-- TAB REGISTRO COMPLETO -->
         <div id="registro" class="tab-content active">
             <!-- FORMULARIO UNIFICADO -->
             <div class="seccion">
-                <h2>Registrar Viaje y Dinero</h2>
+                <h2>Bidaia eta Dirua Erregistratu</h2>
                 <div class="formulario">
                     <div class="grupo-form">
-                        <label for="fecha-viaje">Fecha</label>
+                        <label for="fecha-viaje">Data</label>
                         <input type="date" id="fecha-viaje">
                     </div>
                     <div class="grupo-form">
-                        <label for="conductor-viaje">Conductor</label>
+                        <label for="conductor-viaje">Gidaria</label>
                         <select id="conductor-viaje">
-                            <option value="">-- Seleccionar --</option>
+                            <option value="">-- Hautatu --</option>
                             <option value="Iosu">Iosu</option>
                             <option value="Lide">Lide</option>
                             <option value="Asier">Asier</option>
@@ -452,18 +452,18 @@
                         </select>
                     </div>
                     <div class="grupo-form">
-                        <label>Pasajeros</label>
+                        <label>Bidaiariak</label>
                         <div class="checkboxes" id="pasajeros-checkboxes">
                             <!-- Se rellena por JS -->
                         </div>
                     </div>
                     <div class="grupo-form">
-                        <label for="dinero-viaje">Dinero generado (€)</label>
+                        <label for="dinero-viaje">Sortutako dirua (€)</label>
                         <input type="number" id="dinero-viaje" placeholder="0.00" step="0.01" min="0" aria-label="Dinero generado en euros">
                     </div>
                     <div class="botones-form">
-                        <button class="btn-primario" id="btn-guardar-registro" type="button" title="Guardar registro">💾 Guardar</button>
-                        <button class="btn-secundario" id="btn-limpiar-registro" type="button" title="Limpiar formulario">🔄 Limpiar</button>
+                        <button class="btn-primario" id="btn-guardar-registro" type="button" title="Erregistroa gorde">💾 Gorde</button>
+                        <button class="btn-secundario" id="btn-limpiar-registro" type="button" title="Formularioa garbitu">🔄 Garbitu</button>
                     </div>
                 </div>
                 <div id="alerta-registro" role="alert" aria-live="polite"></div>
@@ -471,13 +471,13 @@
             <div class="seccion">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div>
-                        <h2>Resumen de Saldos - Viajes</h2>
+                        <h2>Bidaien Balantzea</h2>
                         <div class="resumen">
                             <table class="tabla-resumen">
                                 <thead>
                                     <tr>
-                                        <th>Persona</th>
-                                        <th>Balance de Viajes</th>
+                                        <th>Pertsona</th>
+                                        <th>Bidaien Balantzea</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tabla-saldos-viajes"></tbody>
@@ -485,13 +485,13 @@
                         </div>
                     </div>
                     <div>
-                        <h2>Resumen de Saldos - Dinero</h2>
+                        <h2>Diruaren Balantzea</h2>
                         <div class="resumen">
                             <table class="tabla-resumen">
                                 <thead>
                                     <tr>
-                                        <th>Persona</th>
-                                        <th>Saldo (€)</th>
+                                        <th>Pertsona</th>
+                                        <th>Saldoa (€)</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tabla-saldos-dinero"></tbody>
@@ -500,14 +500,14 @@
                     </div>
                 </div>
                 <div style="margin-top: 30px;">
-                    <h2>Pagos Mínimos introducidos</h2>
+                    <h2>Gehitutako Gutxieneko Ordainketak</h2>
                     <div class="resumen">
                         <table class="tabla-resumen">
                             <thead>
                                 <tr>
-                                    <th>Deudor</th>
-                                    <th>Acreedor</th>
-                                    <th>Cantidad (€)</th>
+                                    <th>Zorduna</th>
+                                    <th>Hartzekoduna</th>
+                                    <th>Kopurua (€)</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla-pagos-minimos-registro">
@@ -516,7 +516,7 @@
                     </div>
                 </div>
 
-                <h2>Historial de Registros</h2>
+                <h2>Erregistroen Historia</h2>
                 <div class="historial" id="historial-registro"></div>
             </div>
         </div>
@@ -525,15 +525,15 @@
         <div id="dinero" class="tab-content">
             <!-- FORMULARIO VIAJES -->
             <div class="seccion">
-                <h2>Registrar Viaje</h2>
+                <h2>Bidaia Erregistratu</h2>
                 <div class="formulario">
                     <div class="grupo-form">
-                        <label for="fecha-viaje">Fecha del Trayecto</label>
+                        <label for="fecha-viaje">Bidaia Data</label>
                         <input type="date" id="fecha-viaje">
                     </div>
 
                     <div class="grupo-form">
-                        <label for="conductor-viaje">Conductor</label>
+                        <label for="conductor-viaje">Gidaria</label>
                         <select id="conductor-viaje">
                             <option value="">-- Seleccionar --</option>
                             <option value="Iosu">Iosu</option>
@@ -544,7 +544,7 @@
                     </div>
 
                     <div class="grupo-form">
-                        <label>Pasajeros (además del conductor)</label>
+                        <label>Bidaiariak (gidariaz gain)</label>
                         <div class="checkboxes">
                             <div class="checkbox-item">
                                 <input type="checkbox" id="pasajero-iosu" value="Iosu" class="pasajero-viaje">
@@ -566,13 +566,13 @@
                     </div>
 
                     <div class="grupo-form">
-                        <label for="dinero-viaje">Dinero Generado (€) - Opcional</label>
+                        <label for="dinero-viaje">Sortutako Dirua (€) - Aukerakoa</label>
                         <input type="number" id="dinero-viaje" placeholder="0.00" step="0.01" min="0">
                     </div>
 
                     <div class="botones-form">
-                        <button class="btn-primario" id="btn-guardar-registro">💾 Guardar</button>
-                        <button class="btn-secundario" id="btn-limpiar-registro">🔄 Limpiar</button>
+                        <button class="btn-primario" id="btn-guardar-registro">💾 Gorde</button>
+                        <button class="btn-secundario" id="btn-limpiar-registro">🔄 Garbitu</button>
                     </div>
                 </div>
                 <div id="alerta-registro"></div>
@@ -582,13 +582,13 @@
             <div class="seccion">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div>
-                        <h2>Resumen de Saldos - Viajes</h2>
+                        <h2>Bidaien Balantzea</h2>
                         <div class="resumen">
                             <table class="tabla-resumen">
                                 <thead>
                                     <tr>
-                                        <th>Persona</th>
-                                        <th>Balance de Viajes</th>
+                                        <th>Pertsona</th>
+                                        <th>Bidaien Balantzea</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tabla-saldos-viajes">
@@ -598,13 +598,13 @@
                     </div>
 
                     <div>
-                        <h2>Resumen de Saldos - Dinero</h2>
+                        <h2>Diruaren Balantzea</h2>
                         <div class="resumen">
                             <table class="tabla-resumen">
                                 <thead>
                                     <tr>
-                                        <th>Persona</th>
-                                        <th>Saldo (€)</th>
+                                        <th>Pertsona</th>
+                                        <th>Saldoa (€)</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tabla-saldos-dinero">
@@ -615,14 +615,14 @@
                 </div>
 
                 <div style="margin-top: 30px;">
-                    <h2>Pagos Mínimos para Saldar Deudas (Tricount)</h2>
+                    <h2>Zorrak Kitatzeko Gutxieneko Ordainketak (Tricount)</h2>
                     <div class="resumen">
                         <table class="tabla-resumen">
                             <thead>
                                 <tr>
-                                    <th>Deudor</th>
-                                    <th>Acreedor</th>
-                                    <th>Cantidad (€)</th>
+                                    <th>Zorduna</th>
+                                    <th>Hartzekoduna</th>
+                                    <th>Kopurua (€)</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla-pagos-minimos">
@@ -631,7 +631,7 @@
                     </div>
                 </div>
 
-                <h2>Historial de Registros</h2>
+                <h2>Erregistroen Historia</h2>
                 <div class="historial" id="historial-registro">
                 </div>
             </div>
@@ -640,24 +640,24 @@
         <!-- TAB CONFIGURACIÓN -->
         <div id="configuracion" class="tab-content">
             <div class="seccion">
-                <h2>Configuración y Control</h2>
+                <h2>Konfigurazioa eta Kontrola</h2>
                 
                 <div style="margin-bottom: 20px;">
-                    <h3 style="color: #333; margin-bottom: 10px;">Exportar y Guardar Datos</h3>
+                    <h3 style="color: #333; margin-bottom: 10px;">Datuak Esportatu eta Gorde</h3>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn-exito" id="btn-exportar-viajes">📊 Descargar CSV - Viajes</button>
-                        <button class="btn-exito" id="btn-exportar-dinero">📊 Descargar CSV - Dinero</button>
-                                                <button class="btn-primario" id="btn-restaurar-nube">☁️ Restaurar desde la nube</button>
-                        <button class="btn-primario" id="btn-guardar-nube">☁️ Guardar en la nube</button>
+                        <button class="btn-exito" id="btn-exportar-viajes">📊 CSV Deskargatu - Bidaiak</button>
+                        <button class="btn-exito" id="btn-exportar-dinero">📊 CSV Deskargatu - Dirua</button>
+                        <button class="btn-primario" id="btn-restaurar-nube">☁️ Berreskuratu hodeitik</button>
+                        <button class="btn-primario" id="btn-guardar-nube">☁️ Gorde hodeian</button>
                     </div>
                 </div>
 
                 <div style="margin-bottom: 20px; padding: 15px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 5px;">
-                    <h3 style="color: #856404; margin-bottom: 10px;">⚠️ Zona de Riesgo</h3>
+                    <h3 style="color: #856404; margin-bottom: 10px;">⚠️ Arrisku Gunea</h3>
                     <p style="color: #856404; font-size: 14px; margin-bottom: 15px;">
-                        Esta acción borrará todos los datos del mes actual de ambos sistemas (Dinero y Viajes). No se puede deshacer.
+                        Ekintza honek uneko hilabeteko datu guztiak ezabatuko ditu bi sistemetan (Dirua eta Bidaiak). Ezin da desegin.
                     </p>
-                    <button class="btn-peligro" id="btn-reiniciar-mes">🗑️ Reiniciar Mes (Borrar Todo)</button>
+                    <button class="btn-peligro" id="btn-reiniciar-mes">🗑️ Hilabetea Berrabiarazi (Dena Ezabatu)</button>
                 </div> 
             </div>
         </div>
@@ -666,11 +666,11 @@
     <!-- MODAL CONFIRMACIÓN -->
     <div id="modal-confirmacion" class="modal">
         <div class="modal-contenido">
-            <h2 id="modal-titulo">Confirmación</h2>
+            <h2 id="modal-titulo">Berrespena</h2>
             <p id="modal-mensaje"></p>
             <div class="modal-botones">
-                <button class="btn-peligro" id="btn-confirmar">Confirmar</button>
-                <button class="btn-secundario" id="btn-cancelar">Cancelar</button>
+                <button class="btn-peligro" id="btn-confirmar">Baieztatu</button>
+                <button class="btn-secundario" id="btn-cancelar">Utzi</button>
             </div>
         </div>
     </div>
