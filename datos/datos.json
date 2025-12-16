@@ -8,5 +8,15 @@
       "Itziar"
     ],
     "dinero": 7
+  },
+  {
+    "id": 1765890074789,
+    "fecha": "2025-12-16",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "dinero": 8
   }
 ]
