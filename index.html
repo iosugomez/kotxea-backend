@@ -641,6 +641,23 @@
                         Esta acción borrará todos los datos del mes actual de ambos sistemas (Dinero y Viajes). No se puede deshacer.
                     </p>
                     <button class="btn-peligro" id="btn-reiniciar-mes">🗑️ Reiniciar Mes (Borrar Todo)</button>
+                <!-- Tabla de pagos externos agregados por el usuario -->
+                <div style="margin-top: 20px;">
+                    <h2>Pagos mínimos introducidos</h2>
+                    <div class="resumen">
+                        <table class="tabla-resumen">
+                            <thead>
+                                <tr>
+                                    <th>Deudor</th>
+                                    <th>Acreedor</th>
+                                    <th>Cantidad (€)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-pagos-minimos-externos">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -883,6 +900,40 @@
                         tabla.innerHTML += fila;
                     });
                 }
+                // También actualizar la tabla de pagos externos (si existen)
+                SistemaRegistro.actualizarTablaPagosExternos && SistemaRegistro.actualizarTablaPagosExternos();
+            },
+
+            // Pagos externos predefinidos (pueden venir de una importación o ser editados)
+            _PAGOS_EXTERNOS: [
+                { deudor: 'Iosu', acreedor: 'Asier', cantidad: 2.33 },
+                { deudor: 'Iosu', acreedor: 'Itziar', cantidad: 2.33 }
+            ],
+
+            actualizarTablaPagosExternos: () => {
+                const pagos = SistemaRegistro._PAGOS_EXTERNOS;
+                const tabla = document.getElementById('tabla-pagos-minimos-externos');
+                if (!tabla) return;
+
+                // Agregar cantidades con la misma pareja deudor-acreedor
+                const agregados = {};
+                pagos.forEach(p => {
+                    const key = `${p.deudor}||${p.acreedor}`;
+                    agregados[key] = (agregados[key] || 0) + (parseFloat(p.cantidad) || 0);
+                });
+
+                const filas = Object.entries(agregados).map(([key, cantidad]) => {
+                    const [deudor, acreedor] = key.split('||');
+                    return `
+                        <tr>
+                            <td style="color: #e74c3c; font-weight: bold;">${deudor}</td>
+                            <td style="color: #27ae60; font-weight: bold;">${acreedor}</td>
+                            <td style="color: #f39c12; font-weight: bold;">${(Math.round(cantidad * 100) / 100).toFixed(2)} €</td>
+                        </tr>
+                    `;
+                }).join('');
+
+                tabla.innerHTML = filas || '<tr><td colspan="3" style="text-align: center; color: #999;">No hay pagos introducidos</td></tr>';
             },
 
             actualizarHistorial: () => {
