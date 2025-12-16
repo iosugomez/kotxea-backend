@@ -499,6 +499,23 @@
                         </div>
                     </div>
                 </div>
+                <div style="margin-top: 30px;">
+                    <h2>Pagos Mínimos introducidos</h2>
+                    <div class="resumen">
+                        <table class="tabla-resumen">
+                            <thead>
+                                <tr>
+                                    <th>Deudor</th>
+                                    <th>Acreedor</th>
+                                    <th>Cantidad (€)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-pagos-minimos-registro">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <h2>Historial de Registros</h2>
                 <div class="historial" id="historial-registro"></div>
             </div>
@@ -839,8 +856,12 @@
 
             actualizarTablaPagosMinimos: () => {
                 const pagos = SistemaRegistro._PAGOS_EXTERNOS || [];
-                const tabla = document.getElementById('tabla-pagos-minimos');
-                if (!tabla) return;
+                // Encontrar todas las tablas donde queremos mostrar los pagos (DINERO y REGISTRO)
+                const tablas = [
+                    document.getElementById('tabla-pagos-minimos'),
+                    document.getElementById('tabla-pagos-minimos-registro')
+                ].filter(Boolean);
+                if (tablas.length === 0) return;
 
                 // Agregar cantidades con la misma pareja deudor-acreedor
                 const agregados = {};
@@ -860,7 +881,9 @@
                     `;
                 }).join('');
 
-                tabla.innerHTML = filas || '<tr><td colspan="3" style="text-align: center; color: #999;">No hay pagos introducidos</td></tr>';
+                const contenido = filas || '<tr><td colspan="3" style="text-align: center; color: #999;">No hay pagos introducidos</td></tr>';
+                tablas.forEach(tabla => tabla.innerHTML = contenido);
+
             },
 
             _PAGOS_EXTERNOS: [
