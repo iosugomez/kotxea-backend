@@ -89,16 +89,41 @@ def generar_csv_dinero(registros):
             csv += f"{reg['fecha']},{reg['conductor']},\"{'|'.join(reg['pasajeros'])}\",{reg['dinero']:.2f},{deuda:.2f}\n"
     return csv
 
-def save_file(repo, path, content, message):
-    try:
-        contents = repo.get_contents(path)
-        sha = contents.sha
-    except Exception:
-        sha = None
-    if sha:
-        repo.update_file(path, message, content, sha)
-    else:
-        repo.create_file(path, message, content)
+def save_multiple_files(repo, files, commit_message):
+    """
+    Guarda múltiples archivos en un solo commit
+    files: lista de tuplas (path, content)
+    """
+    # Obtener el commit HEAD actual
+    branch = repo.get_branch('main')
+    base_commit = repo.get_commit(branch.commit.sha)
+    base_tree = base_commit.tree
+    
+    # Crear blobs para cada archivo
+    element_list = []
+    for path, content in files:
+        blob = repo.create_git_blob(content, "utf-8")
+        element = {
+            'path': path,
+            'mode': '100644',  # archivo regular
+            'type': 'blob',
+            'sha': blob.sha
+        }
+        element_list.append(element)
+    
+    # Crear nuevo tree con los archivos
+    new_tree = repo.create_git_tree(element_list, base_tree)
+    
+    # Crear commit
+    new_commit = repo.create_git_commit(
+        commit_message,
+        new_tree,
+        [base_commit]
+    )
+    
+    # Actualizar la referencia del branch
+    ref = repo.get_git_ref('heads/main')
+    ref.edit(new_commit.sha)
 
 @app.route('/save', methods=['POST'])
 def save_data():
@@ -107,14 +132,21 @@ def save_data():
         return jsonify({'error': 'No data provided'}), 400
     repo = get_github_repo()
     try:
-        # Guardar datos.json
-        content_str = json.dumps(data, indent=2, ensure_ascii=False)
-        save_file(repo, DATA_PATH, content_str, f"Update datos.json {datetime.now().isoformat()}")
-        # Guardar CSVs
+        # Preparar todos los archivos
+        content_json = json.dumps(data, indent=2, ensure_ascii=False)
         csv_viajes = generar_csv_viajes(data)
-        save_file(repo, CSV_VIAJES_PATH, csv_viajes, f"Update viajes.csv {datetime.now().isoformat()}")
         csv_dinero = generar_csv_dinero(data)
-        save_file(repo, CSV_DINERO_PATH, csv_dinero, f"Update dinero.csv {datetime.now().isoformat()}")
+        
+        files = [
+            (DATA_PATH, content_json),
+            (CSV_VIAJES_PATH, csv_viajes),
+            (CSV_DINERO_PATH, csv_dinero)
+        ]
+        
+        # Guardar todos en un solo commit
+        commit_message = f"Update data files {datetime.now().isoformat()}"
+        save_multiple_files(repo, files, commit_message)
+        
         return jsonify({'status': 'ok'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
