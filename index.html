@@ -676,20 +676,20 @@
     </div>
 
     <script>
-                        // ===== RESTAURAR DESDE LA NUBE =====
+                        // ===== RESTAURAR DESDE GITHUB =====
                         function restaurarDesdeNube() {
-                            fetch('https://kotxea-backend.onrender.com/datos')
+                            fetch('https://raw.githubusercontent.com/iosugomez/kotxea-backend/main/datos/datos.json')
                                 .then(res => res.json())
                                 .then(datos => {
                                     if (Array.isArray(datos)) {
                                         Storage.setRegistros(datos);
                                         SistemaRegistro.actualizarVistas();
-                                        alert('Datuak hodeitik berreskuratu dira');
+                                        alert('Datuak GitHub-etik berreskuratu dira');
                                     } else {
-                                        alert('Hodeian ez dago daturik');
+                                        alert('GitHub-en ez dago daturik');
                                     }
                                 })
-                                .catch(() => alert('Errorea hodeitik berreskuratzen'));
+                                .catch(() => alert('Errorea GitHub-etik irakurtzean'));
                         }
                 // ===== GUARDAR EN LA NUBE =====
                 function guardarEnLaNube() {
