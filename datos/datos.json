@@ -63,12 +63,11 @@
     "dinero": 6.9
   },
   {
-    "id": 1768832846947,
+    "id": 1768832895555,
     "fecha": "2026-01-19",
-    "conductor": "Lide",
+    "conductor": "Iosu",
     "pasajeros": [
-      "Iosu",
-      "Itziar"
+      "Lide"
     ],
     "dinero": 1
   }
