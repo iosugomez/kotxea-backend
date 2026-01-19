@@ -676,6 +676,13 @@
     </div>
 
     <script>
+                        // ===== DESPERTAR SERVIDOR DE RENDER =====
+                        function despertarServidor() {
+                            // Hace un ping al servidor para que se active si está dormido
+                            fetch('https://kotxea-backend.onrender.com/datos')
+                                .catch(() => {}); // Ignorar errores, solo queremos despertar el servidor
+                        }
+
                         // ===== RESTAURAR DESDE GITHUB =====
                         function restaurarDesdeNube() {
                             fetch('https://raw.githubusercontent.com/iosugomez/kotxea-backend/main/datos/datos.json')
@@ -1027,6 +1034,8 @@
 
         // ===== EVENT LISTENERS =====
         document.addEventListener('DOMContentLoaded', () => {
+                                    // Despertar servidor de Render al cargar la página
+                                    despertarServidor();
                                     // Botón Restaurar desde la nube
                                     document.getElementById('btn-restaurar-nube').addEventListener('click', restaurarDesdeNube);
                                     // Restaurar automáticamente al iniciar
