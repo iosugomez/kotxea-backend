@@ -685,7 +685,9 @@
 
                         // ===== RESTAURAR DESDE GITHUB =====
                         function restaurarDesdeNube() {
-                            fetch('https://raw.githubusercontent.com/iosugomez/kotxea-backend/main/datos/datos.json')
+                            // Agregar timestamp para evitar caché del navegador
+                            const timestamp = new Date().getTime();
+                            fetch(`https://raw.githubusercontent.com/iosugomez/kotxea-backend/main/datos/datos.json?t=${timestamp}`)
                                 .then(res => res.json())
                                 .then(datos => {
                                     if (Array.isArray(datos)) {
