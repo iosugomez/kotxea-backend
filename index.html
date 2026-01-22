@@ -520,6 +520,11 @@
                     </div>
                 </div>
 
+                <div style="background: #e8f5e9; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #27ae60;">
+                    <h3 style="color: #27ae60; margin: 0; font-size: 16px;">💰 Sortutako Dirua Guztira</h3>
+                    <p style="color: #27ae60; font-size: 24px; font-weight: bold; margin: 10px 0 0 0;" id="total-dinero-generado">0.00 €</p>
+                </div>
+
                 <h2>Erregistroen Historia</h2>
                 <div class="historial" id="historial-registro"></div>
             </div>
@@ -638,6 +643,11 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+
+                <div style="background: #e8f5e9; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #27ae60;">
+                    <h3 style="color: #27ae60; margin: 0; font-size: 16px;">💰 Sortutako Dirua Guztira</h3>
+                    <p style="color: #27ae60; font-size: 24px; font-weight: bold; margin: 10px 0 0 0;" id="total-dinero-generado-2">0.00 €</p>
                 </div>
 
                 <h2>Erregistroen Historia</h2>
@@ -879,6 +889,7 @@
             actualizarVistas: () => {
                 SistemaRegistro.actualizarTablaSaldosViajes();
                 SistemaRegistro.actualizarTablaSaldosDinero();
+                SistemaRegistro.actualizarTotalGenerado();
                 SistemaRegistro.actualizarHistorial();
             },
 
@@ -998,6 +1009,18 @@
                         </div>
                     `;
                 }).join('');
+            },
+
+            actualizarTotalGenerado: () => {
+                const registros = Storage.getRegistros();
+                const total = registros.reduce((sum, reg) => sum + (reg.dinero || 0), 0);
+                
+                // Actualizar ambos elementos si existen
+                const elem1 = document.getElementById('total-dinero-generado');
+                const elem2 = document.getElementById('total-dinero-generado-2');
+                
+                if (elem1) elem1.textContent = `${total.toFixed(2)} €`;
+                if (elem2) elem2.textContent = `${total.toFixed(2)} €`;
             },
 
             limpiarFormulario: () => {
