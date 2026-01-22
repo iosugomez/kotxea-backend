@@ -991,9 +991,9 @@
                                 ${detalleDinero}
                                 <div class=\"movimiento-fecha\">${new Date(reg.fecha).toLocaleDateString('es-ES')}</div>
                             </div>
-                            <div style=\"display: flex; gap: 5px;\">
-                                <button class=\"btn-eliminar\" style=\"background: #3498db;\" onclick=\"SistemaRegistro.editar(${reg.id})\" title=\"Editatu\">✏️</button>
-                                <button class=\"btn-eliminar\" onclick=\"SistemaRegistro.eliminar(${reg.id})\" title=\"Ezabatu\">🗑️</button>
+                            <div style=\"display: flex; flex-direction: column; gap: 10px; min-width: 100px;\">
+                                <button class=\"btn-eliminar\" style=\"background: #3498db; padding: 10px 15px; font-size: 13px;\" onclick=\"SistemaRegistro.editar(${reg.id})\">✏️ Editatu</button>
+                                <button class=\"btn-eliminar\" style=\"padding: 10px 15px; font-size: 13px;\" onclick=\"SistemaRegistro.eliminar(${reg.id})\">🗑️ Ezabatu</button>
                             </div>
                         </div>
                     `;
