@@ -7,7 +7,8 @@
       "Asier",
       "Itziar"
     ],
-    "dinero": 7
+    "dinero": 7,
+    "valorViaje": 1
   },
   {
     "id": 1766041039089,
@@ -16,7 +17,8 @@
     "pasajeros": [
       "Iosu"
     ],
-    "dinero": 4.64
+    "dinero": 4.64,
+    "valorViaje": 1
   },
   {
     "id": 1767784094052,
@@ -27,7 +29,8 @@
       "Lide",
       "Asier"
     ],
-    "dinero": 9.12
+    "dinero": 9.12,
+    "valorViaje": 1
   },
   {
     "id": 1767855026404,
@@ -38,7 +41,8 @@
       "Asier",
       "Itziar"
     ],
-    "dinero": 13.39
+    "dinero": 13.39,
+    "valorViaje": 1
   },
   {
     "id": 1768289637188,
@@ -49,7 +53,8 @@
       "Asier",
       "Itziar"
     ],
-    "dinero": 12.45
+    "dinero": 12.45,
+    "valorViaje": 1
   },
   {
     "id": 1768491995140,
@@ -60,7 +65,8 @@
       "Lide",
       "Asier"
     ],
-    "dinero": 6.9
+    "dinero": 6.9,
+    "valorViaje": 1
   },
   {
     "id": 1768903567539,
@@ -70,7 +76,8 @@
       "Lide",
       "Itziar"
     ],
-    "dinero": 12.44
+    "dinero": 12.44,
+    "valorViaje": 1
   },
   {
     "id": 1768903584274,
@@ -81,7 +88,8 @@
       "Asier",
       "Itziar"
     ],
-    "dinero": 6.33
+    "dinero": 6.33,
+    "valorViaje": 1
   },
   {
     "id": 1769067367487,
@@ -92,6 +100,7 @@
       "Asier",
       "Itziar"
     ],
-    "dinero": 13.37
+    "dinero": 13.37,
+    "valorViaje": 1
   }
 ]
