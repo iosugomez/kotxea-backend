@@ -82,5 +82,16 @@
       "Itziar"
     ],
     "dinero": 6.33
+  },
+  {
+    "id": 1769067367487,
+    "fecha": "2026-01-22",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "dinero": 13.37
   }
 ]
