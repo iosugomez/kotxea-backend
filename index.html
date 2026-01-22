@@ -759,6 +759,8 @@
         });
 
         // ===== SISTEMA COMBINADO VIAJES + DINERO =====
+        let registroEnEdicion = null;
+
         const SistemaRegistro = {
         guardar: () => {
             const fecha = document.getElementById('fecha-viaje').value;
@@ -771,12 +773,25 @@
             if (!conductor) { SistemaRegistro.mostrarAlerta('Por favor, selecciona un conductor', 'error'); return; }
             if (pasajeros.length === 0) { SistemaRegistro.mostrarAlerta('Selecciona al menos un pasajero', 'error'); return; }
             if (isNaN(valorViaje) || valorViaje < 0) { SistemaRegistro.mostrarAlerta('El valor del viaje debe ser un número válido (0 o mayor)', 'error'); return; }
-            // Guardar registro
-            const registro = { id: Date.now(), fecha, conductor, pasajeros, valorViaje, dinero };
+            
             const registros = Storage.getRegistros();
-            registros.push(registro);
+            
+            if (registroEnEdicion !== null) {
+                // Modo edición: actualizar registro existente
+                const index = registros.findIndex(r => r.id === registroEnEdicion);
+                if (index !== -1) {
+                    registros[index] = { id: registroEnEdicion, fecha, conductor, pasajeros, valorViaje, dinero };
+                    SistemaRegistro.mostrarAlerta('Registro actualizado correctamente', 'exito');
+                }
+            } else {
+                // Modo creación: nuevo registro
+                const registro = { id: Date.now(), fecha, conductor, pasajeros, valorViaje, dinero };
+                registros.push(registro);
+                SistemaRegistro.mostrarAlerta('Registro guardado correctamente', 'exito');
+            }
+            
             Storage.setRegistros(registros);
-            SistemaRegistro.mostrarAlerta('Registro guardado correctamente', 'exito');
+            registroEnEdicion = null;
             SistemaRegistro.limpiarFormulario();
             SistemaRegistro.actualizarVistas();
             // Guardar automáticamente en la nube
@@ -791,6 +806,37 @@
                 SistemaRegistro.actualizarVistas();
                 // Guardar automáticamente en la nube
                 guardarEnLaNube();
+            },
+
+            editar: (id) => {
+                const registros = Storage.getRegistros();
+                const registro = registros.find(r => r.id === id);
+                if (!registro) return;
+                
+                // Cargar datos en el formulario
+                document.getElementById('fecha-viaje').value = registro.fecha;
+                document.getElementById('conductor-viaje').value = registro.conductor;
+                actualizarCheckboxesPasajeros();
+                
+                // Marcar pasajeros después de que se actualicen los checkboxes
+                setTimeout(() => {
+                    registro.pasajeros.forEach(p => {
+                        const checkbox = document.querySelector(`.pasajero-viaje[value="${p}"]`);
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }, 20);
+                
+                document.getElementById('valor-viaje').value = registro.valorViaje !== undefined ? registro.valorViaje : 1;
+                document.getElementById('dinero-viaje').value = registro.dinero || '';
+                
+                // Marcar que estamos editando
+                registroEnEdicion = id;
+                
+                // Cambiar texto del botón
+                document.getElementById('btn-guardar-registro').textContent = '✏️ Eguneratu';
+                
+                // Scroll al formulario
+                document.querySelector('.seccion').scrollIntoView({ behavior: 'smooth' });
             },
 
             calcularSaldosViajes: () => {
@@ -945,7 +991,10 @@
                                 ${detalleDinero}
                                 <div class=\"movimiento-fecha\">${new Date(reg.fecha).toLocaleDateString('es-ES')}</div>
                             </div>
-                            <button class=\"btn-eliminar\" onclick=\"SistemaRegistro.eliminar(${reg.id})\">Ezabatu</button>
+                            <div style=\"display: flex; gap: 5px;\">
+                                <button class=\"btn-eliminar\" style=\"background: #3498db;\" onclick=\"SistemaRegistro.editar(${reg.id})\" title=\"Editatu\">✏️</button>
+                                <button class=\"btn-eliminar\" onclick=\"SistemaRegistro.eliminar(${reg.id})\" title=\"Ezabatu\">🗑️</button>
+                            </div>
                         </div>
                     `;
                 }).join('');
@@ -960,6 +1009,10 @@
                 setTimeout(() => {
                     document.querySelectorAll('.pasajero-viaje').forEach(el => el.checked = false);
                 }, 10);
+                
+                // Resetear modo edición
+                registroEnEdicion = null;
+                document.getElementById('btn-guardar-registro').textContent = '💾 Gorde';
             },
 
             mostrarAlerta: (mensaje, tipo) => {
