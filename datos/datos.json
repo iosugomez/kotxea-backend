@@ -93,15 +93,5 @@
       "Itziar"
     ],
     "dinero": 13.37
-  },
-  {
-    "id": 1769080962300,
-    "fecha": "2026-01-22",
-    "conductor": "Iosu",
-    "pasajeros": [
-      "Asier"
-    ],
-    "valorViaje": 1,
-    "dinero": 10
   }
 ]
