@@ -566,6 +566,11 @@
                     </div>
 
                     <div class="grupo-form">
+                        <label for="valor-viaje">Bidaiaren Balioa (1 = Normal)</label>
+                        <input type="number" id="valor-viaje" placeholder="1" value="1" step="0.01" min="0">
+                    </div>
+
+                    <div class="grupo-form">
                         <label for="dinero-viaje">Sortutako Dirua (€) - Aukerakoa</label>
                         <input type="number" id="dinero-viaje" placeholder="0.00" step="0.01" min="0">
                     </div>
@@ -755,13 +760,15 @@
             const fecha = document.getElementById('fecha-viaje').value;
             const conductor = document.getElementById('conductor-viaje').value;
             const pasajeros = Array.from(document.querySelectorAll('.pasajero-viaje:checked')).map(el => el.value);
+            const valorViaje = parseFloat(document.getElementById('valor-viaje').value);
             const dinero = parseFloat(document.getElementById('dinero-viaje').value) || 0;
             // Validaciones
             if (!fecha) { SistemaRegistro.mostrarAlerta('Por favor, selecciona una fecha', 'error'); return; }
             if (!conductor) { SistemaRegistro.mostrarAlerta('Por favor, selecciona un conductor', 'error'); return; }
             if (pasajeros.length === 0) { SistemaRegistro.mostrarAlerta('Selecciona al menos un pasajero', 'error'); return; }
+            if (isNaN(valorViaje) || valorViaje < 0) { SistemaRegistro.mostrarAlerta('El valor del viaje debe ser un número válido (0 o mayor)', 'error'); return; }
             // Guardar registro
-            const registro = { id: Date.now(), fecha, conductor, pasajeros, dinero };
+            const registro = { id: Date.now(), fecha, conductor, pasajeros, valorViaje, dinero };
             const registros = Storage.getRegistros();
             registros.push(registro);
             Storage.setRegistros(registros);
@@ -789,9 +796,10 @@
                 PARTICIPANTES.forEach(p => { if (!(p in saldos)) saldos[p] = 0; });
                 const registros = Storage.getRegistros();
                 registros.forEach(reg => {
+                    const valorViaje = reg.valorViaje !== undefined ? reg.valorViaje : 1; // Por defecto 1 para registros antiguos
                     const totalPersonas = reg.pasajeros.length + 1;
-                    const costoPorPersona = 1 / totalPersonas;
-                    saldos[reg.conductor] += (1 - costoPorPersona);
+                    const costoPorPersona = valorViaje / totalPersonas;
+                    saldos[reg.conductor] += (valorViaje - costoPorPersona);
                     reg.pasajeros.forEach(pasajero => { saldos[pasajero] -= costoPorPersona; });
                 });
                 // Truncar a dos decimales
@@ -917,6 +925,8 @@
                 }
 
                 historial.innerHTML = registros.reverse().map(reg => {
+                    const valorViaje = reg.valorViaje !== undefined ? reg.valorViaje : 1;
+                    const detalleValor = valorViaje !== 1 ? `<div class="movimiento-detalles"><strong>⚖️ Balioa:</strong> ${valorViaje.toFixed(2)} viajes</div>` : '';
                     const detalleDinero = reg.dinero > 0 ? `<div class="movimiento-detalles"><strong>💵 Dirusaria:</strong> ${reg.dinero.toFixed(2)} €</div>` : '';
                     
                     return `
@@ -928,6 +938,7 @@
                                 <div class="movimiento-detalles">
                                     <strong>🚗 Bidaiariak:</strong> ${reg.pasajeros.join(', ')}
                                 </div>
+                                ${detalleValor}
                                 ${detalleDinero}
                                 <div class="movimiento-fecha">${new Date(reg.fecha).toLocaleDateString('es-ES')}</div>
                             </div>
@@ -941,6 +952,7 @@
                 const hoy = new Date().toISOString().split('T')[0];
                 document.getElementById('fecha-viaje').value = hoy;
                 document.getElementById('conductor-viaje').value = '';
+                document.getElementById('valor-viaje').value = '1';
                 document.getElementById('dinero-viaje').value = '';
                 setTimeout(() => {
                     document.querySelectorAll('.pasajero-viaje').forEach(el => el.checked = false);
