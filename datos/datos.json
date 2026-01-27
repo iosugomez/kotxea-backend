@@ -102,5 +102,17 @@
     ],
     "valorViaje": 1,
     "dinero": 13.37
+  },
+  {
+    "id": 1769496692999,
+    "fecha": "2026-01-27",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 6.12
   }
 ]
