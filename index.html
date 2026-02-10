@@ -719,12 +719,38 @@
                         }
                 // ===== TOKEN DE AUTENTICACIÓN =====
                 const USR_TOKEN_KEY = 'usr_token';
-                function pedirTokenSiNoHay() {
+                async function verificarToken(token) {
+                    try {
+                        const res = await fetch('https://kotxea-backend.onrender.com/verify-token', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ token: token })
+                        });
+                        const data = await res.json();
+                        return data.valid === true;
+                    } catch (e) {
+                        return false;
+                    }
+                }
+                async function pedirTokenSiNoHay() {
                     let token = localStorage.getItem(USR_TOKEN_KEY);
-                    if (!token) {
+                    if (token) {
+                        const valido = await verificarToken(token);
+                        if (valido) return;
+                        localStorage.removeItem(USR_TOKEN_KEY);
+                    }
+                    let intentos = 3;
+                    while (intentos > 0) {
                         let input = prompt('Introduce la clave de acceso (token):');
-                        if (input) {
+                        if (!input) break;
+                        const valido = await verificarToken(input);
+                        if (valido) {
                             localStorage.setItem(USR_TOKEN_KEY, input);
+                            alert('Token correcto. Acceso permitido.');
+                            return;
+                        } else {
+                            intentos--;
+                            alert('Token incorrecto. Intentos restantes: ' + intentos);
                         }
                     }
                 }

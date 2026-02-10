@@ -201,6 +201,16 @@ def pagos_minimos():
     pagos = calcular_pagos_minimos(saldos)
     return jsonify({'pagos': pagos, 'saldos': saldos})
 
+@app.route('/verify-token', methods=['POST'])
+def verify_token():
+    req = request.json
+    if not req or 'token' not in req:
+        return jsonify({'valid': False}), 400
+    token = req['token']
+    if token == USR_TOKEN:
+        return jsonify({'valid': True})
+    return jsonify({'valid': False})
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
