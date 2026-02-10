@@ -435,7 +435,7 @@
         <div id="registro" class="tab-content active">
             <!-- FORMULARIO UNIFICADO -->
             <div class="seccion">
-                <h2>Bidaia eta Dirua Erregistratu</h2>
+                <h2>Bidaia eta Dirua Erregistratu</h1>
                 <div class="formulario">
                     <div class="grupo-form">
                         <label for="fecha-viaje">Data</label>
@@ -694,479 +694,104 @@
         </div>
     </div>
 
-    <script>
-                        // ===== DESPERTAR SERVIDOR DE RENDER =====
-                        function despertarServidor() {
-                            // Hace un ping al servidor para que se active si está dormido
-                            fetch('https://kotxea-backend.onrender.com/datos')
-                                .catch(() => {}); // Ignorar errores, solo queremos despertar el servidor
-                        }
-
-                        // ===== RESTAURAR DESDE LA NUBE (RENDER) =====
-                        function restaurarDesdeNube() {
-                            fetch('https://kotxea-backend.onrender.com/datos')
-                                .then(res => res.json())
-                                .then(datos => {
-                                    if (Array.isArray(datos)) {
-                                        Storage.setRegistros(datos);
-                                        SistemaRegistro.actualizarVistas();
-                                        alert('Datuak Render-etik berreskuratu dira');
-                                    } else {
-                                        alert('Render-en ez dago daturik');
-                                    }
-                                })
-                                .catch(() => alert('Errorea Render-etik irakurtzean'));
-                        }
-                // ===== GUARDAR EN LA NUBE =====
-                function guardarEnLaNube() {
-                    const datos = Storage.getRegistros();
-                    fetch('https://kotxea-backend.onrender.com/save', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(datos)
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.status === 'ok') {
-                            alert('Datuak hodeian ondo gorde dira');
-                        } else {
-                            alert('Errorea hodeian gordetzean: ' + (data.error || '')); 
-                        }
-                    })
-                    .catch(err => alert('Errorea sarea erabiliz hodeian gordetzean'));
-                }
-        // ===== CONFIGURACIÓN INICIAL =====
-        const PARTICIPANTES = ['Iosu', 'Lide', 'Asier', 'Itziar'];
-        const Storage = {
-            getRegistros: () => JSON.parse(localStorage.getItem('registros')) || [],
-            setRegistros: (data) => localStorage.setItem('registros', JSON.stringify(data)),
-            limpiarTodo: () => { localStorage.removeItem('registros'); }
-        };
-
-        // ===== PASAJEROS DINÁMICOS =====
-        function actualizarCheckboxesPasajeros() {
-            const conductor = document.getElementById('conductor-viaje').value;
-            const cont = document.getElementById('pasajeros-checkboxes');
-            cont.innerHTML = '';
-            PARTICIPANTES.forEach(p => {
-                if (p !== conductor) {
-                    const id = 'pasajero-' + p.toLowerCase();
-                    cont.innerHTML += `<div class="checkbox-item"><input type="checkbox" id="${id}" value="${p}" class="pasajero-viaje" aria-label="Pasajero ${p}"><label for="${id}">${p}</label></div>`;
-                }
-            });
-        }
-
-        // ===== GESTIÓN DE TABS =====
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-                
-                e.target.classList.add('active');
-                const tabId = e.target.dataset.tab;
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-
-        // ===== SISTEMA COMBINADO VIAJES + DINERO =====
-        let registroEnEdicion = null;
-
-        const SistemaRegistro = {
-        guardar: () => {
-            const fecha = document.getElementById('fecha-viaje').value;
-            const conductor = document.getElementById('conductor-viaje').value;
-            const pasajeros = Array.from(document.querySelectorAll('.pasajero-viaje:checked')).map(el => el.value);
-            const valorViaje = parseFloat(document.getElementById('valor-viaje').value);
-            const dinero = parseFloat(document.getElementById('dinero-viaje').value) || 0;
-            // Validaciones
-            if (!fecha) { SistemaRegistro.mostrarAlerta('Por favor, selecciona una fecha', 'error'); return; }
-            if (!conductor) { SistemaRegistro.mostrarAlerta('Por favor, selecciona un conductor', 'error'); return; }
-            if (pasajeros.length === 0) { SistemaRegistro.mostrarAlerta('Selecciona al menos un pasajero', 'error'); return; }
-            if (isNaN(valorViaje) || valorViaje < 0) { SistemaRegistro.mostrarAlerta('El valor del viaje debe ser un número válido (0 o mayor)', 'error'); return; }
-            
-            const registros = Storage.getRegistros();
-            
-            if (registroEnEdicion !== null) {
-                // Modo edición: actualizar registro existente
-                const index = registros.findIndex(r => r.id === registroEnEdicion);
-                if (index !== -1) {
-                    registros[index] = { id: registroEnEdicion, fecha, conductor, pasajeros, valorViaje, dinero };
-                    SistemaRegistro.mostrarAlerta('Registro actualizado correctamente', 'exito');
-                }
-            } else {
-                // Modo creación: nuevo registro
-                const registro = { id: Date.now(), fecha, conductor, pasajeros, valorViaje, dinero };
-                registros.push(registro);
-                SistemaRegistro.mostrarAlerta('Registro guardado correctamente', 'exito');
-            }
-            
-            Storage.setRegistros(registros);
-            registroEnEdicion = null;
-            SistemaRegistro.limpiarFormulario();
-            SistemaRegistro.actualizarVistas();
-            // Guardar automáticamente en la nube
-            guardarEnLaNube();
+    <!-- GESTIÓN DE MODAL Y TOKEN =====
+    const Modal = {
+        mostrar: (titulo, mensaje, callback) => {
+            document.getElementById('modal-titulo').textContent = titulo;
+            document.getElementById('modal-mensaje').textContent = mensaje;
+            document.getElementById('modal-confirmacion').classList.add('active');
+            document.getElementById('btn-confirmar').onclick = () => {
+                callback();
+                Modal.cerrar();
+            };
         },
+        cerrar: () => {
+            document.getElementById('modal-confirmacion').classList.remove('active');
+        }
+    };
 
-            eliminar: (id) => {
-                if (!confirm('¿Seguro que quieres eliminar este registro?')) return;
-                const registros = Storage.getRegistros();
-                const filtrados = registros.filter(r => r.id !== id);
-                Storage.setRegistros(filtrados);
-                SistemaRegistro.actualizarVistas();
-                // Guardar automáticamente en la nube
-                guardarEnLaNube();
-            },
-
-            editar: (id) => {
-                const registros = Storage.getRegistros();
-                const registro = registros.find(r => r.id === id);
-                if (!registro) return;
-                
-                // Cargar datos en el formulario
-                document.getElementById('fecha-viaje').value = registro.fecha;
-                document.getElementById('conductor-viaje').value = registro.conductor;
-                actualizarCheckboxesPasajeros();
-                
-                // Marcar pasajeros después de que se actualicen los checkboxes
-                setTimeout(() => {
-                    registro.pasajeros.forEach(p => {
-                        const checkbox = document.querySelector(`.pasajero-viaje[value="${p}"]`);
-                        if (checkbox) checkbox.checked = true;
-                    });
-                }, 20);
-                
-                document.getElementById('valor-viaje').value = registro.valorViaje !== undefined ? registro.valorViaje : 1;
-                document.getElementById('dinero-viaje').value = registro.dinero || '';
-                
-                // Marcar que estamos editando
-                registroEnEdicion = id;
-                
-                // Cambiar texto del botón
-                document.getElementById('btn-guardar-registro').textContent = '✏️ Eguneratu';
-                
-                // Scroll al formulario
-                document.querySelector('.seccion').scrollIntoView({ behavior: 'smooth' });
-            },
-
-            calcularSaldosViajes: () => {
-                // Valores iniciales base
-                const base = { 'Iosu': -0.14, 'Asier': 0.34, 'Itziar': -0.27, 'Lide': 0.07 };
-                const saldos = { ...base };
-                PARTICIPANTES.forEach(p => { if (!(p in saldos)) saldos[p] = 0; });
-                const registros = Storage.getRegistros();
-                registros.forEach(reg => {
-                    const valorViaje = reg.valorViaje !== undefined ? reg.valorViaje : 1; // Por defecto 1 para registros antiguos
-                    const totalPersonas = reg.pasajeros.length + 1;
-                    const costoPorPersona = valorViaje / totalPersonas;
-                    saldos[reg.conductor] += (valorViaje - costoPorPersona);
-                    reg.pasajeros.forEach(pasajero => { saldos[pasajero] -= costoPorPersona; });
-                });
-                // Truncar a dos decimales
-                Object.keys(saldos).forEach(p => {
-                    saldos[p] = Math.trunc(saldos[p] * 100) / 100;
-                });
-                return saldos;
-            },
-            calcularSaldosDinero: () => {
-                const saldos = {};
-                PARTICIPANTES.forEach(p => saldos[p] = 0);
-                const registros = Storage.getRegistros();
-                registros.forEach(reg => {
-                    const totalPersonas = reg.pasajeros.length + 1;
-                    if (reg.dinero > 0 && reg.pasajeros.length > 0) {
-                        const deudaPorPersona = reg.dinero / totalPersonas;
-                        // El conductor debe a cada pasajero
-                        saldos[reg.conductor] -= deudaPorPersona * reg.pasajeros.length;
-                        reg.pasajeros.forEach(pasajero => {
-                            saldos[pasajero] += deudaPorPersona;
-                        });
-                    }
-                });
-                return saldos;
-            },
-
-            actualizarVistas: () => {
-                SistemaRegistro.actualizarTablaSaldosViajes();
-                SistemaRegistro.actualizarTablaSaldosDinero();
-                SistemaRegistro.actualizarTotalGenerado();
-                SistemaRegistro.actualizarHistorial();
-            },
-
-            actualizarTablaSaldosViajes: () => {
-                const saldos = SistemaRegistro.calcularSaldosViajes();
-                const tabla = document.getElementById('tabla-saldos-viajes');
-                tabla.innerHTML = '';
-
-                // Ordenar de más negativo a más positivo
-                const ordenados = Object.entries(saldos).sort((a, b) => a[1] - b[1]);
-
-                ordenados.forEach(([persona, saldo]) => {
-                    const claseBalance = saldo > 0 ? 'saldo-positivo' : (saldo < 0 ? 'saldo-negativo' : 'saldo-cero');
-                    
-                    const fila = `
-                        <tr>
-                            <td>${persona}</td>
-                            <td class="${claseBalance}">${saldo > 0 ? '+' : ''}${saldo.toFixed(2)} viajes</td>
-                        </tr>
-                    `;
-                    tabla.innerHTML += fila;
-                });
-            },
-
-            actualizarTablaSaldosDinero: () => {
-                const saldos = SistemaRegistro.calcularSaldosDinero();
-                const tabla = document.getElementById('tabla-saldos-dinero');
-                tabla.innerHTML = '';
-
-                PARTICIPANTES.forEach(persona => {
-                    const saldo = saldos[persona];
-                    const claseBalance = saldo > 0 ? 'saldo-positivo' : (saldo < 0 ? 'saldo-negativo' : 'saldo-cero');
-                    
-                    const fila = `
-                        <tr>
-                            <td>${persona}</td>
-                            <td class="${claseBalance}">${saldo > 0 ? '+' : ''}${saldo.toFixed(2)} €</td>
-                        </tr>
-                    `;
-                    tabla.innerHTML += fila;
-                });
-                
-                // Actualizar tabla de pagos mínimos
-                SistemaRegistro.actualizarTablaPagosMinimos();
-            },
-
-            actualizarTablaPagosMinimos: () => {
-                // Calcular pagos mínimos automáticamente a partir de los saldos de dinero (Tricount style)
-                const saldos = SistemaRegistro.calcularSaldosDinero();
-                const deudores = [];
-                const acreedores = [];
-                Object.entries(saldos).forEach(([persona, saldo]) => {
-                    if (saldo < -0.01) deudores.push({ nombre: persona, saldo: -saldo });
-                    else if (saldo > 0.01) acreedores.push({ nombre: persona, saldo });
-                });
-                // Algoritmo de pagos mínimos
-                const pagos = [];
-                let i = 0, j = 0;
-                while (i < deudores.length && j < acreedores.length) {
-                    const deudor = deudores[i];
-                    const acreedor = acreedores[j];
-                    const cantidad = Math.min(deudor.saldo, acreedor.saldo);
-                    pagos.push({ deudor: deudor.nombre, acreedor: acreedor.nombre, cantidad });
-                    deudor.saldo -= cantidad;
-                    acreedor.saldo -= cantidad;
-                    if (Math.abs(deudor.saldo) < 0.01) i++;
-                    if (Math.abs(acreedor.saldo) < 0.01) j++;
-                }
-                // Mostrar en ambas tablas
-                const tablas = [
-                    document.getElementById('tabla-pagos-minimos'),
-                    document.getElementById('tabla-pagos-minimos-registro')
-                ].filter(Boolean);
-                const filas = pagos.map(p => `
-                    <tr>
-                        <td style="color: #e74c3c; font-weight: bold;">${p.deudor}</td>
-                        <td style="color: #27ae60; font-weight: bold;">${p.acreedor}</td>
-                        <td style="color: #f39c12; font-weight: bold;">${p.cantidad.toFixed(2)} €</td>
-                    </tr>
-                `).join('');
-                const contenido = filas || '<tr><td colspan="3" style="text-align: center; color: #999;">No hay pagos mínimos</td></tr>';
-                tablas.forEach(tabla => tabla.innerHTML = contenido);
-            },
-
-            // _PAGOS_EXTERNOS eliminado: ahora todo es automático
-
-            actualizarHistorial: () => {
-                const registros = Storage.getRegistros();
-                const historial = document.getElementById('historial-registro');
-                
-                if (registros.length === 0) {
-                    historial.innerHTML = '<p style="color: #999; text-align: center;">No hay registros</p>';
-                    return;
-                }
-
-                historial.innerHTML = registros.reverse().map(reg => {
-                    const valorViaje = reg.valorViaje !== undefined ? reg.valorViaje : 1;
-                    const detalleValor = `<div class=\"movimiento-detalles\"><strong>⚖️ Balioa:</strong> ${valorViaje.toFixed(2)} viajes</div>`;
-                    const detalleDinero = reg.dinero > 0 ? `<div class=\"movimiento-detalles\"><strong>💵 Dirusaria:</strong> ${reg.dinero.toFixed(2)} €</div>` : '';
-                    return `
-                        <div class=\"movimiento\">
-                            <div class=\"movimiento-info\">
-                                <div class=\"movimiento-detalles\">
-                                    <strong>🚗 Gidaria:</strong> ${reg.conductor}
-                                </div>
-                                <div class=\"movimiento-detalles\">
-                                    <strong>🚗 Bidaiariak:</strong> ${reg.pasajeros.join(', ')}
-                                </div>
-                                ${detalleValor}
-                                ${detalleDinero}
-                                <div class=\"movimiento-fecha\">${new Date(reg.fecha).toLocaleDateString('es-ES')}</div>
-                            </div>
-                            <div style=\"display: flex; flex-direction: column; gap: 10px; min-width: 100px;\">
-                                <button class=\"btn-eliminar\" style=\"background: #3498db; padding: 10px 15px; font-size: 13px;\" onclick=\"SistemaRegistro.editar(${reg.id})\">✏️ Editatu</button>
-                                <button class=\"btn-eliminar\" style=\"padding: 10px 15px; font-size: 13px;\" onclick=\"SistemaRegistro.eliminar(${reg.id})\">🗑️ Ezabatu</button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            },
-
-            actualizarTotalGenerado: () => {
-                const registros = Storage.getRegistros();
-                const total = registros.reduce((sum, reg) => sum + (reg.dinero || 0), 0);
-                
-                // Actualizar ambos elementos si existen
-                const elem1 = document.getElementById('total-dinero-generado');
-                const elem2 = document.getElementById('total-dinero-generado-2');
-                
-                if (elem1) elem1.textContent = `${total.toFixed(2)} €`;
-                if (elem2) elem2.textContent = `${total.toFixed(2)} €`;
-            },
-
-            limpiarFormulario: () => {
-                const hoy = new Date().toISOString().split('T')[0];
-                document.getElementById('fecha-viaje').value = hoy;
-                document.getElementById('conductor-viaje').value = '';
-                document.getElementById('valor-viaje').value = '1';
-                document.getElementById('dinero-viaje').value = '';
-                setTimeout(() => {
-                    document.querySelectorAll('.pasajero-viaje').forEach(el => el.checked = false);
-                }, 10);
-                
-                // Resetear modo edición
-                registroEnEdicion = null;
-                document.getElementById('btn-guardar-registro').textContent = '💾 Gorde';
-            },
-
-            mostrarAlerta: (mensaje, tipo) => {
-                const alertaDiv = document.getElementById('alerta-registro');
-                const claseAlerta = tipo === 'exito' ? 'alerta-exito' : 'alerta-error';
-                alertaDiv.innerHTML = `<div class="alerta ${claseAlerta}">${mensaje}</div>`;
-                alertaDiv.focus && alertaDiv.focus();
-                setTimeout(() => {
-                    alertaDiv.innerHTML = '';
-                }, 3000);
-            },
-
-            exportarCSVs: () => {
-                SistemaRegistro.exportarCSVViajes();
-                SistemaRegistro.exportarCSVDinero();
-            },
-
-            exportarCSVViajes: () => {
-                const saldos = SistemaRegistro.calcularSaldosViajes();
-                const registros = Storage.getRegistros();
-
-                let csv = 'RESUMEN DE SALDOS - VIAJES\n';
-                csv += 'Persona,Balance\n';
-                
-                const ordenados = Object.entries(saldos).sort((a, b) => a[1] - b[1]);
-                ordenados.forEach(([persona, saldo]) => {
-                    csv += `${persona},${saldo.toFixed(3)}\n`;
-                });
-
-                csv += '\n\nHISTORIAL DE VIAJES\n';
-                csv += 'Fecha,Conductor,Pasajeros,Número de Pasajeros\n';
-                registros.forEach(reg => {
-                    csv += `${reg.fecha},${reg.conductor},"${reg.pasajeros.join('|')}",${reg.pasajeros.length}\n`;
-                });
-
-                SistemaRegistro.descargarCSV(csv, 'viajes');
-            },
-
-            exportarCSVDinero: () => {
-                const saldos = SistemaRegistro.calcularSaldosDinero();
-                const registros = Storage.getRegistros();
-
-                let csv = 'RESUMEN DE SALDOS - DINERO\n';
-                csv += 'Persona,Saldo (€)\n';
-                Object.entries(saldos).forEach(([persona, saldo]) => {
-                    csv += `${persona},${saldo.toFixed(2)}\n`;
-                });
-
-                csv += '\n\nHISTORIAL DE DINERO\n';
-                csv += 'Fecha,Conductor,Pasajeros,Dinero Total,Dinero por Pasajero\n';
-                registros.forEach(reg => {
-                    if (reg.dinero > 0) {
-                        const dineroPorPasajero = reg.dinero / reg.pasajeros.length;
-                        csv += `${reg.fecha},${reg.conductor},"${reg.pasajeros.join('|')}","${reg.dinero.toFixed(2)}","${dineroPorPasajero.toFixed(2)}"\n`;
-                    }
-                });
-
-                SistemaRegistro.descargarCSV(csv, 'dinero');
-            },
-
-            descargarCSV: (csv, nombre) => {
-                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = `${nombre}_${new Date().toISOString().split('T')[0]}.csv`;
-                link.click();
+    // ===== TOKEN DE AUTENTICACIÓN =====
+    const USR_TOKEN_KEY = 'usr_token';
+    function pedirTokenSiNoHay() {
+        let token = localStorage.getItem(USR_TOKEN_KEY);
+        if (!token) {
+            let input = prompt('Introduce la clave de acceso (token):');
+            if (input) {
+                localStorage.setItem(USR_TOKEN_KEY, input);
             }
-        };
+        }
+    }
+    function getToken() {
+        return localStorage.getItem(USR_TOKEN_KEY) || '';
+    }
 
-        // ===== GESTIÓN DE MODAL =====
-        const Modal = {
-            mostrar: (titulo, mensaje, callback) => {
-                document.getElementById('modal-titulo').textContent = titulo;
-                document.getElementById('modal-mensaje').textContent = mensaje;
-                document.getElementById('modal-confirmacion').classList.add('active');
-                
-                document.getElementById('btn-confirmar').onclick = () => {
-                    callback();
-                    Modal.cerrar();
-                };
-            },
-
-            cerrar: () => {
-                document.getElementById('modal-confirmacion').classList.remove('active');
+    function guardarEnLaNube() {
+        const datos = Storage.getRegistros();
+        const token = getToken();
+        fetch('https://kotxea-backend.onrender.com/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: datos, token })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'ok') {
+                alert('Datuak hodeian ondo gorde dira');
+            } else if (data.error === 'Authentication failed') {
+                alert('Errorea: token incorrecto. Por favor, introduce la clave de nuevo.');
+                localStorage.removeItem(USR_TOKEN_KEY);
+                pedirTokenSiNoHay();
+            } else {
+                alert('Errorea hodeian gordetzean: ' + (data.error || ''));
             }
-        };
+        })
+        .catch(err => alert('Errorea sarea erabiliz hodeian gordetzean'));
+    }
 
-        // ===== EVENT LISTENERS =====
-        document.addEventListener('DOMContentLoaded', () => {
-                                    // Despertar servidor de Render al cargar la página
-                                    despertarServidor();
-                                    // Botón Restaurar desde la nube
-                                    document.getElementById('btn-restaurar-nube').addEventListener('click', restaurarDesdeNube);
-                                    // Restaurar automáticamente al iniciar
-                                    restaurarDesdeNube();
-                        // Botón Guardar en la nube
-                        document.getElementById('btn-guardar-nube').addEventListener('click', guardarEnLaNube);
-            // Establecer fecha actual por defecto
-            const hoy = new Date().toISOString().split('T')[0];
-            document.getElementById('fecha-viaje').value = hoy;
-            // Inicializar checkboxes pasajeros
+    document.addEventListener('DOMContentLoaded', () => {
+        pedirTokenSiNoHay();
+        // Despertar servidor de Render al cargar la página
+        despertarServidor();
+        // Botón Restaurar desde la nube
+        document.getElementById('btn-restaurar-nube').addEventListener('click', restaurarDesdeNube);
+        // Restaurar automáticamente al iniciar
+        restaurarDesdeNube();
+        // Botón Guardar en la nube
+        document.getElementById('btn-guardar-nube').addEventListener('click', guardarEnLaNube);
+        // Establecer fecha actual por defecto
+        const hoy = new Date().toISOString().split('T')[0];
+        document.getElementById('fecha-viaje').value = hoy;
+        // Inicializar checkboxes pasajeros
+        actualizarCheckboxesPasajeros();
+        document.getElementById('conductor-viaje').addEventListener('change', actualizarCheckboxesPasajeros);
+        // Botones Registro
+        document.getElementById('btn-guardar-registro').addEventListener('click', SistemaRegistro.guardar);
+        document.getElementById('btn-limpiar-registro').addEventListener('click', () => {
+            SistemaRegistro.limpiarFormulario();
             actualizarCheckboxesPasajeros();
-            document.getElementById('conductor-viaje').addEventListener('change', actualizarCheckboxesPasajeros);
-            // Botones Registro
-            document.getElementById('btn-guardar-registro').addEventListener('click', SistemaRegistro.guardar);
-            document.getElementById('btn-limpiar-registro').addEventListener('click', () => {
-                SistemaRegistro.limpiarFormulario();
-                actualizarCheckboxesPasajeros();
-            });
-            // Botones Exportar
-            document.getElementById('btn-exportar-viajes').addEventListener('click', SistemaRegistro.exportarCSVViajes);
-            document.getElementById('btn-exportar-dinero').addEventListener('click', SistemaRegistro.exportarCSVDinero);
-            // Botón Reiniciar Mes
-            document.getElementById('btn-reiniciar-mes').addEventListener('click', () => {
-                Modal.mostrar(
-                    '⚠️ Reiniciar Mes',
-                    '¿Estás seguro de que quieres borrar todos los datos? Esta acción no se puede deshacer.',
-                    () => {
-                        Storage.limpiarTodo();
-                        SistemaRegistro.actualizarVistas();
-                        alert('✅ Todos los datos han sido eliminados');
-                        SistemaRegistro.limpiarFormulario();
-                        actualizarCheckboxesPasajeros();
-                    }
-                );
-            });
-            // Botón Cancelar Modal
-            document.getElementById('btn-cancelar').addEventListener('click', Modal.cerrar);
-            // Actualizar vistas iniciales
-            SistemaRegistro.actualizarVistas();
         });
+        // Botones Exportar
+        document.getElementById('btn-exportar-viajes').addEventListener('click', SistemaRegistro.exportarCSVViajes);
+        document.getElementById('btn-exportar-dinero').addEventListener('click', SistemaRegistro.exportarCSVDinero);
+        // Botón Reiniciar Mes
+        document.getElementById('btn-reiniciar-mes').addEventListener('click', () => {
+            Modal.mostrar(
+                '⚠️ Reiniciar Mes',
+                '¿Estás seguro de que quieres borrar todos los datos? Esta acción no se puede deshacer.',
+                () => {
+                    Storage.limpiarTodo();
+                    SistemaRegistro.actualizarVistas();
+                    alert('✅ Todos los datos han sido eliminados');
+                    SistemaRegistro.limpiarFormulario();
+                    actualizarCheckboxesPasajeros();
+                }
+            );
+        });
+        // Botón Cancelar Modal
+        document.getElementById('btn-cancelar').addEventListener('click', Modal.cerrar);
+        // Actualizar vistas iniciales
+        SistemaRegistro.actualizarVistas();
+    });
     </script>
 </body>
 </html>

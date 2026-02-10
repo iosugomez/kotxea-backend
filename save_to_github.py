@@ -8,6 +8,7 @@ from datetime import datetime
 
 # Configuración
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
+USR_TOKEN = os.environ.get('USR_TOKEN')
 REPO_NAME = 'iosugomez/kotxea-backend'
 DATA_PATH = 'datos/datos.json'
 CSV_VIAJES_PATH = 'datos/viajes.csv'
@@ -102,9 +103,13 @@ def save_file(repo, path, content, message):
 
 @app.route('/save', methods=['POST'])
 def save_data():
-    data = request.json
-    if not data:
-        return jsonify({'error': 'No data provided'}), 400
+    req = request.json
+    if not req or 'data' not in req or 'token' not in req:
+        return jsonify({'error': 'No data or token provided'}), 400
+    data = req['data']
+    token = req['token']
+    if token != USR_TOKEN:
+        return jsonify({'error': 'Authentication failed'}), 401
     repo = get_github_repo()
     try:
         # Guardar datos.json
