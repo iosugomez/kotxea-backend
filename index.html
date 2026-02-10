@@ -739,18 +739,16 @@
                         if (valido) return;
                         localStorage.removeItem(USR_TOKEN_KEY);
                     }
-                    let intentos = 3;
-                    while (intentos > 0) {
+                    while (true) {
                         let input = prompt('Introduce la clave de acceso (token):');
-                        if (!input) break;
+                        if (!input) continue;
                         const valido = await verificarToken(input);
                         if (valido) {
                             localStorage.setItem(USR_TOKEN_KEY, input);
                             alert('Token correcto. Acceso permitido.');
                             return;
                         } else {
-                            intentos--;
-                            alert('Token incorrecto. Intentos restantes: ' + intentos);
+                            alert('Token incorrecto. Vuelve a intentarlo.');
                         }
                     }
                 }
