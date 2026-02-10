@@ -717,18 +717,38 @@
                                 })
                                 .catch(() => alert('Errorea Render-etik irakurtzean'));
                         }
+                // ===== TOKEN DE AUTENTICACIÓN =====
+                const USR_TOKEN_KEY = 'usr_token';
+                function pedirTokenSiNoHay() {
+                    let token = localStorage.getItem(USR_TOKEN_KEY);
+                    if (!token) {
+                        let input = prompt('Introduce la clave de acceso (token):');
+                        if (input) {
+                            localStorage.setItem(USR_TOKEN_KEY, input);
+                        }
+                    }
+                }
+                function getToken() {
+                    return localStorage.getItem(USR_TOKEN_KEY) || '';
+                }
+
                 // ===== GUARDAR EN LA NUBE =====
                 function guardarEnLaNube() {
                     const datos = Storage.getRegistros();
+                    const token = getToken();
                     fetch('https://kotxea-backend.onrender.com/save', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(datos)
+                        body: JSON.stringify({ data: datos, token: token })
                     })
                     .then(res => res.json())
                     .then(data => {
                         if (data.status === 'ok') {
                             alert('Datuak hodeian ondo gorde dira');
+                        } else if (data.error === 'Authentication failed') {
+                            alert('Errorea: token incorrecto. Introduce la clave de nuevo.');
+                            localStorage.removeItem(USR_TOKEN_KEY);
+                            pedirTokenSiNoHay();
                         } else {
                             alert('Errorea hodeian gordetzean: ' + (data.error || '')); 
                         }
@@ -1125,6 +1145,8 @@
 
         // ===== EVENT LISTENERS =====
         document.addEventListener('DOMContentLoaded', () => {
+                                    // Pedir token si no está guardado
+                                    pedirTokenSiNoHay();
                                     // Despertar servidor de Render al cargar la página
                                     despertarServidor();
                                     // Botón Restaurar desde la nube
