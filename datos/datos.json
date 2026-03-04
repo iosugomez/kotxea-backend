@@ -288,5 +288,15 @@
     ],
     "valorViaje": 1,
     "dinero": 2.12
+  },
+  {
+    "id": 1772606855814,
+    "fecha": "2026-03-03",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 2.27
   }
 ]
