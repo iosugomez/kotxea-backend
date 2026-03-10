@@ -779,6 +779,32 @@
                     })
                     .catch(err => alert('Errorea sarea erabiliz hodeian gordetzean'));
                 }
+
+                // ===== SINCRONIZACIÓN POR OPERACIÓN (evita sobreescrituras) =====
+                async function sincronizarNube(endpoint, payload) {
+                    const token = getToken();
+                    try {
+                        const res = await fetch(`https://kotxea-backend.onrender.com/${endpoint}`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ ...payload, token })
+                        });
+                        const data = await res.json();
+                        if (data.status === 'ok' && Array.isArray(data.data)) {
+                            Storage.setRegistros(data.data);
+                            SistemaRegistro.actualizarVistas();
+                        } else if (data.error === 'Authentication failed') {
+                            alert('Errorea: token incorrecto. Introduce la clave de nuevo.');
+                            localStorage.removeItem(USR_TOKEN_KEY);
+                            pedirTokenSiNoHay();
+                        } else if (data.error) {
+                            alert('Errorea hodeian gordetzean: ' + data.error);
+                        }
+                    } catch (err) {
+                        alert('Errorea sarea erabiliz hodeian gordetzean');
+                    }
+                }
+
         // ===== CONFIGURACIÓN INICIAL =====
         const PARTICIPANTES = ['Iosu', 'Lide', 'Asier', 'Itziar'];
         const Storage = {
@@ -836,20 +862,24 @@
                 if (index !== -1) {
                     registros[index] = { id: registroEnEdicion, fecha, conductor, pasajeros, valorViaje, dinero };
                     SistemaRegistro.mostrarAlerta('Registro actualizado correctamente', 'exito');
+                    Storage.setRegistros(registros);
+                    const registroEditado = registros[index];
+                    registroEnEdicion = null;
+                    SistemaRegistro.limpiarFormulario();
+                    SistemaRegistro.actualizarVistas();
+                    sincronizarNube('edit', { registro: registroEditado });
                 }
             } else {
                 // Modo creación: nuevo registro
                 const registro = { id: Date.now(), fecha, conductor, pasajeros, valorViaje, dinero };
                 registros.push(registro);
                 SistemaRegistro.mostrarAlerta('Registro guardado correctamente', 'exito');
+                Storage.setRegistros(registros);
+                registroEnEdicion = null;
+                SistemaRegistro.limpiarFormulario();
+                SistemaRegistro.actualizarVistas();
+                sincronizarNube('add', { registro });
             }
-            
-            Storage.setRegistros(registros);
-            registroEnEdicion = null;
-            SistemaRegistro.limpiarFormulario();
-            SistemaRegistro.actualizarVistas();
-            // Guardar automáticamente en la nube
-            guardarEnLaNube();
         },
 
             eliminar: (id) => {
@@ -858,8 +888,8 @@
                 const filtrados = registros.filter(r => r.id !== id);
                 Storage.setRegistros(filtrados);
                 SistemaRegistro.actualizarVistas();
-                // Guardar automáticamente en la nube
-                guardarEnLaNube();
+                // Eliminar en nube por ID (no sobreescribe datos de otros)
+                sincronizarNube('delete', { id });
             },
 
             editar: (id) => {
