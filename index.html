@@ -525,47 +525,52 @@
                     <p style="color: #27ae60; font-size: 24px; font-weight: bold; margin: 10px 0 0 0;" id="total-dinero-generado">0.00 €</p>
                 </div>
 
-                <!-- LIQUIDAZIOA -->
-                <div style="margin-top: 20px; padding: 20px; background: #f0fff4; border-radius: 8px; border-left: 4px solid #27ae60; margin-bottom: 20px;">
-                    <h2 style="margin-bottom: 15px; color: #27ae60;">💸 Likidazioa (Dirua Kitatu)</h2>
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-start;">
-                        <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-                            <button class="btn-exito" id="btn-liquidacion-total" style="white-space: nowrap;">✅ Likidazio Osoa</button>
-                            <span style="font-size: 12px; color: #555;">Saldo guztiak zero jartzen ditu</span>
-                        </div>
-                        <div style="flex: 1; min-width: 260px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
-                            <strong style="font-size: 14px; display: block; margin-bottom: 10px; color: #555;">💸 Likidazio Partziala (batek besteari ordaindu dio)</strong>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
-                                <div class="grupo-form">
-                                    <label for="liq-fecha">Data</label>
-                                    <input type="date" id="liq-fecha">
-                                </div>
-                                <div class="grupo-form">
-                                    <label for="liq-cantidad">Kopurua (€)</label>
-                                    <input type="number" id="liq-cantidad" placeholder="0.00" step="0.01" min="0.01">
-                                </div>
-                                <div class="grupo-form">
-                                    <label for="liq-de">Nork ordaindu du</label>
-                                    <select id="liq-de">
-                                        <option value="">-- Hautatu --</option>
-                                        <option value="Iosu">Iosu</option>
-                                        <option value="Lide">Lide</option>
-                                        <option value="Asier">Asier</option>
-                                        <option value="Itziar">Itziar</option>
-                                    </select>
-                                </div>
-                                <div class="grupo-form">
-                                    <label for="liq-para">Nori ordaindu zaio</label>
-                                    <select id="liq-para">
-                                        <option value="">-- Hautatu --</option>
-                                        <option value="Iosu">Iosu</option>
-                                        <option value="Lide">Lide</option>
-                                        <option value="Asier">Asier</option>
-                                        <option value="Itziar">Itziar</option>
-                                    </select>
-                                </div>
+                <!-- LIQUIDAZIOA (desplegable) -->
+                <div style="margin-top: 20px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #a8d5b5; overflow: hidden;">
+                    <button id="btn-toggle-liquidacion" onclick="toggleLiquidacion()" style="width: 100%; display: flex; justify-content: space-between; align-items: center; background: #f0fff4; border: none; padding: 14px 20px; cursor: pointer; font-size: 15px; font-weight: 600; color: #27ae60; border-left: 4px solid #27ae60;">
+                        <span>💸 Likidazioa (Dirua Kitatu)</span>
+                        <span id="liq-arrow" style="font-size: 12px; transition: transform 0.2s;">▼</span>
+                    </button>
+                    <div id="liq-panel" style="display: none; padding: 20px; background: #f0fff4;">
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-start;">
+                            <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+                                <button class="btn-exito" id="btn-liquidacion-total" style="white-space: nowrap;">✅ Likidazio Osoa</button>
+                                <span style="font-size: 12px; color: #555;">Saldo guztiak zero jartzen ditu</span>
                             </div>
-                            <button class="btn-primario" id="btn-liquidacion-parcial" style="width: 100%;">💸 Erregistratu</button>
+                            <div style="flex: 1; min-width: 260px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
+                                <strong style="font-size: 14px; display: block; margin-bottom: 10px; color: #555;">💸 Likidazio Partziala (batek besteari ordaindu dio)</strong>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                                    <div class="grupo-form">
+                                        <label for="liq-fecha">Data</label>
+                                        <input type="date" id="liq-fecha">
+                                    </div>
+                                    <div class="grupo-form">
+                                        <label for="liq-cantidad">Kopurua (€)</label>
+                                        <input type="number" id="liq-cantidad" placeholder="0.00" step="0.01" min="0.01">
+                                    </div>
+                                    <div class="grupo-form">
+                                        <label for="liq-de">Nork ordaindu du</label>
+                                        <select id="liq-de">
+                                            <option value="">-- Hautatu --</option>
+                                            <option value="Iosu">Iosu</option>
+                                            <option value="Lide">Lide</option>
+                                            <option value="Asier">Asier</option>
+                                            <option value="Itziar">Itziar</option>
+                                        </select>
+                                    </div>
+                                    <div class="grupo-form">
+                                        <label for="liq-para">Nori ordaindu zaio</label>
+                                        <select id="liq-para">
+                                            <option value="">-- Hautatu --</option>
+                                            <option value="Iosu">Iosu</option>
+                                            <option value="Lide">Lide</option>
+                                            <option value="Asier">Asier</option>
+                                            <option value="Itziar">Itziar</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn-primario" id="btn-liquidacion-parcial" style="width: 100%;">💸 Erregistratu</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -848,6 +853,15 @@
                     } catch (err) {
                         alert('Errorea sarea erabiliz hodeian gordetzean');
                     }
+                }
+
+                // ===== LIQUIDAZIOA DESPLEGABLE =====
+                function toggleLiquidacion() {
+                    const panel = document.getElementById('liq-panel');
+                    const arrow = document.getElementById('liq-arrow');
+                    const abierto = panel.style.display !== 'none';
+                    panel.style.display = abierto ? 'none' : 'block';
+                    arrow.style.transform = abierto ? '' : 'rotate(180deg)';
                 }
 
                 // ===== LIQUIDAZIOAK =====
