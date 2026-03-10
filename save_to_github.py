@@ -23,10 +23,12 @@ def get_github_repo():
     return repo
 
 def generar_csv_viajes(registros):
-    # Calcula saldos y genera CSV de viajes
+    # Calcula saldos y genera CSV de viajes (ignora liquidaciones)
     participantes = ['Iosu', 'Lide', 'Asier', 'Itziar']
     saldos = {p: 0 for p in participantes}
     for reg in registros:
+        if reg.get('tipo') == 'liquidacion':
+            continue
         total = len(reg['pasajeros']) + 1
         c = 1 / total
         saldos[reg['conductor']] += (1 - c)
@@ -37,6 +39,8 @@ def generar_csv_viajes(registros):
         csv += f'{p},{s:.3f}\n'
     csv += '\nFecha,Conductor,Pasajeros,Número de Pasajeros\n'
     for reg in registros:
+        if reg.get('tipo') == 'liquidacion':
+            continue
         csv += f"{reg['fecha']},{reg['conductor']},\"{'|'.join(reg['pasajeros'])}\",{len(reg['pasajeros'])}\n"
     return csv
 
@@ -44,6 +48,16 @@ def generar_csv_dinero(registros):
     participantes = ['Iosu', 'Lide', 'Asier', 'Itziar']
     saldos = {p: 0 for p in participantes}
     for reg in registros:
+        if reg.get('tipo') == 'liquidacion':
+            if reg.get('subtipo') == 'total':
+                for p, v in reg.get('ajustes', {}).items():
+                    if p in saldos:
+                        saldos[p] += v
+            elif reg.get('subtipo') == 'parcial':
+                de, para, cantidad = reg.get('de'), reg.get('para'), reg.get('cantidad', 0)
+                if de in saldos: saldos[de] += cantidad
+                if para in saldos: saldos[para] -= cantidad
+            continue
         total = len(reg['pasajeros']) + 1
         if reg['dinero'] > 0 and len(reg['pasajeros']) > 0:
             deuda = reg['dinero'] / total
@@ -83,8 +97,12 @@ def generar_csv_dinero(registros):
             csv += f'{deudor},{acreedor},{cantidad:.2f}\n'
 
     csv += '\nFecha,Conductor,Pasajeros,Dinero Total,Dinero por Persona\n'
-    for reg in registros:
-        if reg['dinero'] > 0 and len(reg['pasajeros']) > 0:
+    for reg in registros:        if reg.get('tipo') == 'liquidacion':
+            if reg.get('subtipo') == 'parcial':
+                csv += f"{reg['fecha']},Liquidacion Parcial,\"{reg.get('de','')}→{reg.get('para','')}\",{reg.get('cantidad',0):.2f},\n"
+            elif reg.get('subtipo') == 'total':
+                csv += f"{reg['fecha']},Liquidacion Total,,0.00,\n"
+            continue        if reg['dinero'] > 0 and len(reg['pasajeros']) > 0:
             total = len(reg['pasajeros']) + 1
             deuda = reg['dinero'] / total
             csv += f"{reg['fecha']},{reg['conductor']},\"{'|'.join(reg['pasajeros'])}\",{reg['dinero']:.2f},{deuda:.2f}\n"

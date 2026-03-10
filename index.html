@@ -525,6 +525,51 @@
                     <p style="color: #27ae60; font-size: 24px; font-weight: bold; margin: 10px 0 0 0;" id="total-dinero-generado">0.00 €</p>
                 </div>
 
+                <!-- LIQUIDAZIOA -->
+                <div style="margin-top: 20px; padding: 20px; background: #f0fff4; border-radius: 8px; border-left: 4px solid #27ae60; margin-bottom: 20px;">
+                    <h2 style="margin-bottom: 15px; color: #27ae60;">💸 Likidazioa (Dirua Kitatu)</h2>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-start;">
+                        <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+                            <button class="btn-exito" id="btn-liquidacion-total" style="white-space: nowrap;">✅ Likidazio Osoa</button>
+                            <span style="font-size: 12px; color: #555;">Saldo guztiak zero jartzen ditu</span>
+                        </div>
+                        <div style="flex: 1; min-width: 260px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
+                            <strong style="font-size: 14px; display: block; margin-bottom: 10px; color: #555;">💸 Likidazio Partziala (batek besteari ordaindu dio)</strong>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                                <div class="grupo-form">
+                                    <label for="liq-fecha">Data</label>
+                                    <input type="date" id="liq-fecha">
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="liq-cantidad">Kopurua (€)</label>
+                                    <input type="number" id="liq-cantidad" placeholder="0.00" step="0.01" min="0.01">
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="liq-de">Nork ordaindu du</label>
+                                    <select id="liq-de">
+                                        <option value="">-- Hautatu --</option>
+                                        <option value="Iosu">Iosu</option>
+                                        <option value="Lide">Lide</option>
+                                        <option value="Asier">Asier</option>
+                                        <option value="Itziar">Itziar</option>
+                                    </select>
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="liq-para">Nori ordaindu zaio</label>
+                                    <select id="liq-para">
+                                        <option value="">-- Hautatu --</option>
+                                        <option value="Iosu">Iosu</option>
+                                        <option value="Lide">Lide</option>
+                                        <option value="Asier">Asier</option>
+                                        <option value="Itziar">Itziar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn-primario" id="btn-liquidacion-parcial" style="width: 100%;">💸 Erregistratu</button>
+                        </div>
+                    </div>
+                </div>
+
                 <h2>Erregistroen Historia</h2>
                 <div class="historial" id="historial-registro"></div>
             </div>
@@ -805,6 +850,45 @@
                     }
                 }
 
+                // ===== LIQUIDAZIOAK =====
+                function registrarLiquidazioOsoa() {
+                    const saldos = SistemaRegistro.calcularSaldosDinero();
+                    const tieneDeudas = Object.values(saldos).some(s => Math.abs(s) > 0.01);
+                    if (!tieneDeudas) { alert('Ez dago zorrik likidatzeko.'); return; }
+                    if (!confirm('Likidazio osoa egin? Diru-saldoak zero geratuko dira.')) return;
+                    const hoy = new Date().toISOString().split('T')[0];
+                    // ajustes = kontrakoa saldoen (zerora eramateko)
+                    const ajustes = {};
+                    PARTICIPANTES.forEach(p => { ajustes[p] = -(saldos[p] || 0); });
+                    const registro = { id: Date.now(), tipo: 'liquidacion', subtipo: 'total', fecha: hoy, ajustes };
+                    const registros = Storage.getRegistros();
+                    registros.push(registro);
+                    Storage.setRegistros(registros);
+                    SistemaRegistro.actualizarVistas();
+                    sincronizarNube('add', { registro });
+                }
+
+                function registrarLiquidazioPartziala() {
+                    const fecha = document.getElementById('liq-fecha').value;
+                    const de = document.getElementById('liq-de').value;
+                    const para = document.getElementById('liq-para').value;
+                    const cantidad = parseFloat(document.getElementById('liq-cantidad').value);
+                    if (!fecha) { alert('Hautatu data.'); return; }
+                    if (!de) { alert('Hautatu nork ordaintzen duen.'); return; }
+                    if (!para) { alert('Hautatu nori ordaintzen zaion.'); return; }
+                    if (de === para) { alert('Nork eta nori ezin dira berdinak izan.'); return; }
+                    if (isNaN(cantidad) || cantidad <= 0) { alert('Sartu kopuru baliogarri bat.'); return; }
+                    const registro = { id: Date.now(), tipo: 'liquidacion', subtipo: 'parcial', fecha, de, para, cantidad };
+                    const registros = Storage.getRegistros();
+                    registros.push(registro);
+                    Storage.setRegistros(registros);
+                    document.getElementById('liq-de').value = '';
+                    document.getElementById('liq-para').value = '';
+                    document.getElementById('liq-cantidad').value = '';
+                    SistemaRegistro.actualizarVistas();
+                    sincronizarNube('add', { registro });
+                }
+
         // ===== CONFIGURACIÓN INICIAL =====
         const PARTICIPANTES = ['Iosu', 'Lide', 'Asier', 'Itziar'];
         const Storage = {
@@ -930,7 +1014,8 @@
                 PARTICIPANTES.forEach(p => { if (!(p in saldos)) saldos[p] = 0; });
                 const registros = Storage.getRegistros();
                 registros.forEach(reg => {
-                    const valorViaje = reg.valorViaje !== undefined ? reg.valorViaje : 1; // Por defecto 1 para registros antiguos
+                    if (reg.tipo === 'liquidacion') return; // las liquidaciones solo afectan al dinero
+                    const valorViaje = reg.valorViaje !== undefined ? reg.valorViaje : 1;
                     const totalPersonas = reg.pasajeros.length + 1;
                     const costoPorPersona = valorViaje / totalPersonas;
                     saldos[reg.conductor] += (valorViaje - costoPorPersona);
@@ -947,10 +1032,19 @@
                 PARTICIPANTES.forEach(p => saldos[p] = 0);
                 const registros = Storage.getRegistros();
                 registros.forEach(reg => {
+                    if (reg.tipo === 'liquidacion') {
+                        if (reg.subtipo === 'total') {
+                            Object.entries(reg.ajustes || {}).forEach(([p, v]) => { if (p in saldos) saldos[p] += v; });
+                        } else if (reg.subtipo === 'parcial') {
+                            // de pagó a para: de reduce su deuda, para reduce su crédito
+                            if (reg.de in saldos) saldos[reg.de] += reg.cantidad;
+                            if (reg.para in saldos) saldos[reg.para] -= reg.cantidad;
+                        }
+                        return;
+                    }
                     const totalPersonas = reg.pasajeros.length + 1;
                     if (reg.dinero > 0 && reg.pasajeros.length > 0) {
                         const deudaPorPersona = reg.dinero / totalPersonas;
-                        // El conductor debe a cada pasajero
                         saldos[reg.conductor] -= deudaPorPersona * reg.pasajeros.length;
                         reg.pasajeros.forEach(pasajero => {
                             saldos[pasajero] += deudaPorPersona;
@@ -1060,6 +1154,37 @@
                 }
 
                 historial.innerHTML = registros.reverse().map(reg => {
+                    // Liquidacion total
+                    if (reg.tipo === 'liquidacion' && reg.subtipo === 'total') {
+                        const detalle = Object.entries(reg.ajustes || {})
+                            .filter(([, v]) => Math.abs(v) > 0.001)
+                            .map(([p, v]) => `${p}: ${v >= 0 ? '+' : ''}${v.toFixed(2)}€`)
+                            .join(', ');
+                        return `
+                            <div class=\"movimiento\" style=\"border-left-color: #27ae60; background: #f0fff4;\">
+                                <div class=\"movimiento-info\">
+                                    <div class=\"movimiento-detalles\"><strong>✅ Likidazio Osoa</strong></div>
+                                    <div class=\"movimiento-detalles\" style=\"font-size: 12px; color: #666;\">${detalle}</div>
+                                    <div class=\"movimiento-fecha\">${new Date(reg.fecha).toLocaleDateString('es-ES')}</div>
+                                </div>
+                                <button class=\"btn-eliminar\" style=\"padding: 10px 15px; font-size: 13px;\" onclick=\"SistemaRegistro.eliminar(${reg.id})\">🗑️ Ezabatu</button>
+                            </div>
+                        `;
+                    }
+                    // Liquidacion parcial
+                    if (reg.tipo === 'liquidacion' && reg.subtipo === 'parcial') {
+                        return `
+                            <div class=\"movimiento\" style=\"border-left-color: #f39c12; background: #fffdf0;\">
+                                <div class=\"movimiento-info\">
+                                    <div class=\"movimiento-detalles\"><strong>💸 Likidazio Partziala</strong></div>
+                                    <div class=\"movimiento-detalles\">${reg.de} → ${reg.para}: <strong>${reg.cantidad.toFixed(2)} €</strong></div>
+                                    <div class=\"movimiento-fecha\">${new Date(reg.fecha).toLocaleDateString('es-ES')}</div>
+                                </div>
+                                <button class=\"btn-eliminar\" style=\"padding: 10px 15px; font-size: 13px;\" onclick=\"SistemaRegistro.eliminar(${reg.id})\">🗑️ Ezabatu</button>
+                            </div>
+                        `;
+                    }
+                    // Viaje normal
                     const valorViaje = reg.valorViaje !== undefined ? reg.valorViaje : 1;
                     const detalleValor = `<div class=\"movimiento-detalles\"><strong>⚖️ Balioa:</strong> ${valorViaje.toFixed(2)} viajes</div>`;
                     const detalleDinero = reg.dinero > 0 ? `<div class=\"movimiento-detalles\"><strong>💵 Dirusaria:</strong> ${reg.dinero.toFixed(2)} €</div>` : '';
@@ -1212,6 +1337,7 @@
             // Establecer fecha actual por defecto
             const hoy = new Date().toISOString().split('T')[0];
             document.getElementById('fecha-viaje').value = hoy;
+            document.getElementById('liq-fecha').value = hoy;
             // Inicializar checkboxes pasajeros
             actualizarCheckboxesPasajeros();
             document.getElementById('conductor-viaje').addEventListener('change', actualizarCheckboxesPasajeros);
@@ -1224,6 +1350,9 @@
             // Botones Exportar
             document.getElementById('btn-exportar-viajes').addEventListener('click', SistemaRegistro.exportarCSVViajes);
             document.getElementById('btn-exportar-dinero').addEventListener('click', SistemaRegistro.exportarCSVDinero);
+            // Botones Liquidación
+            document.getElementById('btn-liquidacion-total').addEventListener('click', registrarLiquidazioOsoa);
+            document.getElementById('btn-liquidacion-parcial').addEventListener('click', registrarLiquidazioPartziala);
             // Botón Reiniciar Mes
             document.getElementById('btn-reiniciar-mes').addEventListener('click', () => {
                 Modal.mostrar(
