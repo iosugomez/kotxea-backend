@@ -322,5 +322,14 @@
     ],
     "valorViaje": 0,
     "dinero": 12.37
+  },
+  {
+    "id": 1773152821598,
+    "tipo": "liquidacion",
+    "subtipo": "parcial",
+    "fecha": "2026-03-10",
+    "de": "Lide",
+    "para": "Iosu",
+    "cantidad": 10
   }
 ]
