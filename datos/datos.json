@@ -322,15 +322,5 @@
     ],
     "valorViaje": 0,
     "dinero": 12.37
-  },
-  {
-    "id": 1773142920320,
-    "fecha": "2026-03-10",
-    "conductor": "Lide",
-    "pasajeros": [
-      "Itziar"
-    ],
-    "valorViaje": 1,
-    "dinero": 0
   }
 ]
