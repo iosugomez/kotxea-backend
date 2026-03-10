@@ -97,12 +97,14 @@ def generar_csv_dinero(registros):
             csv += f'{deudor},{acreedor},{cantidad:.2f}\n'
 
     csv += '\nFecha,Conductor,Pasajeros,Dinero Total,Dinero por Persona\n'
-    for reg in registros:        if reg.get('tipo') == 'liquidacion':
+    for reg in registros:
+        if reg.get('tipo') == 'liquidacion':
             if reg.get('subtipo') == 'parcial':
                 csv += f"{reg['fecha']},Liquidacion Parcial,\"{reg.get('de','')}→{reg.get('para','')}\",{reg.get('cantidad',0):.2f},\n"
             elif reg.get('subtipo') == 'total':
                 csv += f"{reg['fecha']},Liquidacion Total,,0.00,\n"
-            continue        if reg['dinero'] > 0 and len(reg['pasajeros']) > 0:
+            continue
+        if reg['dinero'] > 0 and len(reg['pasajeros']) > 0:
             total = len(reg['pasajeros']) + 1
             deuda = reg['dinero'] / total
             csv += f"{reg['fecha']},{reg['conductor']},\"{'|'.join(reg['pasajeros'])}\",{reg['dinero']:.2f},{deuda:.2f}\n"
