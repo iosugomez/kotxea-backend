@@ -324,16 +324,6 @@
     "dinero": 12.37
   },
   {
-    "id": 1773142903192,
-    "fecha": "2026-03-10",
-    "conductor": "Itziar",
-    "pasajeros": [
-      "Asier"
-    ],
-    "valorViaje": 1,
-    "dinero": 0
-  },
-  {
     "id": 1773142920320,
     "fecha": "2026-03-10",
     "conductor": "Lide",
