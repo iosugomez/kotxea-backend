@@ -340,5 +340,14 @@
     "de": "Iosu",
     "para": "Lide",
     "cantidad": 45
+  },
+  {
+    "id": 1773153398909,
+    "tipo": "liquidacion",
+    "subtipo": "parcial",
+    "fecha": "2026-03-10",
+    "de": "Itziar",
+    "para": "Lide",
+    "cantidad": 50
   }
 ]
