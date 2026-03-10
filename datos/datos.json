@@ -332,15 +332,5 @@
     ],
     "valorViaje": 1,
     "dinero": 0
-  },
-  {
-    "id": 1773143000330,
-    "fecha": "2026-03-10",
-    "conductor": "Iosu",
-    "pasajeros": [
-      "Asier"
-    ],
-    "valorViaje": 1,
-    "dinero": 0
   }
 ]
