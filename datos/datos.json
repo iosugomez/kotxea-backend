@@ -331,5 +331,14 @@
     "de": "Asier",
     "para": "Lide",
     "cantidad": 14
+  },
+  {
+    "id": 1773153293956,
+    "tipo": "liquidacion",
+    "subtipo": "parcial",
+    "fecha": "2026-03-10",
+    "de": "Asier",
+    "para": "Lide",
+    "cantidad": 100
   }
 ]
