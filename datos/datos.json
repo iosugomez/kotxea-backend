@@ -345,5 +345,16 @@
     ],
     "valorViaje": 1,
     "dinero": 11.17
+  },
+  {
+    "id": 1773674903238,
+    "fecha": "2026-03-16",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 8.15
   }
 ]
