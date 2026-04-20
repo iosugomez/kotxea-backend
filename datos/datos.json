@@ -528,5 +528,15 @@
     ],
     "valorViaje": 0,
     "dinero": 12.37
+  },
+  {
+    "id": 1776690100120,
+    "fecha": "2026-04-20",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 3.96
   }
 ]
