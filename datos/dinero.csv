@@ -1,14 +1,14 @@
 Persona,Saldo (€)
 Iosu,10.43
-Lide,-36.58
+Lide,-38.56
 Asier,14.20
-Itziar,11.95
+Itziar,13.93
 
 Pagos mínimos para saldar deudas:
 Deudor,Acreedor,Cantidad (€)
 Lide,Iosu,10.43
 Lide,Asier,14.20
-Lide,Itziar,11.95
+Lide,Itziar,13.93
 
 Fecha,Conductor,Pasajeros,Dinero Total,Dinero por Persona
 2025-12-16,Iosu,"Asier|Itziar",7.00,2.33
@@ -48,3 +48,4 @@ Fecha,Conductor,Pasajeros,Dinero Total,Dinero por Persona
 2026-04-14,Lide,"Asier|Itziar",8.30,2.77
 2026-04-13,Lide,"Asier",2.00,1.00
 2026-04-16,Lide,"Iosu|Asier|Itziar",12.37,3.09
+2026-04-20,Lide,"Itziar",3.96,1.98
