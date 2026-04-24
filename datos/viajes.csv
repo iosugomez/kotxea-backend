@@ -1,8 +1,8 @@
 Persona,Balance
-Asier,-1.250
-Iosu,-0.583
-Itziar,-0.083
-Lide,1.917
+Asier,-4.000
+Iosu,-2.500
+Itziar,-1.000
+Lide,7.500
 
 Fecha,Conductor,Pasajeros,Número de Pasajeros
 2025-12-16,Iosu,"Asier|Itziar",2
@@ -33,3 +33,25 @@ Fecha,Conductor,Pasajeros,Número de Pasajeros
 2026-03-03,Iosu,"Asier",1
 2026-03-05,Iosu,"Lide|Asier|Itziar",3
 2026-03-05,Lide,"Iosu|Asier|Itziar",3
+2026-03-10,Lide,"Iosu|Asier|Itziar",3
+2026-03-12,Itziar,"Iosu|Asier",2
+2026-03-16,Asier,"Lide|Itziar",2
+2026-03-24,Lide,"Asier|Itziar",2
+2026-03-26,Itziar,"Iosu|Lide|Asier",3
+2026-03-26,Lide,"Iosu|Asier|Itziar",3
+2026-03-30,Iosu,"Lide|Asier|Itziar",3
+2026-03-30,Lide,"Iosu|Asier|Itziar",3
+2026-03-31,Asier,"Iosu|Lide|Itziar",3
+2026-03-31,Lide,"Iosu|Asier|Itziar",3
+2026-04-13,Lide,"Iosu|Asier",2
+2026-04-14,Asier,"Lide|Itziar",2
+2026-04-14,Lide,"Asier|Itziar",2
+2026-04-17,Itziar,"Lide",1
+2026-04-13,Lide,"Asier",1
+2026-04-16,Iosu,"Lide|Asier|Itziar",3
+2026-04-16,Lide,"Iosu|Asier|Itziar",3
+2026-04-20,Lide,"Itziar",1
+2026-04-21,Itziar,"Iosu|Lide|Asier",3
+2026-04-21,Lide,"Iosu|Asier|Itziar",3
+2026-04-23,Itziar,"Iosu|Lide|Asier",3
+2026-04-23,Lide,"Iosu|Asier|Itziar",3
