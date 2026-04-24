@@ -1167,7 +1167,14 @@
                     return;
                 }
 
-                historial.innerHTML = registros.reverse().map(reg => {
+                const ordenados = [...registros].sort((a, b) => {
+                    const fechaA = new Date(a.fecha).getTime();
+                    const fechaB = new Date(b.fecha).getTime();
+                    if (fechaA !== fechaB) return fechaB - fechaA;
+                    return (b.id || 0) - (a.id || 0);
+                });
+
+                historial.innerHTML = ordenados.map(reg => {
                     // Liquidacion total
                     if (reg.tipo === 'liquidacion' && reg.subtipo === 'total') {
                         const detalle = Object.entries(reg.ajustes || {})
