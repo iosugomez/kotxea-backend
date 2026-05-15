@@ -579,27 +579,27 @@
                     <h2 style="margin-bottom: 0;">Erregistroen Historia</h2>
                     <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: end;">
                         <div class="grupo-form" style="min-width: 220px; margin-bottom: 0;">
-                            <label for="historial-mes-filtro">Filtrar por mes</label>
+                            <label for="historial-mes-filtro">Hilabete iragazia</label>
                             <select id="historial-mes-filtro">
-                                <option value="">Todos los meses</option>
-                                <option value="1">Enero</option>
-                                <option value="2">Febrero</option>
-                                <option value="3">Marzo</option>
-                                <option value="4">Abril</option>
-                                <option value="5">Mayo</option>
-                                <option value="6">Junio</option>
-                                <option value="7">Julio</option>
-                                <option value="8">Agosto</option>
-                                <option value="9">Septiembre</option>
-                                <option value="10">Octubre</option>
-                                <option value="11">Noviembre</option>
-                                <option value="12">Diciembre</option>
+                                <option value="">Hilabete guztiak</option>
+                                <option value="1">Urtarrila</option>
+                                <option value="2">Otsaila</option>
+                                <option value="3">Martxoa</option>
+                                <option value="4">Apirila</option>
+                                <option value="5">Maiatza</option>
+                                <option value="6">Ekaina</option>
+                                <option value="7">Uztaila</option>
+                                <option value="8">Abuztua</option>
+                                <option value="9">Iraila</option>
+                                <option value="10">Urria</option>
+                                <option value="11">Azaroa</option>
+                                <option value="12">Abendua</option>
                             </select>
                         </div>
                         <div class="grupo-form" style="min-width: 180px; margin-bottom: 0;">
-                            <label for="historial-anio-filtro">Filtrar por año</label>
+                            <label for="historial-anio-filtro">Urte iragazia</label>
                             <select id="historial-anio-filtro">
-                                <option value="">Todos los años</option>
+                                <option value="">Urte guztiak</option>
                             </select>
                         </div>
                     </div>
@@ -1289,11 +1289,11 @@
                     <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; padding: 10px 12px; background: #f5f7fb; border-radius: 6px;">
                         <span style="font-size: 13px; color: #666;">Mostrando ${desde}-${hasta} de ${filtradosPorAnio.length}${filtroActivo ? ` · ${filtroActivo}` : ''}</span>
                         <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(1)" ${historialPaginaActual === 1 ? 'disabled' : ''}>« Primera</button>
-                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual - 1})" ${historialPaginaActual === 1 ? 'disabled' : ''}>‹ Anterior</button>
-                            <span style="font-size: 13px; color: #333; font-weight: 600;">Página ${historialPaginaActual} de ${totalPaginas}</span>
-                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual + 1})" ${historialPaginaActual === totalPaginas ? 'disabled' : ''}>Siguiente ›</button>
-                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${totalPaginas})" ${historialPaginaActual === totalPaginas ? 'disabled' : ''}>Última »</button>
+                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(1)" ${historialPaginaActual === 1 ? 'disabled' : ''}>« Lehenengoa</button>
+                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual - 1})" ${historialPaginaActual === 1 ? 'disabled' : ''}>‹ Aurrekoa</button>
+                            <span style="font-size: 13px; color: #333; font-weight: 600;">${historialPaginaActual} orria ${totalPaginas}tik</span>
+                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual + 1})" ${historialPaginaActual === totalPaginas ? 'disabled' : ''}>Hurrengoa ›</button>
+                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${totalPaginas})" ${historialPaginaActual === totalPaginas ? 'disabled' : ''}>Azkena »</button>
                         </div>
                     </div>
                 ` : '';
