@@ -1195,11 +1195,9 @@
                     <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; padding: 10px 12px; background: #f5f7fb; border-radius: 6px;">
                         <span style="font-size: 13px; color: #666;">Mostrando ${desde}-${hasta} de ${ordenados.length}</span>
                         <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(1)" ${historialPaginaActual === 1 ? 'disabled' : ''}>« Primera</button>
-                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual - 1})" ${historialPaginaActual === 1 ? 'disabled' : ''}>‹ Anterior</button>
-                            <span style="font-size: 13px; color: #333; font-weight: 600;">Página ${historialPaginaActual} de ${totalPaginas}</span>
-                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual + 1})" ${historialPaginaActual === totalPaginas ? 'disabled' : ''}>Siguiente ›</button>
-                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${totalPaginas})" ${historialPaginaActual === totalPaginas ? 'disabled' : ''}>Última »</button>
+                            <button class="btn-secundario" type="button" aria-label="Página anterior" title="Página anterior" style="width: 40px; height: 40px; padding: 0; font-size: 18px; line-height: 1; display: inline-flex; align-items: center; justify-content: center;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual - 1})" ${historialPaginaActual === 1 ? 'disabled' : ''}>←</button>
+                            <span style="font-size: 13px; color: #333; font-weight: 600; min-width: 92px; text-align: center;">${historialPaginaActual} / ${totalPaginas}</span>
+                            <button class="btn-secundario" type="button" aria-label="Página siguiente" title="Página siguiente" style="width: 40px; height: 40px; padding: 0; font-size: 18px; line-height: 1; display: inline-flex; align-items: center; justify-content: center;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual + 1})" ${historialPaginaActual === totalPaginas ? 'disabled' : ''}>→</button>
                         </div>
                     </div>
                 ` : '';
