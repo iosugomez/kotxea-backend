@@ -938,6 +938,8 @@
 
         // ===== SISTEMA COMBINADO VIAJES + DINERO =====
         let registroEnEdicion = null;
+        let historialPaginaActual = 1;
+        const HISTORIAL_POR_PAGINA = 10;
 
         const SistemaRegistro = {
         guardar: () => {
@@ -988,6 +990,11 @@
                 SistemaRegistro.actualizarVistas();
                 // Eliminar en nube por ID (no sobreescribe datos de otros)
                 sincronizarNube('delete', { id });
+            },
+
+            irPaginaHistorial: (pagina) => {
+                historialPaginaActual = pagina;
+                SistemaRegistro.actualizarHistorial();
             },
 
             editar: (id) => {
@@ -1160,10 +1167,13 @@
 
             actualizarHistorial: () => {
                 const registros = Storage.getRegistros();
-                const historial = document.getElementById('historial-registro');
+                const historiales = document.querySelectorAll('[id="historial-registro"]');
+                if (historiales.length === 0) return;
                 
                 if (registros.length === 0) {
-                    historial.innerHTML = '<p style="color: #999; text-align: center;">No hay registros</p>';
+                    historiales.forEach(historial => {
+                        historial.innerHTML = '<p style="color: #999; text-align: center;">No hay registros</p>';
+                    });
                     return;
                 }
 
@@ -1174,7 +1184,27 @@
                     return (b.id || 0) - (a.id || 0);
                 });
 
-                historial.innerHTML = ordenados.map(reg => {
+                const totalPaginas = Math.max(1, Math.ceil(ordenados.length / HISTORIAL_POR_PAGINA));
+                historialPaginaActual = Math.min(Math.max(historialPaginaActual, 1), totalPaginas);
+                const inicio = (historialPaginaActual - 1) * HISTORIAL_POR_PAGINA;
+                const visibles = ordenados.slice(inicio, inicio + HISTORIAL_POR_PAGINA);
+                const desde = inicio + 1;
+                const hasta = Math.min(inicio + HISTORIAL_POR_PAGINA, ordenados.length);
+
+                const controlesPaginacion = totalPaginas > 1 ? `
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; padding: 10px 12px; background: #f5f7fb; border-radius: 6px;">
+                        <span style="font-size: 13px; color: #666;">Mostrando ${desde}-${hasta} de ${ordenados.length}</span>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(1)" ${historialPaginaActual === 1 ? 'disabled' : ''}>« Primera</button>
+                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual - 1})" ${historialPaginaActual === 1 ? 'disabled' : ''}>‹ Anterior</button>
+                            <span style="font-size: 13px; color: #333; font-weight: 600;">Página ${historialPaginaActual} de ${totalPaginas}</span>
+                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual + 1})" ${historialPaginaActual === totalPaginas ? 'disabled' : ''}>Siguiente ›</button>
+                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${totalPaginas})" ${historialPaginaActual === totalPaginas ? 'disabled' : ''}>Última »</button>
+                        </div>
+                    </div>
+                ` : '';
+
+                const contenido = controlesPaginacion + visibles.map(reg => {
                     // Liquidacion total
                     if (reg.tipo === 'liquidacion' && reg.subtipo === 'total') {
                         const detalle = Object.entries(reg.ajustes || {})
@@ -1229,6 +1259,10 @@
                         </div>
                     `;
                 }).join('');
+
+                historiales.forEach(historial => {
+                    historial.innerHTML = contenido;
+                });
             },
 
             actualizarTotalGenerado: () => {
