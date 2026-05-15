@@ -598,5 +598,153 @@
       "Asier": -19.894166666666667,
       "Itziar": -19.624166666666667
     }
+  },
+  {
+    "id": 1777271746075,
+    "fecha": "2026-04-27",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 4.15
+  },
+  {
+    "id": 1777377283949,
+    "fecha": "2026-04-28",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1777377355273,
+    "fecha": "2026-04-28",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 6.09
+  },
+  {
+    "id": 1777824199225,
+    "fecha": "2026-04-30",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1777824236820,
+    "fecha": "2026-04-30",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.06
+  },
+  {
+    "id": 1777975115120,
+    "fecha": "2026-05-05",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1777975160220,
+    "fecha": "2026-05-05",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 12.45
+  },
+  {
+    "id": 1778134324491,
+    "fecha": "2026-05-07",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 12.36
+  },
+  {
+    "id": 1778479664859,
+    "fecha": "2026-05-08",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1778480235900,
+    "fecha": "2026-05-08",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 6.2
+  },
+  {
+    "id": 1778580575102,
+    "fecha": "2026-05-12",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1778580600385,
+    "fecha": "2026-05-12",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.3
+  },
+  {
+    "id": 1778746974219,
+    "fecha": "2026-05-14",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 10.29
   }
 ]
