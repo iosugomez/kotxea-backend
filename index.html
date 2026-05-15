@@ -1281,13 +1281,13 @@
                 const hasta = Math.min(inicio + HISTORIAL_POR_PAGINA, filtradosPorAnio.length);
 
                 const filtroActivo = [
-                    historialMesFiltro ? `mes ${historialMesFiltro}` : '',
-                    historialAnioFiltro ? `año ${historialAnioFiltro}` : ''
+                    historialMesFiltro ? `hila ${historialMesFiltro}` : '',
+                    historialAnioFiltro ? `urtea ${historialAnioFiltro}` : ''
                 ].filter(Boolean).join(' · ');
 
                 const controlesPaginacion = totalPaginas > 1 ? `
                     <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; padding: 10px 12px; background: #f5f7fb; border-radius: 6px;">
-                        <span style="font-size: 13px; color: #666;">Mostrando ${desde}-${hasta} de ${filtradosPorAnio.length}${filtroActivo ? ` · ${filtroActivo}` : ''}</span>
+                        <span style="font-size: 13px; color: #666;">Erakutsi ${desde}-${hasta} / ${filtradosPorAnio.length}${filtroActivo ? ` · ${filtroActivo}` : ''}</span>
                         <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                             <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(1)" ${historialPaginaActual === 1 ? 'disabled' : ''}>« Lehenengoa</button>
                             <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual - 1})" ${historialPaginaActual === 1 ? 'disabled' : ''}>‹ Aurrekoa</button>
