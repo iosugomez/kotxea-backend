@@ -575,7 +575,27 @@
                     </div>
                 </div>
 
-                <h2>Erregistroen Historia</h2>
+                <div style="display: flex; justify-content: space-between; align-items: end; gap: 12px; flex-wrap: wrap; margin-bottom: 10px;">
+                    <h2 style="margin-bottom: 0;">Erregistroen Historia</h2>
+                    <div class="grupo-form" style="min-width: 220px; margin-bottom: 0;">
+                        <label for="historial-mes-filtro">Filtrar por mes</label>
+                        <select id="historial-mes-filtro">
+                            <option value="">Todos los meses</option>
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="historial" id="historial-registro"></div>
             </div>
         </div>
@@ -939,6 +959,7 @@
         // ===== SISTEMA COMBINADO VIAJES + DINERO =====
         let registroEnEdicion = null;
         let historialPaginaActual = 1;
+        let historialMesFiltro = '';
         const HISTORIAL_POR_PAGINA = 10;
 
         const SistemaRegistro = {
@@ -994,6 +1015,12 @@
 
             irPaginaHistorial: (pagina) => {
                 historialPaginaActual = pagina;
+                SistemaRegistro.actualizarHistorial();
+            },
+
+            cambiarFiltroHistorialMes: (mes) => {
+                historialMesFiltro = mes;
+                historialPaginaActual = 1;
                 SistemaRegistro.actualizarHistorial();
             },
 
@@ -1184,20 +1211,38 @@
                     return (b.id || 0) - (a.id || 0);
                 });
 
-                const totalPaginas = Math.max(1, Math.ceil(ordenados.length / HISTORIAL_POR_PAGINA));
+                const filtrados = historialMesFiltro
+                    ? ordenados.filter(reg => {
+                        const fecha = new Date(reg.fecha);
+                        return (fecha.getMonth() + 1).toString() === historialMesFiltro;
+                    })
+                    : ordenados;
+
+                if (filtrados.length === 0) {
+                    historiales.forEach(historial => {
+                        historial.innerHTML = historialMesFiltro
+                            ? '<p style="color: #999; text-align: center;">No hay registros para este mes</p>'
+                            : '<p style="color: #999; text-align: center;">No hay registros</p>';
+                    });
+                    return;
+                }
+
+                const totalPaginas = Math.max(1, Math.ceil(filtrados.length / HISTORIAL_POR_PAGINA));
                 historialPaginaActual = Math.min(Math.max(historialPaginaActual, 1), totalPaginas);
                 const inicio = (historialPaginaActual - 1) * HISTORIAL_POR_PAGINA;
-                const visibles = ordenados.slice(inicio, inicio + HISTORIAL_POR_PAGINA);
+                const visibles = filtrados.slice(inicio, inicio + HISTORIAL_POR_PAGINA);
                 const desde = inicio + 1;
-                const hasta = Math.min(inicio + HISTORIAL_POR_PAGINA, ordenados.length);
+                const hasta = Math.min(inicio + HISTORIAL_POR_PAGINA, filtrados.length);
 
                 const controlesPaginacion = totalPaginas > 1 ? `
                     <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; padding: 10px 12px; background: #f5f7fb; border-radius: 6px;">
-                        <span style="font-size: 13px; color: #666;">Mostrando ${desde}-${hasta} de ${ordenados.length}</span>
+                        <span style="font-size: 13px; color: #666;">Mostrando ${desde}-${hasta} de ${filtrados.length}${historialMesFiltro ? ' · mes filtrado' : ''}</span>
                         <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                            <button class="btn-secundario" type="button" aria-label="Página anterior" title="Página anterior" style="width: 40px; height: 40px; padding: 0; font-size: 18px; line-height: 1; display: inline-flex; align-items: center; justify-content: center;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual - 1})" ${historialPaginaActual === 1 ? 'disabled' : ''}>←</button>
-                            <span style="font-size: 13px; color: #333; font-weight: 600; min-width: 92px; text-align: center;">${historialPaginaActual} / ${totalPaginas}</span>
-                            <button class="btn-secundario" type="button" aria-label="Página siguiente" title="Página siguiente" style="width: 40px; height: 40px; padding: 0; font-size: 18px; line-height: 1; display: inline-flex; align-items: center; justify-content: center;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual + 1})" ${historialPaginaActual === totalPaginas ? 'disabled' : ''}>→</button>
+                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(1)" ${historialPaginaActual === 1 ? 'disabled' : ''}>« Primera</button>
+                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual - 1})" ${historialPaginaActual === 1 ? 'disabled' : ''}>‹ Anterior</button>
+                            <span style="font-size: 13px; color: #333; font-weight: 600;">Página ${historialPaginaActual} de ${totalPaginas}</span>
+                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual + 1})" ${historialPaginaActual === totalPaginas ? 'disabled' : ''}>Siguiente ›</button>
+                            <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${totalPaginas})" ${historialPaginaActual === totalPaginas ? 'disabled' : ''}>Última »</button>
                         </div>
                     </div>
                 ` : '';
@@ -1403,6 +1448,9 @@
             // Botones Exportar
             document.getElementById('btn-exportar-viajes').addEventListener('click', SistemaRegistro.exportarCSVViajes);
             document.getElementById('btn-exportar-dinero').addEventListener('click', SistemaRegistro.exportarCSVDinero);
+            document.getElementById('historial-mes-filtro').addEventListener('change', (event) => {
+                SistemaRegistro.cambiarFiltroHistorialMes(event.target.value);
+            });
             // Botones Liquidación
             document.getElementById('btn-liquidacion-total').addEventListener('click', registrarLiquidazioOsoa);
             document.getElementById('btn-liquidacion-parcial').addEventListener('click', registrarLiquidazioPartziala);
