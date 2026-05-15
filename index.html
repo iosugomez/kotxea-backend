@@ -1414,9 +1414,12 @@
                 });
 
                 csv += '\n\nHISTORIAL DE VIAJES\n';
-                csv += 'Fecha,Conductor,Pasajeros,Número de Pasajeros\n';
+                csv += 'Fecha,Conductor,Pasajeros,Número de Pasajeros,Valor del Viaje\n';
                 registros.forEach(reg => {
-                    csv += `${reg.fecha},${reg.conductor},"${reg.pasajeros.join('|')}",${reg.pasajeros.length}\n`;
+                    if (reg.tipo !== 'liquidacion') {
+                        const valorViaje = reg.valorViaje !== undefined ? reg.valorViaje : 1;
+                        csv += `${reg.fecha},${reg.conductor},"${reg.pasajeros.join('|')}",${reg.pasajeros.length},${valorViaje.toFixed(2)}\n`;
+                    }
                 });
 
                 SistemaRegistro.descargarCSV(csv, 'viajes');

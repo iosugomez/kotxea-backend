@@ -29,19 +29,21 @@ def generar_csv_viajes(registros):
     for reg in registros:
         if reg.get('tipo') == 'liquidacion':
             continue
+        valor_viaje = reg.get('valorViaje', 1)
         total = len(reg['pasajeros']) + 1
-        c = 1 / total
-        saldos[reg['conductor']] += (1 - c)
+        c = valor_viaje / total
+        saldos[reg['conductor']] += (valor_viaje - c)
         for p in reg['pasajeros']:
             saldos[p] -= c
     csv = 'Persona,Balance\n'
     for p, s in sorted(saldos.items(), key=lambda x: x[1]):
         csv += f'{p},{s:.3f}\n'
-    csv += '\nFecha,Conductor,Pasajeros,Número de Pasajeros\n'
+    csv += '\nFecha,Conductor,Pasajeros,Número de Pasajeros,Valor del Viaje\n'
     for reg in registros:
         if reg.get('tipo') == 'liquidacion':
             continue
-        csv += f"{reg['fecha']},{reg['conductor']},\"{'|'.join(reg['pasajeros'])}\",{len(reg['pasajeros'])}\n"
+        valor_viaje = reg.get('valorViaje', 1)
+        csv += f"{reg['fecha']},{reg['conductor']},\"{'|'.join(reg['pasajeros'])}\",{len(reg['pasajeros'])},{valor_viaje:.2f}\n"
     return csv
 
 def generar_csv_dinero(registros):
