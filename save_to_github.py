@@ -25,7 +25,9 @@ def get_github_repo():
 def generar_csv_viajes(registros):
     # Calcula saldos y genera CSV de viajes (ignora liquidaciones)
     participantes = ['Iosu', 'Lide', 'Asier', 'Itziar']
-    saldos = {p: 0 for p in participantes}
+    # Valores iniciales base (de meses anteriores)
+    base = {'Iosu': -0.14, 'Asier': 0.34, 'Itziar': -0.27, 'Lide': 0.07}
+    saldos = {p: base.get(p, 0) for p in participantes}
     for reg in registros:
         if reg.get('tipo') == 'liquidacion':
             continue
