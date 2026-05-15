@@ -980,7 +980,7 @@
                 .map(registro => new Date(registro.fecha).getFullYear())
                 .filter(anio => !Number.isNaN(anio)))].sort((a, b) => b - a);
 
-            selectorAnio.innerHTML = '<option value="">Todos los años</option>';
+            selectorAnio.innerHTML = '<option value="">Urte guztiak</option>';
             anios.forEach(anio => {
                 const option = document.createElement('option');
                 option.value = String(anio);
