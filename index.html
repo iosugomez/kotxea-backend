@@ -595,6 +595,12 @@
                             <option value="12">Diciembre</option>
                         </select>
                     </div>
+                    <div class="grupo-form" style="min-width: 180px; margin-bottom: 0;">
+                        <label for="historial-anio-filtro">Filtrar por año</label>
+                        <select id="historial-anio-filtro">
+                            <option value="">Todos los años</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="historial" id="historial-registro"></div>
             </div>
@@ -960,7 +966,33 @@
         let registroEnEdicion = null;
         let historialPaginaActual = 1;
         let historialMesFiltro = '';
+        let historialAnioFiltro = '';
         const HISTORIAL_POR_PAGINA = 10;
+
+        function actualizarOpcionesFiltroAnioHistorial(registros) {
+            const selectorAnio = document.getElementById('historial-anio-filtro');
+            if (!selectorAnio) return;
+
+            const anioSeleccionado = historialAnioFiltro;
+            const anios = [...new Set(registros
+                .map(registro => new Date(registro.fecha).getFullYear())
+                .filter(anio => !Number.isNaN(anio)))].sort((a, b) => b - a);
+
+            selectorAnio.innerHTML = '<option value="">Todos los años</option>';
+            anios.forEach(anio => {
+                const option = document.createElement('option');
+                option.value = String(anio);
+                option.textContent = String(anio);
+                selectorAnio.appendChild(option);
+            });
+
+            if (anioSeleccionado && anios.includes(Number(anioSeleccionado))) {
+                selectorAnio.value = anioSeleccionado;
+            } else {
+                historialAnioFiltro = '';
+                selectorAnio.value = '';
+            }
+        }
 
         const SistemaRegistro = {
         guardar: () => {
@@ -1020,6 +1052,12 @@
 
             cambiarFiltroHistorialMes: (mes) => {
                 historialMesFiltro = mes;
+                historialPaginaActual = 1;
+                SistemaRegistro.actualizarHistorial();
+            },
+
+            cambiarFiltroHistorialAnio: (anio) => {
+                historialAnioFiltro = anio;
                 historialPaginaActual = 1;
                 SistemaRegistro.actualizarHistorial();
             },
@@ -1196,6 +1234,8 @@
                 const registros = Storage.getRegistros();
                 const historiales = document.querySelectorAll('[id="historial-registro"]');
                 if (historiales.length === 0) return;
+
+                actualizarOpcionesFiltroAnioHistorial(registros);
                 
                 if (registros.length === 0) {
                     historiales.forEach(historial => {
@@ -1218,25 +1258,34 @@
                     })
                     : ordenados;
 
-                if (filtrados.length === 0) {
+                const filtradosPorAnio = historialAnioFiltro
+                    ? filtrados.filter(reg => new Date(reg.fecha).getFullYear().toString() === historialAnioFiltro)
+                    : filtrados;
+
+                if (filtradosPorAnio.length === 0) {
                     historiales.forEach(historial => {
-                        historial.innerHTML = historialMesFiltro
-                            ? '<p style="color: #999; text-align: center;">No hay registros para este mes</p>'
+                        historial.innerHTML = (historialMesFiltro || historialAnioFiltro)
+                            ? '<p style="color: #999; text-align: center;">No hay registros para este filtro</p>'
                             : '<p style="color: #999; text-align: center;">No hay registros</p>';
                     });
                     return;
                 }
 
-                const totalPaginas = Math.max(1, Math.ceil(filtrados.length / HISTORIAL_POR_PAGINA));
+                const totalPaginas = Math.max(1, Math.ceil(filtradosPorAnio.length / HISTORIAL_POR_PAGINA));
                 historialPaginaActual = Math.min(Math.max(historialPaginaActual, 1), totalPaginas);
                 const inicio = (historialPaginaActual - 1) * HISTORIAL_POR_PAGINA;
-                const visibles = filtrados.slice(inicio, inicio + HISTORIAL_POR_PAGINA);
+                const visibles = filtradosPorAnio.slice(inicio, inicio + HISTORIAL_POR_PAGINA);
                 const desde = inicio + 1;
-                const hasta = Math.min(inicio + HISTORIAL_POR_PAGINA, filtrados.length);
+                const hasta = Math.min(inicio + HISTORIAL_POR_PAGINA, filtradosPorAnio.length);
+
+                const filtroActivo = [
+                    historialMesFiltro ? `mes ${historialMesFiltro}` : '',
+                    historialAnioFiltro ? `año ${historialAnioFiltro}` : ''
+                ].filter(Boolean).join(' · ');
 
                 const controlesPaginacion = totalPaginas > 1 ? `
                     <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; padding: 10px 12px; background: #f5f7fb; border-radius: 6px;">
-                        <span style="font-size: 13px; color: #666;">Mostrando ${desde}-${hasta} de ${filtrados.length}${historialMesFiltro ? ' · mes filtrado' : ''}</span>
+                        <span style="font-size: 13px; color: #666;">Mostrando ${desde}-${hasta} de ${filtradosPorAnio.length}${filtroActivo ? ` · ${filtroActivo}` : ''}</span>
                         <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                             <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(1)" ${historialPaginaActual === 1 ? 'disabled' : ''}>« Primera</button>
                             <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual - 1})" ${historialPaginaActual === 1 ? 'disabled' : ''}>‹ Anterior</button>
@@ -1450,6 +1499,9 @@
             document.getElementById('btn-exportar-dinero').addEventListener('click', SistemaRegistro.exportarCSVDinero);
             document.getElementById('historial-mes-filtro').addEventListener('change', (event) => {
                 SistemaRegistro.cambiarFiltroHistorialMes(event.target.value);
+            });
+            document.getElementById('historial-anio-filtro').addEventListener('change', (event) => {
+                SistemaRegistro.cambiarFiltroHistorialAnio(event.target.value);
             });
             // Botones Liquidación
             document.getElementById('btn-liquidacion-total').addEventListener('click', registrarLiquidazioOsoa);
