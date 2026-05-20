@@ -768,5 +768,17 @@
     ],
     "valorViaje": 0,
     "dinero": 8.3
+  },
+  {
+    "id": 1779286324662,
+    "tipo": "liquidacion",
+    "subtipo": "total",
+    "fecha": "2026-05-20",
+    "ajustes": {
+      "Iosu": -18.5175,
+      "Lide": 53.54083333333333,
+      "Asier": -12.364166666666666,
+      "Itziar": -22.659166666666664
+    }
   }
 ]
