@@ -780,5 +780,15 @@
       "Asier": -12.364166666666666,
       "Itziar": -22.659166666666664
     }
+  },
+  {
+    "id": 1779349248158,
+    "fecha": "2026-05-21",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide"
+    ],
+    "valorViaje": 0.5,
+    "dinero": 0
   }
 ]
