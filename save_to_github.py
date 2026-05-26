@@ -1,6 +1,7 @@
 
 import os
 import json
+import subprocess
 from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 from github import Github
@@ -21,6 +22,27 @@ def get_github_repo():
     g = Github(GITHUB_TOKEN)
     repo = g.get_repo(REPO_NAME)
     return repo
+
+def obtener_rama_actual(repo=None):
+    rama = os.environ.get('GITHUB_BRANCH') or os.environ.get('CURRENT_BRANCH')
+    if rama:
+        return rama
+    try:
+        salida = subprocess.check_output(
+            ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+            stderr=subprocess.DEVNULL,
+            text=True,
+        ).strip()
+        if salida and salida != 'HEAD':
+            return salida
+    except Exception:
+        pass
+    if repo is not None:
+        try:
+            return repo.default_branch
+        except Exception:
+            pass
+    return 'main'
 
 def obtener_pasajeros(reg):
     return reg.get('pasajeros', []) if isinstance(reg.get('pasajeros', []), list) else []
@@ -132,16 +154,17 @@ def generar_csv_dinero(registros):
             csv += f"{reg['fecha']},{titular_dinero},\"{'|'.join(reg['pasajeros'])}\",{reg['dinero']:.2f},{deuda:.2f}\n"
     return csv
 
-def save_file(repo, path, content, message):
+def save_file(repo, path, content, message, branch=None):
+    branch = branch or obtener_rama_actual(repo)
     try:
-        contents = repo.get_contents(path)
+        contents = repo.get_contents(path, ref=branch)
         sha = contents.sha
     except Exception:
         sha = None
     if sha:
-        repo.update_file(path, message, content, sha)
+        repo.update_file(path, message, content, sha, branch=branch)
     else:
-        repo.create_file(path, message, content)
+        repo.create_file(path, message, content, branch=branch)
 
 @app.route('/save', methods=['POST'])
 def save_data():
@@ -191,9 +214,10 @@ def calcular_pagos_minimos(saldos):
             j += 1
     return pagos
 
-def get_file_content(repo, path):
+def get_file_content(repo, path, branch=None):
     try:
-        contents = repo.get_contents(path)
+        branch = branch or obtener_rama_actual(repo)
+        contents = repo.get_contents(path, ref=branch)
         return contents.decoded_content.decode()
     except Exception:
         return None
@@ -254,14 +278,15 @@ def add_registro():
     if req['token'] != USR_TOKEN:
         return jsonify({'error': 'Authentication failed'}), 401
     repo = get_github_repo()
+    branch = obtener_rama_actual(repo)
     try:
-        content = get_file_content(repo, DATA_PATH)
+        content = get_file_content(repo, DATA_PATH, branch)
         registros = json.loads(content) if content else []
         registros.append(req['registro'])
         content_str = json.dumps(registros, indent=2, ensure_ascii=False)
-        save_file(repo, DATA_PATH, content_str, f"Add registro {datetime.now().isoformat()}")
-        save_file(repo, CSV_VIAJES_PATH, generar_csv_viajes(registros), f"Update viajes.csv {datetime.now().isoformat()}")
-        save_file(repo, CSV_DINERO_PATH, generar_csv_dinero(registros), f"Update dinero.csv {datetime.now().isoformat()}")
+        save_file(repo, DATA_PATH, content_str, f"Add registro {datetime.now().isoformat()}", branch=branch)
+        save_file(repo, CSV_VIAJES_PATH, generar_csv_viajes(registros), f"Update viajes.csv {datetime.now().isoformat()}", branch=branch)
+        save_file(repo, CSV_DINERO_PATH, generar_csv_dinero(registros), f"Update dinero.csv {datetime.now().isoformat()}", branch=branch)
         return jsonify({'status': 'ok', 'data': registros})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -274,14 +299,15 @@ def delete_registro():
     if req['token'] != USR_TOKEN:
         return jsonify({'error': 'Authentication failed'}), 401
     repo = get_github_repo()
+    branch = obtener_rama_actual(repo)
     try:
-        content = get_file_content(repo, DATA_PATH)
+        content = get_file_content(repo, DATA_PATH, branch)
         registros = json.loads(content) if content else []
         registros = [r for r in registros if r.get('id') != req['id']]
         content_str = json.dumps(registros, indent=2, ensure_ascii=False)
-        save_file(repo, DATA_PATH, content_str, f"Delete registro {req['id']} {datetime.now().isoformat()}")
-        save_file(repo, CSV_VIAJES_PATH, generar_csv_viajes(registros), f"Update viajes.csv {datetime.now().isoformat()}")
-        save_file(repo, CSV_DINERO_PATH, generar_csv_dinero(registros), f"Update dinero.csv {datetime.now().isoformat()}")
+        save_file(repo, DATA_PATH, content_str, f"Delete registro {req['id']} {datetime.now().isoformat()}", branch=branch)
+        save_file(repo, CSV_VIAJES_PATH, generar_csv_viajes(registros), f"Update viajes.csv {datetime.now().isoformat()}", branch=branch)
+        save_file(repo, CSV_DINERO_PATH, generar_csv_dinero(registros), f"Update dinero.csv {datetime.now().isoformat()}", branch=branch)
         return jsonify({'status': 'ok', 'data': registros})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -294,8 +320,9 @@ def edit_registro():
     if req['token'] != USR_TOKEN:
         return jsonify({'error': 'Authentication failed'}), 401
     repo = get_github_repo()
+    branch = obtener_rama_actual(repo)
     try:
-        content = get_file_content(repo, DATA_PATH)
+        content = get_file_content(repo, DATA_PATH, branch)
         registros = json.loads(content) if content else []
         idx = next((i for i, r in enumerate(registros) if r.get('id') == req['registro']['id']), None)
         if idx is not None:
@@ -303,9 +330,9 @@ def edit_registro():
         else:
             registros.append(req['registro'])
         content_str = json.dumps(registros, indent=2, ensure_ascii=False)
-        save_file(repo, DATA_PATH, content_str, f"Edit registro {req['registro']['id']} {datetime.now().isoformat()}")
-        save_file(repo, CSV_VIAJES_PATH, generar_csv_viajes(registros), f"Update viajes.csv {datetime.now().isoformat()}")
-        save_file(repo, CSV_DINERO_PATH, generar_csv_dinero(registros), f"Update dinero.csv {datetime.now().isoformat()}")
+        save_file(repo, DATA_PATH, content_str, f"Edit registro {req['registro']['id']} {datetime.now().isoformat()}", branch=branch)
+        save_file(repo, CSV_VIAJES_PATH, generar_csv_viajes(registros), f"Update viajes.csv {datetime.now().isoformat()}", branch=branch)
+        save_file(repo, CSV_DINERO_PATH, generar_csv_dinero(registros), f"Update dinero.csv {datetime.now().isoformat()}", branch=branch)
         return jsonify({'status': 'ok', 'data': registros})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
