@@ -22,6 +22,18 @@ def get_github_repo():
     repo = g.get_repo(REPO_NAME)
     return repo
 
+def obtener_pasajeros(reg):
+    return reg.get('pasajeros', []) if isinstance(reg.get('pasajeros', []), list) else []
+
+def obtener_tribbu_gidaria(reg):
+    tribbu = reg.get('tribbuGidaria')
+    if isinstance(tribbu, str) and tribbu:
+        return tribbu
+    return ''
+
+def obtener_titular_dinero(reg):
+    return obtener_tribbu_gidaria(reg) or reg.get('conductor', '')
+
 def generar_csv_viajes(registros):
     # Calcula saldos y genera CSV de viajes (ignora liquidaciones)
     participantes = ['Iosu', 'Lide', 'Asier', 'Itziar']
@@ -32,20 +44,23 @@ def generar_csv_viajes(registros):
         if reg.get('tipo') == 'liquidacion':
             continue
         valor_viaje = reg.get('valorViaje', 1)
-        total = len(reg['pasajeros']) + 1
+        pasajeros = obtener_pasajeros(reg)
+        total = len(pasajeros) + 1
         c = valor_viaje / total
         saldos[reg['conductor']] += (valor_viaje - c)
-        for p in reg['pasajeros']:
+        for p in pasajeros:
             saldos[p] -= c
     csv = 'Persona,Balance\n'
     for p, s in sorted(saldos.items(), key=lambda x: x[1]):
         csv += f'{p},{s:.3f}\n'
-    csv += '\nFecha,Conductor,Pasajeros,Número de Pasajeros,Valor del Viaje\n'
+    csv += '\nFecha,Conductor,Pasajeros,Número de Pasajeros,Valor del Viaje,Tribbu Gidaria\n'
     for reg in registros:
         if reg.get('tipo') == 'liquidacion':
             continue
         valor_viaje = reg.get('valorViaje', 1)
-        csv += f"{reg['fecha']},{reg['conductor']},\"{'|'.join(reg['pasajeros'])}\",{len(reg['pasajeros'])},{valor_viaje:.2f}\n"
+        pasajeros = obtener_pasajeros(reg)
+        tribbu = obtener_tribbu_gidaria(reg)
+        csv += f"{reg['fecha']},{reg['conductor']},\"{'|'.join(pasajeros)}\",{len(pasajeros)},{valor_viaje:.2f},{tribbu}\n"
     return csv
 
 def generar_csv_dinero(registros):
@@ -62,11 +77,14 @@ def generar_csv_dinero(registros):
                 if de in saldos: saldos[de] += cantidad
                 if para in saldos: saldos[para] -= cantidad
             continue
-        total = len(reg['pasajeros']) + 1
-        if reg['dinero'] > 0 and len(reg['pasajeros']) > 0:
+        pasajeros = obtener_pasajeros(reg)
+        total = len(pasajeros) + 1
+        if reg.get('dinero', 0) > 0 and len(pasajeros) > 0:
             deuda = reg['dinero'] / total
-            saldos[reg['conductor']] -= deuda * len(reg['pasajeros'])
-            for p in reg['pasajeros']:
+            titular_dinero = obtener_titular_dinero(reg)
+            if titular_dinero in saldos:
+                saldos[titular_dinero] -= deuda * len(pasajeros)
+            for p in pasajeros:
                 saldos[p] += deuda
     csv = 'Persona,Saldo (€)\n'
     for p, s in saldos.items():
@@ -215,11 +233,14 @@ def pagos_minimos():
     saldos = {p: 0 for p in participantes}
     
     for reg in data:
-        total = len(reg.get('pasajeros', [])) + 1
-        if reg.get('dinero', 0) > 0 and len(reg.get('pasajeros', [])) > 0:
+        pasajeros = obtener_pasajeros(reg)
+        total = len(pasajeros) + 1
+        if reg.get('dinero', 0) > 0 and len(pasajeros) > 0:
             deuda = reg['dinero'] / total
-            saldos[reg['conductor']] -= deuda * len(reg['pasajeros'])
-            for p in reg['pasajeros']:
+            titular_dinero = obtener_titular_dinero(reg)
+            if titular_dinero in saldos:
+                saldos[titular_dinero] -= deuda * len(pasajeros)
+            for p in pasajeros:
                 saldos[p] += deuda
     
     pagos = calcular_pagos_minimos(saldos)
