@@ -10,35 +10,35 @@ Lide,Iosu,1.90
 Lide,Asier,8.37
 Lide,Itziar,2.76
 
-Fecha,Conductor,Pasajeros,Dinero Total,Dinero por Persona
-2025-12-16,Iosu,"Asier|Itziar",7.00,2.33
-2025-12-18,Asier,"Iosu",4.64,2.32
-2026-01-07,Itziar,"Iosu|Lide|Asier",9.12,2.28
-2026-01-08,Iosu,"Lide|Asier|Itziar",13.39,3.35
+Fecha,Tribbu Gidaria,Pasajeros,Dinero Total,Dinero por Persona
+2025-12-16,Lide,"Asier|Itziar",7.00,2.33
+2025-12-18,Lide,"Iosu",4.64,2.32
+2026-01-07,Lide,"Iosu|Lide|Asier",9.12,2.28
+2026-01-08,Lide,"Lide|Asier|Itziar",13.39,3.35
 2026-01-13,Lide,"Iosu|Asier|Itziar",12.45,3.11
-2026-01-15,Itziar,"Iosu|Lide|Asier",6.90,1.73
-2026-01-19,Asier,"Lide|Itziar",12.44,4.15
+2026-01-15,Lide,"Iosu|Lide|Asier",6.90,1.73
+2026-01-19,Lide,"Lide|Itziar",12.44,4.15
 2026-01-20,Lide,"Iosu|Asier|Itziar",6.33,1.58
-2026-01-22,Iosu,"Lide|Asier|Itziar",13.37,3.34
-2026-01-27,Itziar,"Iosu|Lide|Asier",6.12,1.53
+2026-01-22,Lide,"Lide|Asier|Itziar",13.37,3.34
+2026-01-27,Lide,"Iosu|Lide|Asier",6.12,1.53
 2026-01-27,Lide,"Iosu|Asier|Itziar",6.27,1.57
-2026-01-29,Asier,"Iosu|Itziar",9.28,3.09
+2026-01-29,Lide,"Iosu|Itziar",9.28,3.09
 2026-02-03,Lide,"Iosu|Asier|Itziar",10.35,2.59
-2026-02-05,Iosu,"Lide|Asier|Itziar",13.39,3.35
-2026-02-10,Itziar,"Iosu|Lide|Asier",4.54,1.14
-2026-02-10,Asier,"Iosu|Lide|Itziar",7.08,1.77
-2026-02-12,Itziar,"Iosu|Lide|Asier",4.54,1.14
-2026-02-12,Asier,"Iosu|Lide|Itziar",6.82,1.71
+2026-02-05,Lide,"Lide|Asier|Itziar",13.39,3.35
+2026-02-10,Lide,"Iosu|Lide|Asier",4.54,1.14
+2026-02-10,Lide,"Iosu|Lide|Itziar",7.08,1.77
+2026-02-12,Lide,"Iosu|Lide|Asier",4.54,1.14
+2026-02-12,Lide,"Iosu|Lide|Itziar",6.82,1.71
 2026-02-17,Lide,"Iosu|Asier|Itziar",12.45,3.11
 2026-02-19,Lide,"Asier|Itziar",8.24,2.75
-2026-02-24,Itziar,"Iosu|Lide|Asier",8.30,2.08
+2026-02-24,Lide,"Iosu|Lide|Asier",8.30,2.08
 2026-02-26,Lide,"Iosu|Asier",4.08,1.36
-2026-03-03,Asier,"Iosu",2.12,1.06
-2026-03-03,Iosu,"Asier",2.27,1.14
+2026-03-03,Lide,"Iosu",2.12,1.06
+2026-03-03,Lide,"Asier",2.27,1.14
 2026-03-05,Lide,"Iosu|Asier|Itziar",12.37,3.09
 2026-03-10,Lide,"Iosu|Asier|Itziar",6.36,1.59
-2026-03-12,Itziar,"Iosu|Asier",11.17,3.72
-2026-03-16,Asier,"Lide|Itziar",8.15,2.72
+2026-03-12,Lide,"Iosu|Asier",11.17,3.72
+2026-03-16,Lide,"Lide|Itziar",8.15,2.72
 2026-03-24,Lide,"Asier|Itziar",8.30,2.77
 2026-03-26,Lide,"Iosu|Asier|Itziar",12.37,3.09
 2026-03-27,Liquidacion Total,,0.00,
@@ -64,6 +64,7 @@ Fecha,Conductor,Pasajeros,Dinero Total,Dinero por Persona
 2026-05-20,Liquidacion Total,,0.00,
 2026-05-21,Lide,"Iosu",2.04,1.02
 2026-05-21,Lide,"Asier",1.92,0.96
-2026-05-23,Iosu,"Asier",3.77,1.89
+2026-05-23,Lide,"Asier",3.77,1.89
 2026-05-25,Lide,"Asier|Itziar",8.28,2.76
 2026-05-26,Lide,"Iosu|Asier",8.30,2.77
+2026-05-26,Lide,"Lide",2.00,1.00
