@@ -863,16 +863,5 @@
     ],
     "valorViaje": 1,
     "dinero": 8.3
-  },
-  {
-    "id": 1779804156079,
-    "fecha": "2026-05-26",
-    "conductor": "Iosu",
-    "pasajeros": [
-      "Lide"
-    ],
-    "valorViaje": 1,
-    "dinero": 2,
-    "tribbuGidaria": "Lide"
   }
 ]
