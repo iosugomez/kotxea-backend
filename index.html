@@ -453,11 +453,8 @@
                             </select>
                         </div>
                         <div class="grupo-form" style="margin-bottom: 0; min-width: 220px;">
-                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
-                                <input type="checkbox" id="activar-tribbu-gidaria">
-                                <span>Tribbu gidaria</span>
-                            </label>
-                            <select id="tribbu-gidaria" style="display: none;">
+                            <label for="tribbu-gidaria">Tribbu gidaria</label>
+                            <select id="tribbu-gidaria">
                                 <option value="">-- Hautatu --</option>
                                 <option value="Iosu">Iosu</option>
                                 <option value="Lide">Lide</option>
@@ -646,11 +643,8 @@
                             </select>
                         </div>
                         <div class="grupo-form" style="margin-bottom: 0; min-width: 220px;">
-                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
-                                <input type="checkbox" id="activar-tribbu-gidaria">
-                                <span>Tribbu gidaria</span>
-                            </label>
-                            <select id="tribbu-gidaria" style="display: none;">
+                            <label for="tribbu-gidaria">Tribbu gidaria</label>
+                            <select id="tribbu-gidaria">
                                 <option value="">-- Seleccionar --</option>
                                 <option value="Iosu">Iosu</option>
                                 <option value="Lide">Lide</option>
@@ -1007,17 +1001,6 @@
             return obtenerTribbuGidaria(registro) || registro.conductor || '';
         }
 
-        function actualizarVisibilidadTribbuGidaria() {
-            const activo = obtenerCheckboxActivo('#activar-tribbu-gidaria');
-            document.querySelectorAll('#tribbu-gidaria').forEach(select => {
-                select.style.display = activo ? '' : 'none';
-                select.disabled = !activo;
-                if (!activo) {
-                    select.value = '';
-                }
-            });
-        }
-
         function actualizarTextoGuardar(texto) {
             document.querySelectorAll('#btn-guardar-registro').forEach(btn => {
                 btn.textContent = texto;
@@ -1099,20 +1082,17 @@
             const pasajeros = Array.from(formularioActivo.querySelectorAll('.pasajero-viaje:checked')).map(el => el.value);
             const valorViaje = parseFloat(obtenerValorActivo('#valor-viaje'));
             const dinero = parseFloat(obtenerValorActivo('#dinero-viaje')) || 0;
-            const usarTribbuGidaria = obtenerCheckboxActivo('#activar-tribbu-gidaria');
-            const tribbuGidaria = usarTribbuGidaria ? obtenerValorActivo('#tribbu-gidaria') : '';
+            const tribbuGidaria = obtenerValorActivo('#tribbu-gidaria');
             // Validaciones
             if (!fecha) { SistemaRegistro.mostrarAlerta('Por favor, selecciona una fecha', 'error'); return; }
             if (!conductor) { SistemaRegistro.mostrarAlerta('Por favor, selecciona un conductor', 'error'); return; }
-            if (dinero > 0 && !usarTribbuGidaria) { SistemaRegistro.mostrarAlerta('Si hay dinero, debes activar y seleccionar Tribbu gidaria', 'error'); return; }
             if (dinero > 0 && !tribbuGidaria) { SistemaRegistro.mostrarAlerta('Si hay dinero, selecciona Tribbu gidaria', 'error'); return; }
-            if (usarTribbuGidaria && !tribbuGidaria) { SistemaRegistro.mostrarAlerta('Selecciona Tribbu gidaria', 'error'); return; }
             if (pasajeros.length === 0) { SistemaRegistro.mostrarAlerta('Selecciona al menos un pasajero', 'error'); return; }
             if (isNaN(valorViaje) || valorViaje < 0) { SistemaRegistro.mostrarAlerta('El valor del viaje debe ser un número válido (0 o mayor)', 'error'); return; }
             
             const registros = Storage.getRegistros();
             const registroBase = { fecha, conductor, pasajeros, valorViaje, dinero };
-            if (usarTribbuGidaria) {
+            if (tribbuGidaria) {
                 registroBase.tribbuGidaria = tribbuGidaria;
             }
             
@@ -1188,7 +1168,6 @@
                 // Cargar datos en el formulario
                 actualizarCamposDuplicados('#fecha-viaje', registroNormalizado.fecha);
                 actualizarCamposDuplicados('#conductor-viaje', registroNormalizado.conductor);
-                actualizarCamposDuplicados('#activar-tribbu-gidaria', Boolean(obtenerTribbuGidaria(registroNormalizado)));
                 actualizarCheckboxesPasajeros();
                 
                 // Marcar pasajeros después de que se actualicen los checkboxes
@@ -1202,7 +1181,6 @@
                 actualizarCamposDuplicados('#valor-viaje', registroNormalizado.valorViaje !== undefined ? registroNormalizado.valorViaje : 1);
                 actualizarCamposDuplicados('#dinero-viaje', registroNormalizado.dinero || '');
                 actualizarCamposDuplicados('#tribbu-gidaria', obtenerTribbuGidaria(registroNormalizado));
-                actualizarVisibilidadTribbuGidaria();
                 
                 // Marcar que estamos editando
                 registroEnEdicion = id;
@@ -1502,11 +1480,9 @@
                 const hoy = new Date().toISOString().split('T')[0];
                 actualizarCamposDuplicados('#fecha-viaje', hoy);
                 actualizarCamposDuplicados('#conductor-viaje', '');
-                actualizarCamposDuplicados('#activar-tribbu-gidaria', false);
                 actualizarCamposDuplicados('#valor-viaje', '1');
                 actualizarCamposDuplicados('#dinero-viaje', '');
                 actualizarCamposDuplicados('#tribbu-gidaria', '');
-                actualizarVisibilidadTribbuGidaria();
                 setTimeout(() => {
                     document.querySelectorAll('.pasajero-viaje').forEach(el => el.checked = false);
                 }, 10);
@@ -1568,13 +1544,13 @@
                 });
 
                 csv += '\n\nHISTORIAL DE DINERO\n';
-                csv += 'Fecha,Conductor,Pasajeros,Dinero Total,Dinero por Pasajero,Titular del dinero\n';
+                csv += 'Fecha,Tribbu Gidaria,Pasajeros,Dinero Total,Dinero por Pasajero,Titular del dinero\n';
                 registros.forEach(reg => {
                     if ((reg.dinero || 0) > 0) {
                         const pasajeros = Array.isArray(reg.pasajeros) ? reg.pasajeros : [];
                         const dineroPorPasajero = pasajeros.length > 0 ? reg.dinero / (pasajeros.length + 1) : reg.dinero;
                         const titularDinero = obtenerTitularDinero(reg);
-                        csv += `${reg.fecha},${reg.conductor},"${pasajeros.join('|')}","${reg.dinero.toFixed(2)}","${dineroPorPasajero.toFixed(2)}",${titularDinero}\n`;
+                        csv += `${reg.fecha},${titularDinero},"${pasajeros.join('|')}","${reg.dinero.toFixed(2)}","${dineroPorPasajero.toFixed(2)}",${titularDinero}\n`;
                     }
                 });
 
@@ -1627,8 +1603,6 @@
             // Inicializar checkboxes pasajeros
             actualizarCheckboxesPasajeros();
             document.getElementById('conductor-viaje').addEventListener('change', actualizarCheckboxesPasajeros);
-            document.getElementById('activar-tribbu-gidaria').addEventListener('change', actualizarVisibilidadTribbuGidaria);
-            actualizarVisibilidadTribbuGidaria();
             // Botones Registro
             document.getElementById('btn-guardar-registro').addEventListener('click', SistemaRegistro.guardar);
             document.getElementById('btn-limpiar-registro').addEventListener('click', () => {

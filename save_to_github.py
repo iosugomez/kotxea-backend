@@ -118,7 +118,7 @@ def generar_csv_dinero(registros):
         for deudor, acreedor, cantidad in pagos:
             csv += f'{deudor},{acreedor},{cantidad:.2f}\n'
 
-    csv += '\nFecha,Conductor,Pasajeros,Dinero Total,Dinero por Persona\n'
+    csv += '\nFecha,Tribbu Gidaria,Pasajeros,Dinero Total,Dinero por Persona\n'
     for reg in registros:
         if reg.get('tipo') == 'liquidacion':
             if reg.get('subtipo') == 'parcial':
@@ -129,7 +129,7 @@ def generar_csv_dinero(registros):
         if reg['dinero'] > 0 and len(reg['pasajeros']) > 0:
             total = len(reg['pasajeros']) + 1
             deuda = reg['dinero'] / total
-            csv += f"{reg['fecha']},{reg['conductor']},\"{'|'.join(reg['pasajeros'])}\",{reg['dinero']:.2f},{deuda:.2f}\n"
+            csv += f"{reg['fecha']},{titular_dinero},\"{'|'.join(reg['pasajeros'])}\",{reg['dinero']:.2f},{deuda:.2f}\n"
     return csv
 
 def save_file(repo, path, content, message):
