@@ -1009,5 +1009,16 @@
     ],
     "valorViaje": 0,
     "dinero": 10.28
+  },
+  {
+    "id": 1781671499495,
+    "fecha": "2026-06-16",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
   }
 ]
