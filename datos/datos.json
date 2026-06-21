@@ -1055,5 +1055,15 @@
     ],
     "valorViaje": 0,
     "dinero": 12.31
+  },
+  {
+    "id": 1782041034191,
+    "fecha": "2026-06-19",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu"
+    ],
+    "valorViaje": 1.8,
+    "dinero": 8.34
   }
 ]
