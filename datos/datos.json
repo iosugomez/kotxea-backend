@@ -1239,5 +1239,15 @@
     ],
     "valorViaje": 0,
     "dinero": 12.33
+  },
+  {
+    "id": 1784193666991,
+    "fecha": "2026-07-16",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
   }
 ]
