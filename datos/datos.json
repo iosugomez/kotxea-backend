@@ -1368,5 +1368,15 @@
     ],
     "valorViaje": 0,
     "dinero": 8.3
+  },
+  {
+    "id": 1785307670949,
+    "fecha": "2026-07-28",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 4.13
   }
 ]
