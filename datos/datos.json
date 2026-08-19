@@ -1389,5 +1389,15 @@
     ],
     "valorViaje": 1,
     "dinero": 4.12
+  },
+  {
+    "id": 1787141398113,
+    "fecha": "2026-08-18",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 4.66
   }
 ]
