@@ -1450,9 +1450,10 @@
     "fecha": "2026-08-27",
     "conductor": "Lide",
     "pasajeros": [
+      "Iosu",
       "Asier"
     ],
     "valorViaje": 0,
-    "dinero": 2.03
+    "dinero": 6.16
   }
 ]
