@@ -1,7 +1,7 @@
 Persona,Balance
-Asier,-0.510
-Iosu,-0.123
-Lide,0.237
+Iosu,-0.457
+Lide,-0.097
+Asier,0.157
 Itziar,0.397
 
 Fecha,Conductor,Pasajeros,Número de Pasajeros,Valor del Viaje
@@ -138,3 +138,4 @@ Fecha,Conductor,Pasajeros,Número de Pasajeros,Valor del Viaje
 2026-09-03,Itziar,"Iosu|Lide",2,1.00
 2026-09-03,Lide,"Iosu|Itziar",2,0.00
 2026-09-08,Lide,"Iosu|Asier",2,1.00
+2026-09-09,Asier,"Iosu|Lide",2,1.00
