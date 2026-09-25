@@ -1603,5 +1603,16 @@
     ],
     "valorViaje": 1,
     "dinero": 0
+  },
+  {
+    "id": 1790314869882,
+    "fecha": "2026-09-24",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.47
   }
 ]
