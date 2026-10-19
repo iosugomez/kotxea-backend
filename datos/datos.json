@@ -1665,7 +1665,7 @@
     "dinero": 8.42,
     "fecha": "2026-10-01",
     "id": 1791185195507,
-    "marcado": true,
+    "marcado": false,
     "pasajeros": [
       "Lide",
       "Asier"
