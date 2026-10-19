@@ -1,1697 +1,1697 @@
 [
-    {
-        "conductor":  "Iosu",
-        "dinero":  7,
-        "fecha":  "2025-12-16",
-        "id":  1765897533394,
-        "pasajeros":  [
-                          "Asier",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Asier",
-        "dinero":  4.64,
-        "fecha":  "2025-12-18",
-        "id":  1766041039089,
-        "pasajeros":  [
-                          "Iosu"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Itziar",
-        "dinero":  9.12,
-        "fecha":  "2026-01-07",
-        "id":  1767784094052,
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Asier"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Iosu",
-        "dinero":  13.39,
-        "fecha":  "2026-01-08",
-        "id":  1767855026404,
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Lide",
-        "dinero":  12.45,
-        "fecha":  "2026-01-13",
-        "id":  1768289637188,
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Itziar",
-        "dinero":  6.9,
-        "fecha":  "2026-01-15",
-        "id":  1768491995140,
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Asier"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Asier",
-        "dinero":  12.44,
-        "fecha":  "2026-01-19",
-        "id":  1768903567539,
-        "pasajeros":  [
-                          "Lide",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Lide",
-        "dinero":  6.33,
-        "fecha":  "2026-01-20",
-        "id":  1768903584274,
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Iosu",
-        "dinero":  13.37,
-        "fecha":  "2026-01-22",
-        "id":  1769067367487,
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Itziar",
-        "dinero":  6.12,
-        "fecha":  "2026-01-27",
-        "id":  1769496692999,
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Asier"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Lide",
-        "dinero":  6.27,
-        "fecha":  "2026-01-27",
-        "id":  1769528466494,
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  0
-    },
-    {
-        "conductor":  "Asier",
-        "dinero":  9.28,
-        "fecha":  "2026-01-29",
-        "id":  1769697338575,
-        "pasajeros":  [
-                          "Iosu",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Lide",
-        "dinero":  10.35,
-        "fecha":  "2026-02-03",
-        "id":  1770101765593,
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Iosu",
-        "dinero":  13.39,
-        "fecha":  "2026-02-05",
-        "id":  1770280452211,
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Itziar",
-        "dinero":  4.54,
-        "fecha":  "2026-02-10",
-        "id":  1770715520877,
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Asier"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Asier",
-        "dinero":  7.08,
-        "fecha":  "2026-02-10",
-        "id":  1770736098021,
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  0
-    },
-    {
-        "conductor":  "Itziar",
-        "dinero":  4.54,
-        "fecha":  "2026-02-12",
-        "id":  1770907258481,
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Asier"
-                      ],
-        "marcado":  true,
-        "valorViaje":  0
-    },
-    {
-        "conductor":  "Asier",
-        "dinero":  6.82,
-        "fecha":  "2026-02-12",
-        "id":  1770908119318,
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Iosu",
-        "dinero":  0,
-        "fecha":  "2026-02-17",
-        "id":  1771339840963,
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Lide",
-        "dinero":  12.45,
-        "fecha":  "2026-02-17",
-        "id":  1771339951755,
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  0
-    },
-    {
-        "conductor":  "Lide",
-        "dinero":  8.24,
-        "fecha":  "2026-02-19",
-        "id":  1771861962383,
-        "pasajeros":  [
-                          "Asier",
-                          "Itziar"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Itziar",
-        "dinero":  8.3,
-        "fecha":  "2026-02-24",
-        "id":  1772019247161,
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Asier"
-                      ],
-        "marcado":  true,
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Asier",
-        "dinero":  0,
-        "fecha":  "2026-02-26",
-        "id":  1772174796567,
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide"
-                      ],
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Lide",
-        "dinero":  4.08,
-        "fecha":  "2026-02-26",
-        "id":  1772188741719,
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "marcado":  true,
-        "valorViaje":  0
-    },
-    {
-        "conductor":  "Asier",
-        "dinero":  2.12,
-        "fecha":  "2026-03-03",
-        "id":  1772606601929,
-        "pasajeros":  [
-                          "Iosu"
-                      ],
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Iosu",
-        "dinero":  2.27,
-        "fecha":  "2026-03-03",
-        "id":  1772606855814,
-        "pasajeros":  [
-                          "Asier"
-                      ],
-        "valorViaje":  0
-    },
-    {
-        "conductor":  "Iosu",
-        "dinero":  0,
-        "fecha":  "2026-03-05",
-        "id":  1772784715429,
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1
-    },
-    {
-        "conductor":  "Lide",
-        "dinero":  12.37,
-        "fecha":  "2026-03-05",
-        "id":  1772784923499,
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0
-    },
-    {
-        "id":  1773216194467,
-        "fecha":  "2026-03-10",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  6.36
-    },
-    {
-        "id":  1773603759487,
-        "fecha":  "2026-03-12",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  11.17
-    },
-    {
-        "id":  1773674903238,
-        "fecha":  "2026-03-16",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Lide",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  8.15
-    },
-    {
-        "id":  1774432088604,
-        "fecha":  "2026-03-24",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  8.3
-    },
-    {
-        "id":  1774544708738,
-        "fecha":  "2026-03-26",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1774544734699,
-        "fecha":  "2026-03-26",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  12.37
-    },
-    {
-        "id":  1774621237161,
-        "tipo":  "liquidacion",
-        "subtipo":  "total",
-        "fecha":  "2026-03-27",
-        "ajustes":  {
-                        "Iosu":  -8.734999999999998,
-                        "Lide":  42.70333333333332,
-                        "Asier":  -20.001666666666665,
-                        "Itziar":  -13.966666666666665
-                    }
-    },
-    {
-        "id":  1774884331038,
-        "fecha":  "2026-03-30",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1774939515381,
-        "fecha":  "2026-03-30",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  11.91
-    },
-    {
-        "id":  1775038797387,
-        "fecha":  "2026-03-31",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1775038870019,
-        "fecha":  "2026-03-31",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  12.45
-    },
-    {
-        "id":  1776090993697,
-        "fecha":  "2026-04-13",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  0.5,
-        "dinero":  3.75
-    },
-    {
-        "id":  1776162682444,
-        "fecha":  "2026-04-14",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Lide",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1776162694344,
-        "fecha":  "2026-04-14",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.3
-    },
-    {
-        "id":  1776629065967,
-        "fecha":  "2026-04-17",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Lide"
-                      ],
-        "valorViaje":  0.5,
-        "dinero":  0
-    },
-    {
-        "id":  1776689447905,
-        "fecha":  "2026-04-13",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Asier"
-                      ],
-        "valorViaje":  0.5,
-        "dinero":  2
-    },
-    {
-        "id":  1776689963643,
-        "fecha":  "2026-04-16",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1776690035161,
-        "fecha":  "2026-04-16",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  12.37
-    },
-    {
-        "id":  1776690100120,
-        "fecha":  "2026-04-20",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  3.96
-    },
-    {
-        "id":  1776780704989,
-        "fecha":  "2026-04-21",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1776780760459,
-        "fecha":  "2026-04-21",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  10.42
-    },
-    {
-        "id":  1776934755711,
-        "fecha":  "2026-04-23",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1776934774408,
-        "fecha":  "2026-04-23",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  12.36
-    },
-    {
-        "id":  1777008646544,
-        "tipo":  "liquidacion",
-        "subtipo":  "total",
-        "fecha":  "2026-04-24",
-        "ajustes":  {
-                        "Iosu":  -16.127499999999998,
-                        "Lide":  55.64583333333333,
-                        "Asier":  -19.894166666666667,
-                        "Itziar":  -19.624166666666667
-                    }
-    },
-    {
-        "id":  1777271746075,
-        "fecha":  "2026-04-27",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  4.15
-    },
-    {
-        "id":  1777377283949,
-        "fecha":  "2026-04-28",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1777377355273,
-        "fecha":  "2026-04-28",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  6.09
-    },
-    {
-        "id":  1777824199225,
-        "fecha":  "2026-04-30",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1777824236820,
-        "fecha":  "2026-04-30",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.06
-    },
-    {
-        "id":  1777975115120,
-        "fecha":  "2026-05-05",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1777975160220,
-        "fecha":  "2026-05-05",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  12.45
-    },
-    {
-        "id":  1778134324491,
-        "fecha":  "2026-05-07",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  12.36
-    },
-    {
-        "id":  1778479664859,
-        "fecha":  "2026-05-08",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Lide",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1778480235900,
-        "fecha":  "2026-05-08",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  6.2
-    },
-    {
-        "id":  1778580575102,
-        "fecha":  "2026-05-12",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1778580600385,
-        "fecha":  "2026-05-12",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.3
-    },
-    {
-        "id":  1778746974219,
-        "fecha":  "2026-05-14",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  10.29
-    },
-    {
-        "id":  1779176098774,
-        "fecha":  "2026-05-19",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1779176161356,
-        "fecha":  "2026-05-19",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.3
-    },
-    {
-        "id":  1779286324662,
-        "tipo":  "liquidacion",
-        "subtipo":  "total",
-        "fecha":  "2026-05-20",
-        "ajustes":  {
-                        "Iosu":  -18.5175,
-                        "Lide":  53.54083333333333,
-                        "Asier":  -12.364166666666666,
-                        "Itziar":  -22.659166666666664
-                    }
-    },
-    {
-        "id":  1779349248158,
-        "fecha":  "2026-05-21",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide"
-                      ],
-        "valorViaje":  0.5,
-        "dinero":  0
-    },
-    {
-        "id":  1779349288403,
-        "fecha":  "2026-05-21",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Lide"
-                      ],
-        "valorViaje":  0.5,
-        "dinero":  0
-    },
-    {
-        "id":  1779349328815,
-        "fecha":  "2026-05-21",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu"
-                      ],
-        "valorViaje":  0,
-        "dinero":  2.04
-    },
-    {
-        "id":  1779427328362,
-        "fecha":  "2026-05-21",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Asier"
-                      ],
-        "valorViaje":  0,
-        "dinero":  1.92
-    },
-    {
-        "id":  1779688425479,
-        "fecha":  "2026-05-23",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Asier"
-                      ],
-        "valorViaje":  1.5,
-        "dinero":  3.77
-    },
-    {
-        "id":  1779689122400,
-        "fecha":  "2026-05-25",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Lide",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1779689190228,
-        "fecha":  "2026-05-25",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.28
-    },
-    {
-        "id":  1779785298064,
-        "fecha":  "2026-05-26",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  8.3
-    },
-    {
-        "id":  1779946806700,
-        "fecha":  "2026-05-28",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1779950444159,
-        "fecha":  "2026-05-28",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.21
-    },
-    {
-        "id":  1780042260782,
-        "fecha":  "2026-05-29",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1780294741621,
-        "fecha":  "2026-06-01",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu"
-                      ],
-        "valorViaje":  1,
-        "dinero":  4.08
-    },
-    {
-        "id":  1780319670780,
-        "fecha":  "2026-05-29",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.24
-    },
-    {
-        "id":  1780403199049,
-        "fecha":  "2026-06-02",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1780462651734,
-        "fecha":  "2026-06-02",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  4.15
-    },
-    {
-        "id":  1780646608879,
-        "fecha":  "2026-06-04",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1780646630332,
-        "fecha":  "2026-06-04",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  10.28
-    },
-    {
-        "id":  1781006429107,
-        "fecha":  "2026-06-09",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1781006508471,
-        "fecha":  "2026-06-09",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.3
-    },
-    {
-        "id":  1781164380779,
-        "fecha":  "2026-06-11",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1781182299370,
-        "fecha":  "2026-06-11",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  10.28
-    },
-    {
-        "id":  1781671499495,
-        "fecha":  "2026-06-16",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1781671547552,
-        "fecha":  "2026-06-16",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.3
-    },
-    {
-        "id":  1781792100081,
-        "fecha":  "2026-06-18",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1781860013731,
-        "fecha":  "2026-06-18",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  12.31
-    },
-    {
-        "id":  1782041034191,
-        "fecha":  "2026-06-19",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Iosu"
-                      ],
-        "valorViaje":  1.8,
-        "dinero":  8.34
-    },
-    {
-        "id":  1782199502721,
-        "fecha":  "2026-06-23",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1782386949592,
-        "fecha":  "2026-06-25",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1782715147096,
-        "fecha":  "2026-06-23",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  4.06
-    },
-    {
-        "id":  1782727926943,
-        "fecha":  "2026-06-25",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Iosu",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  6.33
-    },
-    {
-        "id":  1782906958960,
-        "fecha":  "2026-06-30",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1782906982919,
-        "fecha":  "2026-06-30",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.2
-    },
-    {
-        "id":  1783068380597,
-        "fecha":  "2026-07-02",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide"
-                      ],
-        "valorViaje":  1,
-        "dinero":  8.43
-    },
-    {
-        "id":  1783497239224,
-        "fecha":  "2026-07-07",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  4.06
-    },
-    {
-        "id":  1783497378119,
-        "fecha":  "2026-07-07",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  0,
-        "dinero":  4.14
-    },
-    {
-        "id":  1783584551592,
-        "fecha":  "2026-07-09",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1783878610794,
-        "fecha":  "2026-07-09",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Lide"
-                      ],
-        "valorViaje":  1,
-        "dinero":  2.06
-    },
-    {
-        "id":  1783922150790,
-        "fecha":  "2026-07-13",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0.5,
-        "dinero":  4.06
-    },
-    {
-        "id":  1783922184053,
-        "fecha":  "2026-07-13",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Asier"
-                      ],
-        "valorViaje":  0.5,
-        "dinero":  2.08
-    },
-    {
-        "id":  1783925594472,
-        "fecha":  "2026-07-09",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Iosu"
-                      ],
-        "valorViaje":  0,
-        "dinero":  2.27
-    },
-    {
-        "id":  1784014535755,
-        "fecha":  "2026-07-14",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1784014634316,
-        "fecha":  "2026-07-14",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  12.33
-    },
-    {
-        "id":  1784193666991,
-        "fecha":  "2026-07-16",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu"
-                      ],
-        "valorViaje":  1,
-        "dinero":  2.06
-    },
-    {
-        "id":  1784530820262,
-        "fecha":  "2026-07-17",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  7.9
-    },
-    {
-        "id":  1784530890157,
-        "fecha":  "2026-07-17",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  11.85
-    },
-    {
-        "id":  1784626206291,
-        "fecha":  "2026-07-21",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1784699713105,
-        "fecha":  "2026-07-21",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.24
-    },
-    {
-        "id":  1784699759748,
-        "fecha":  "2026-07-22",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  4.07
-    },
-    {
-        "id":  1784699844704,
-        "fecha":  "2026-07-16",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  2.3
-    },
-    {
-        "id":  1784808021369,
-        "fecha":  "2026-07-23",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1784808043808,
-        "fecha":  "2026-07-23",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  0,
-        "dinero":  4.14
-    },
-    {
-        "id":  1785141135809,
-        "fecha":  "2026-07-27",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1785231544822,
-        "fecha":  "2026-07-28",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Lide"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1785231595043,
-        "fecha":  "2026-07-27",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.3
-    },
-    {
-        "id":  1785307670949,
-        "fecha":  "2026-07-28",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Asier"
-                      ],
-        "valorViaje":  0,
-        "dinero":  4.13
-    },
-    {
-        "id":  1785404765073,
-        "fecha":  "2026-07-30",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  4.12
-    },
-    {
-        "id":  1787141398113,
-        "fecha":  "2026-08-18",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  4.66
-    },
-    {
-        "id":  1787220636292,
-        "fecha":  "2026-08-19",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  4.59
-    },
-    {
-        "id":  1787726728735,
-        "fecha":  "2026-08-25",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  12.69
-    },
-    {
-        "id":  1787814117396,
-        "fecha":  "2026-08-25",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1787814289044,
-        "fecha":  "2026-08-27",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1787814359770,
-        "fecha":  "2026-08-27",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  0,
-        "dinero":  6.16
-    },
-    {
-        "id":  1788167095360,
-        "fecha":  "2026-08-31",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  4.08
-    },
-    {
-        "id":  1788242135543,
-        "fecha":  "2026-09-01",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1788345133430,
-        "fecha":  "2026-09-01",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  10.3
-    },
-    {
-        "id":  1788414932066,
-        "fecha":  "2026-09-03",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1788770932138,
-        "fecha":  "2026-09-03",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.3
-    },
-    {
-        "id":  1788848998274,
-        "fecha":  "2026-09-08",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  8.22
-    },
-    {
-        "id":  1788934965550,
-        "fecha":  "2026-09-09",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1789048830443,
-        "fecha":  "2026-09-09",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.2
-    },
-    {
-        "id":  1789479202299,
-        "fecha":  "2026-09-15",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  8.78
-    },
-    {
-        "id":  1789624706649,
-        "fecha":  "2026-09-17",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1789970228026,
-        "fecha":  "2026-09-17",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  0,
-        "dinero":  12.33
-    },
-    {
-        "id":  1790066642043,
-        "fecha":  "2026-09-22",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Iosu",
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1790234293672,
-        "fecha":  "2026-09-24",
-        "conductor":  "Iosu",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1790314869882,
-        "fecha":  "2026-09-24",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Iosu",
-                          "Lide"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.47
-    },
-    {
-        "id":  1790749396043,
-        "fecha":  "2026-09-29",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  1,
-        "dinero":  8.39
-    },
-    {
-        "id":  1791185046496,
-        "fecha":  "2026-10-01",
-        "conductor":  "Asier",
-        "pasajeros":  [
-                          "Lide",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
-    {
-        "id":  1791185195507,
-        "fecha":  "2026-10-01",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.42
-    },
-    {
-        "id":  1791349971798,
-        "fecha":  "2026-10-06",
-        "conductor":  "Itziar",
-        "pasajeros":  [
-                          "Lide",
-                          "Asier"
-                      ],
-        "valorViaje":  0,
-        "dinero":  8.42
-    },
-    {
-        "id":  1791349991972,
-        "fecha":  "2026-10-06",
-        "conductor":  "Lide",
-        "pasajeros":  [
-                          "Asier",
-                          "Itziar"
-                      ],
-        "valorViaje":  1,
-        "dinero":  0
-    },
+  {
+    "conductor": "Iosu",
+    "dinero": 7,
+    "fecha": "2025-12-16",
+    "id": 1765897533394,
+    "pasajeros": [
+      "Asier",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Asier",
+    "dinero": 4.64,
+    "fecha": "2025-12-18",
+    "id": 1766041039089,
+    "pasajeros": [
+      "Iosu"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Itziar",
+    "dinero": 9.12,
+    "fecha": "2026-01-07",
+    "id": 1767784094052,
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Asier"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Iosu",
+    "dinero": 13.39,
+    "fecha": "2026-01-08",
+    "id": 1767855026404,
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Lide",
+    "dinero": 12.45,
+    "fecha": "2026-01-13",
+    "id": 1768289637188,
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Itziar",
+    "dinero": 6.9,
+    "fecha": "2026-01-15",
+    "id": 1768491995140,
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Asier"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Asier",
+    "dinero": 12.44,
+    "fecha": "2026-01-19",
+    "id": 1768903567539,
+    "pasajeros": [
+      "Lide",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Lide",
+    "dinero": 6.33,
+    "fecha": "2026-01-20",
+    "id": 1768903584274,
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Iosu",
+    "dinero": 13.37,
+    "fecha": "2026-01-22",
+    "id": 1769067367487,
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Itziar",
+    "dinero": 6.12,
+    "fecha": "2026-01-27",
+    "id": 1769496692999,
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Asier"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Lide",
+    "dinero": 6.27,
+    "fecha": "2026-01-27",
+    "id": 1769528466494,
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 0
+  },
+  {
+    "conductor": "Asier",
+    "dinero": 9.28,
+    "fecha": "2026-01-29",
+    "id": 1769697338575,
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Lide",
+    "dinero": 10.35,
+    "fecha": "2026-02-03",
+    "id": 1770101765593,
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Iosu",
+    "dinero": 13.39,
+    "fecha": "2026-02-05",
+    "id": 1770280452211,
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Itziar",
+    "dinero": 4.54,
+    "fecha": "2026-02-10",
+    "id": 1770715520877,
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Asier"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Asier",
+    "dinero": 7.08,
+    "fecha": "2026-02-10",
+    "id": 1770736098021,
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 0
+  },
+  {
+    "conductor": "Itziar",
+    "dinero": 4.54,
+    "fecha": "2026-02-12",
+    "id": 1770907258481,
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Asier"
+    ],
+    "marcado": true,
+    "valorViaje": 0
+  },
+  {
+    "conductor": "Asier",
+    "dinero": 6.82,
+    "fecha": "2026-02-12",
+    "id": 1770908119318,
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Iosu",
+    "dinero": 0,
+    "fecha": "2026-02-17",
+    "id": 1771339840963,
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Lide",
+    "dinero": 12.45,
+    "fecha": "2026-02-17",
+    "id": 1771339951755,
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 0
+  },
+  {
+    "conductor": "Lide",
+    "dinero": 8.24,
+    "fecha": "2026-02-19",
+    "id": 1771861962383,
+    "pasajeros": [
+      "Asier",
+      "Itziar"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Itziar",
+    "dinero": 8.3,
+    "fecha": "2026-02-24",
+    "id": 1772019247161,
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Asier"
+    ],
+    "marcado": true,
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Asier",
+    "dinero": 0,
+    "fecha": "2026-02-26",
+    "id": 1772174796567,
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Lide",
+    "dinero": 4.08,
+    "fecha": "2026-02-26",
+    "id": 1772188741719,
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "marcado": true,
+    "valorViaje": 0
+  },
+  {
+    "conductor": "Asier",
+    "dinero": 2.12,
+    "fecha": "2026-03-03",
+    "id": 1772606601929,
+    "pasajeros": [
+      "Iosu"
+    ],
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Iosu",
+    "dinero": 2.27,
+    "fecha": "2026-03-03",
+    "id": 1772606855814,
+    "pasajeros": [
+      "Asier"
+    ],
+    "valorViaje": 0
+  },
+  {
+    "conductor": "Iosu",
+    "dinero": 0,
+    "fecha": "2026-03-05",
+    "id": 1772784715429,
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1
+  },
+  {
+    "conductor": "Lide",
+    "dinero": 12.37,
+    "fecha": "2026-03-05",
+    "id": 1772784923499,
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0
+  },
+  {
+    "id": 1773216194467,
+    "fecha": "2026-03-10",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 6.36
+  },
+  {
+    "id": 1773603759487,
+    "fecha": "2026-03-12",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 11.17
+  },
+  {
+    "id": 1773674903238,
+    "fecha": "2026-03-16",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 8.15
+  },
+  {
+    "id": 1774432088604,
+    "fecha": "2026-03-24",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 8.3
+  },
+  {
+    "id": 1774544708738,
+    "fecha": "2026-03-26",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1774544734699,
+    "fecha": "2026-03-26",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 12.37
+  },
+  {
+    "id": 1774621237161,
+    "tipo": "liquidacion",
+    "subtipo": "total",
+    "fecha": "2026-03-27",
+    "ajustes": {
+      "Iosu": -8.734999999999998,
+      "Lide": 42.70333333333332,
+      "Asier": -20.001666666666665,
+      "Itziar": -13.966666666666665
+    }
+  },
+  {
+    "id": 1774884331038,
+    "fecha": "2026-03-30",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1774939515381,
+    "fecha": "2026-03-30",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 11.91
+  },
+  {
+    "id": 1775038797387,
+    "fecha": "2026-03-31",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1775038870019,
+    "fecha": "2026-03-31",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 12.45
+  },
+  {
+    "id": 1776090993697,
+    "fecha": "2026-04-13",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 0.5,
+    "dinero": 3.75
+  },
+  {
+    "id": 1776162682444,
+    "fecha": "2026-04-14",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1776162694344,
+    "fecha": "2026-04-14",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.3
+  },
+  {
+    "id": 1776629065967,
+    "fecha": "2026-04-17",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Lide"
+    ],
+    "valorViaje": 0.5,
+    "dinero": 0
+  },
+  {
+    "id": 1776689447905,
+    "fecha": "2026-04-13",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier"
+    ],
+    "valorViaje": 0.5,
+    "dinero": 2
+  },
+  {
+    "id": 1776689963643,
+    "fecha": "2026-04-16",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1776690035161,
+    "fecha": "2026-04-16",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 12.37
+  },
+  {
+    "id": 1776690100120,
+    "fecha": "2026-04-20",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 3.96
+  },
+  {
+    "id": 1776780704989,
+    "fecha": "2026-04-21",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1776780760459,
+    "fecha": "2026-04-21",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 10.42
+  },
+  {
+    "id": 1776934755711,
+    "fecha": "2026-04-23",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1776934774408,
+    "fecha": "2026-04-23",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 12.36
+  },
+  {
+    "id": 1777008646544,
+    "tipo": "liquidacion",
+    "subtipo": "total",
+    "fecha": "2026-04-24",
+    "ajustes": {
+      "Iosu": -16.127499999999998,
+      "Lide": 55.64583333333333,
+      "Asier": -19.894166666666667,
+      "Itziar": -19.624166666666667
+    }
+  },
+  {
+    "id": 1777271746075,
+    "fecha": "2026-04-27",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 4.15
+  },
+  {
+    "id": 1777377283949,
+    "fecha": "2026-04-28",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1777377355273,
+    "fecha": "2026-04-28",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 6.09
+  },
+  {
+    "id": 1777824199225,
+    "fecha": "2026-04-30",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1777824236820,
+    "fecha": "2026-04-30",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.06
+  },
+  {
+    "id": 1777975115120,
+    "fecha": "2026-05-05",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1777975160220,
+    "fecha": "2026-05-05",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 12.45
+  },
+  {
+    "id": 1778134324491,
+    "fecha": "2026-05-07",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 12.36
+  },
+  {
+    "id": 1778479664859,
+    "fecha": "2026-05-08",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1778480235900,
+    "fecha": "2026-05-08",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 6.2
+  },
+  {
+    "id": 1778580575102,
+    "fecha": "2026-05-12",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1778580600385,
+    "fecha": "2026-05-12",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.3
+  },
+  {
+    "id": 1778746974219,
+    "fecha": "2026-05-14",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 10.29
+  },
+  {
+    "id": 1779176098774,
+    "fecha": "2026-05-19",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1779176161356,
+    "fecha": "2026-05-19",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.3
+  },
+  {
+    "id": 1779286324662,
+    "tipo": "liquidacion",
+    "subtipo": "total",
+    "fecha": "2026-05-20",
+    "ajustes": {
+      "Iosu": -18.5175,
+      "Lide": 53.54083333333333,
+      "Asier": -12.364166666666666,
+      "Itziar": -22.659166666666664
+    }
+  },
+  {
+    "id": 1779349248158,
+    "fecha": "2026-05-21",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide"
+    ],
+    "valorViaje": 0.5,
+    "dinero": 0
+  },
+  {
+    "id": 1779349288403,
+    "fecha": "2026-05-21",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Lide"
+    ],
+    "valorViaje": 0.5,
+    "dinero": 0
+  },
+  {
+    "id": 1779349328815,
+    "fecha": "2026-05-21",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu"
+    ],
+    "valorViaje": 0,
+    "dinero": 2.04
+  },
+  {
+    "id": 1779427328362,
+    "fecha": "2026-05-21",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 1.92
+  },
+  {
+    "id": 1779688425479,
+    "fecha": "2026-05-23",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Asier"
+    ],
+    "valorViaje": 1.5,
+    "dinero": 3.77
+  },
+  {
+    "id": 1779689122400,
+    "fecha": "2026-05-25",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1779689190228,
+    "fecha": "2026-05-25",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.28
+  },
+  {
+    "id": 1779785298064,
+    "fecha": "2026-05-26",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 8.3
+  },
+  {
+    "id": 1779946806700,
+    "fecha": "2026-05-28",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1779950444159,
+    "fecha": "2026-05-28",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.21
+  },
+  {
+    "id": 1780042260782,
+    "fecha": "2026-05-29",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1780294741621,
+    "fecha": "2026-06-01",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu"
+    ],
+    "valorViaje": 1,
+    "dinero": 4.08
+  },
+  {
+    "id": 1780319670780,
+    "fecha": "2026-05-29",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.24
+  },
+  {
+    "id": 1780403199049,
+    "fecha": "2026-06-02",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1780462651734,
+    "fecha": "2026-06-02",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 4.15
+  },
+  {
+    "id": 1780646608879,
+    "fecha": "2026-06-04",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1780646630332,
+    "fecha": "2026-06-04",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 10.28
+  },
+  {
+    "id": 1781006429107,
+    "fecha": "2026-06-09",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1781006508471,
+    "fecha": "2026-06-09",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.3
+  },
+  {
+    "id": 1781164380779,
+    "fecha": "2026-06-11",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1781182299370,
+    "fecha": "2026-06-11",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 10.28
+  },
+  {
+    "id": 1781671499495,
+    "fecha": "2026-06-16",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1781671547552,
+    "fecha": "2026-06-16",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.3
+  },
+  {
+    "id": 1781792100081,
+    "fecha": "2026-06-18",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1781860013731,
+    "fecha": "2026-06-18",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 12.31
+  },
+  {
+    "id": 1782041034191,
+    "fecha": "2026-06-19",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu"
+    ],
+    "valorViaje": 1.8,
+    "dinero": 8.34
+  },
+  {
+    "id": 1782199502721,
+    "fecha": "2026-06-23",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1782386949592,
+    "fecha": "2026-06-25",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1782715147096,
+    "fecha": "2026-06-23",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 4.06
+  },
+  {
+    "id": 1782727926943,
+    "fecha": "2026-06-25",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 6.33
+  },
+  {
+    "id": 1782906958960,
+    "fecha": "2026-06-30",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1782906982919,
+    "fecha": "2026-06-30",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.2
+  },
+  {
+    "id": 1783068380597,
+    "fecha": "2026-07-02",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 8.43
+  },
+  {
+    "id": 1783497239224,
+    "fecha": "2026-07-07",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 4.06
+  },
+  {
+    "id": 1783497378119,
+    "fecha": "2026-07-07",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 4.14
+  },
+  {
+    "id": 1783584551592,
+    "fecha": "2026-07-09",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1783878610794,
+    "fecha": "2026-07-09",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 2.06
+  },
+  {
+    "id": 1783922150790,
+    "fecha": "2026-07-13",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0.5,
+    "dinero": 4.06
+  },
+  {
+    "id": 1783922184053,
+    "fecha": "2026-07-13",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier"
+    ],
+    "valorViaje": 0.5,
+    "dinero": 2.08
+  },
+  {
+    "id": 1783925594472,
+    "fecha": "2026-07-09",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu"
+    ],
+    "valorViaje": 0,
+    "dinero": 2.27
+  },
+  {
+    "id": 1784014535755,
+    "fecha": "2026-07-14",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1784014634316,
+    "fecha": "2026-07-14",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 12.33
+  },
+  {
+    "id": 1784193666991,
+    "fecha": "2026-07-16",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu"
+    ],
+    "valorViaje": 1,
+    "dinero": 2.06
+  },
+  {
+    "id": 1784530820262,
+    "fecha": "2026-07-17",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 7.9
+  },
+  {
+    "id": 1784530890157,
+    "fecha": "2026-07-17",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 11.85
+  },
+  {
+    "id": 1784626206291,
+    "fecha": "2026-07-21",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1784699713105,
+    "fecha": "2026-07-21",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.24
+  },
+  {
+    "id": 1784699759748,
+    "fecha": "2026-07-22",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 4.07
+  },
+  {
+    "id": 1784699844704,
+    "fecha": "2026-07-16",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 2.3
+  },
+  {
+    "id": 1784808021369,
+    "fecha": "2026-07-23",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1784808043808,
+    "fecha": "2026-07-23",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 4.14
+  },
+  {
+    "id": 1785141135809,
+    "fecha": "2026-07-27",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1785231544822,
+    "fecha": "2026-07-28",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1785231595043,
+    "fecha": "2026-07-27",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.3
+  },
+  {
+    "id": 1785307670949,
+    "fecha": "2026-07-28",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 4.13
+  },
+  {
+    "id": 1785404765073,
+    "fecha": "2026-07-30",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 4.12
+  },
+  {
+    "id": 1787141398113,
+    "fecha": "2026-08-18",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 4.66
+  },
+  {
+    "id": 1787220636292,
+    "fecha": "2026-08-19",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 4.59
+  },
+  {
+    "id": 1787726728735,
+    "fecha": "2026-08-25",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 12.69
+  },
+  {
+    "id": 1787814117396,
+    "fecha": "2026-08-25",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1787814289044,
+    "fecha": "2026-08-27",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1787814359770,
+    "fecha": "2026-08-27",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 6.16
+  },
+  {
+    "id": 1788167095360,
+    "fecha": "2026-08-31",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 4.08
+  },
+  {
+    "id": 1788242135543,
+    "fecha": "2026-09-01",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1788345133430,
+    "fecha": "2026-09-01",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 10.3
+  },
+  {
+    "id": 1788414932066,
+    "fecha": "2026-09-03",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1788770932138,
+    "fecha": "2026-09-03",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.3
+  },
+  {
+    "id": 1788848998274,
+    "fecha": "2026-09-08",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 8.22
+  },
+  {
+    "id": 1788934965550,
+    "fecha": "2026-09-09",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1789048830443,
+    "fecha": "2026-09-09",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.2
+  },
+  {
+    "id": 1789479202299,
+    "fecha": "2026-09-15",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 8.78
+  },
+  {
+    "id": 1789624706649,
+    "fecha": "2026-09-17",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1789970228026,
+    "fecha": "2026-09-17",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 0,
+    "dinero": 12.33
+  },
+  {
+    "id": 1790066642043,
+    "fecha": "2026-09-22",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Iosu",
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1790234293672,
+    "fecha": "2026-09-24",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1790314869882,
+    "fecha": "2026-09-24",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.47
+  },
+  {
+    "id": 1790749396043,
+    "fecha": "2026-09-29",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 8.39
+  },
+  {
+    "id": 1791185046496,
+    "fecha": "2026-10-01",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
+  {
+    "id": 1791185195507,
+    "fecha": "2026-10-01",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.42
+  },
+  {
+    "id": 1791349971798,
+    "fecha": "2026-10-06",
+    "conductor": "Itziar",
+    "pasajeros": [
+      "Lide",
+      "Asier"
+    ],
+    "valorViaje": 0,
+    "dinero": 8.42
+  },
+  {
+    "id": 1791349991972,
+    "fecha": "2026-10-06",
+    "conductor": "Lide",
+    "pasajeros": [
+      "Asier",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0
+  },
   {
     "id": 1791878586622,
     "fecha": "2026-10-08",
@@ -1710,6 +1710,7 @@
       "Asier"
     ],
     "valorViaje": 1,
-    "dinero": 4.2
+    "dinero": 4.2,
+    "marcado": true
   }
 ]
