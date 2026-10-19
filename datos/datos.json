@@ -1290,16 +1290,17 @@
     "dinero": 7.9
   },
   {
-    "id": 1784530890157,
-    "fecha": "2026-07-17",
     "conductor": "Lide",
+    "dinero": 11.85,
+    "fecha": "2026-07-17",
+    "id": 1784530890157,
     "pasajeros": [
       "Iosu",
       "Asier",
       "Itziar"
     ],
     "valorViaje": 0,
-    "dinero": 11.85
+    "marcado": true
   },
   {
     "id": 1784626206291,
