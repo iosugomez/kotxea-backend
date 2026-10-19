@@ -1406,6 +1406,7 @@
 
                         registros[index].marcado = event.target.checked;
                         Storage.setRegistros(registros);
+                        sincronizarNube('edit', { registro: registros[index] });
                     });
                 });
             },
