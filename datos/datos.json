@@ -1664,12 +1664,12 @@
     "dinero": 8.42,
     "fecha": "2026-10-01",
     "id": 1791185195507,
+    "marcado": false,
     "pasajeros": [
       "Lide",
       "Asier"
     ],
-    "valorViaje": 0,
-    "marcado": true
+    "valorViaje": 0
   },
   {
     "conductor": "Itziar",
