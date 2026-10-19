@@ -1638,15 +1638,16 @@
     "dinero": 8.47
   },
   {
-    "id": 1790749396043,
-    "fecha": "2026-09-29",
     "conductor": "Itziar",
+    "dinero": 8.39,
+    "fecha": "2026-09-29",
+    "id": 1790749396043,
     "pasajeros": [
       "Lide",
       "Asier"
     ],
     "valorViaje": 1,
-    "dinero": 8.39
+    "marcado": true
   },
   {
     "id": 1791185046496,
