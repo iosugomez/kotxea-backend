@@ -406,16 +406,17 @@
     "dinero": 0
   },
   {
-    "id": 1774544734699,
-    "fecha": "2026-03-26",
     "conductor": "Lide",
+    "dinero": 12.37,
+    "fecha": "2026-03-26",
+    "id": 1774544734699,
     "pasajeros": [
       "Iosu",
       "Asier",
       "Itziar"
     ],
     "valorViaje": 0,
-    "dinero": 12.37
+    "marcado": true
   },
   {
     "id": 1774621237161,
