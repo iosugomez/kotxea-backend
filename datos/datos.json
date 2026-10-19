@@ -1707,14 +1707,14 @@
     "marcado": false
   },
   {
-    "id": 1792044488101,
-    "fecha": "2026-10-15",
     "conductor": "Itziar",
+    "dinero": 4.2,
+    "fecha": "2026-10-15",
+    "id": 1792044488101,
+    "marcado": false,
     "pasajeros": [
       "Asier"
     ],
-    "valorViaje": 1,
-    "dinero": 4.2,
-    "marcado": true
+    "valorViaje": 1
   }
 ]
