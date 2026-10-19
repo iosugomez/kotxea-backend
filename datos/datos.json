@@ -1694,14 +1694,15 @@
     "dinero": 0
   },
   {
-    "id": 1791878586622,
-    "fecha": "2026-10-08",
     "conductor": "Asier",
+    "dinero": 4.21,
+    "fecha": "2026-10-08",
+    "id": 1791878586622,
     "pasajeros": [
       "Lide"
     ],
     "valorViaje": 1,
-    "dinero": 4.21
+    "marcado": true
   },
   {
     "id": 1792044488101,
