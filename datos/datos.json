@@ -1737,18 +1737,5 @@
     "valorViaje": 1,
     "dinero": 0,
     "marcado": false
-  },
-  {
-    "id": 1792483233386,
-    "fecha": "2026-10-20",
-    "conductor": "Lide",
-    "pasajeros": [
-      "Iosu",
-      "Asier",
-      "Itziar"
-    ],
-    "valorViaje": 1,
-    "dinero": 0,
-    "marcado": false
   }
 ]
