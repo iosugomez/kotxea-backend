@@ -1749,5 +1749,18 @@
     ],
     "valorViaje": 0,
     "dinero": 12.63
+  },
+  {
+    "id": 1792665874886,
+    "fecha": "2026-10-22",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Iosu",
+      "Lide",
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0,
+    "marcado": false
   }
 ]
