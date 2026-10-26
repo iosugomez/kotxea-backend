@@ -526,14 +526,15 @@
     "dinero": 0
   },
   {
-    "id": 1776689447905,
-    "fecha": "2026-04-13",
     "conductor": "Lide",
+    "dinero": 2,
+    "fecha": "2026-04-13",
+    "id": 1776689447905,
     "pasajeros": [
       "Asier"
     ],
     "valorViaje": 0.5,
-    "dinero": 2
+    "marcado": true
   },
   {
     "id": 1776689963643,
