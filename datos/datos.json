@@ -1790,5 +1790,16 @@
     "valorViaje": 1,
     "dinero": 0,
     "marcado": false
+  },
+  {
+    "id": 1793183176327,
+    "fecha": "2026-10-28",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Asier"
+    ],
+    "valorViaje": 1,
+    "dinero": 0,
+    "marcado": false
   }
 ]
