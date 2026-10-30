@@ -602,6 +602,24 @@
                                 <option value="">Urte guztiak</option>
                             </select>
                         </div>
+                        <div class="grupo-form" style="min-width: 180px; margin-bottom: 0;">
+                            <label for="historial-gidari-filtro">Gidaria</label>
+                            <select id="historial-gidari-filtro">
+                                <option value="">Guztiak</option>
+                                <option value="Iosu">Iosu</option>
+                                <option value="Lide">Lide</option>
+                                <option value="Asier">Asier</option>
+                                <option value="Itziar">Itziar</option>
+                            </select>
+                        </div>
+                        <div class="grupo-form" style="min-width: 200px; margin-bottom: 0;">
+                            <label for="historial-remuneracion-filtro">Remunerazioa</label>
+                            <select id="historial-remuneracion-filtro">
+                                <option value="">Guztiak</option>
+                                <option value="con">Dirusariarekin</option>
+                                <option value="sin">Dirusaririk gabe</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="historial" id="historial-registro"></div>
@@ -994,6 +1012,8 @@
         let historialPaginaActual = 1;
         let historialMesFiltro = '';
         let historialAnioFiltro = '';
+        let historialGidariFiltro = '';
+        let historialRemuneracionFiltro = '';
         const HISTORIAL_POR_PAGINA = 10;
 
         function actualizarOpcionesFiltroAnioHistorial(registros) {
@@ -1085,6 +1105,18 @@
 
             cambiarFiltroHistorialAnio: (anio) => {
                 historialAnioFiltro = anio;
+                historialPaginaActual = 1;
+                SistemaRegistro.actualizarHistorial();
+            },
+
+            cambiarFiltroHistorialGidari: (gidari) => {
+                historialGidariFiltro = gidari;
+                historialPaginaActual = 1;
+                SistemaRegistro.actualizarHistorial();
+            },
+
+            cambiarFiltroHistorialRemuneracion: (remuneracion) => {
+                historialRemuneracionFiltro = remuneracion;
                 historialPaginaActual = 1;
                 SistemaRegistro.actualizarHistorial();
             },
@@ -1289,30 +1321,44 @@
                     ? filtrados.filter(reg => new Date(reg.fecha).getFullYear().toString() === historialAnioFiltro)
                     : filtrados;
 
-                if (filtradosPorAnio.length === 0) {
+                const filtradosPorGidari = historialGidariFiltro
+                    ? filtradosPorAnio.filter(reg => reg.conductor === historialGidariFiltro)
+                    : filtradosPorAnio;
+
+                const filtradosFinales = historialRemuneracionFiltro
+                    ? filtradosPorGidari.filter(reg => {
+                        if (historialRemuneracionFiltro === 'con') return reg.dinero > 0;
+                        if (historialRemuneracionFiltro === 'sin') return !reg.dinero || reg.dinero === 0;
+                        return true;
+                    })
+                    : filtradosPorGidari;
+
+                if (filtradosFinales.length === 0) {
                     historiales.forEach(historial => {
-                        historial.innerHTML = (historialMesFiltro || historialAnioFiltro)
+                        historial.innerHTML = (historialMesFiltro || historialAnioFiltro || historialGidariFiltro || historialRemuneracionFiltro)
                             ? '<p style="color: #999; text-align: center;">No hay registros para este filtro</p>'
                             : '<p style="color: #999; text-align: center;">No hay registros</p>';
                     });
                     return;
                 }
 
-                const totalPaginas = Math.max(1, Math.ceil(filtradosPorAnio.length / HISTORIAL_POR_PAGINA));
+                const totalPaginas = Math.max(1, Math.ceil(filtradosFinales.length / HISTORIAL_POR_PAGINA));
                 historialPaginaActual = Math.min(Math.max(historialPaginaActual, 1), totalPaginas);
                 const inicio = (historialPaginaActual - 1) * HISTORIAL_POR_PAGINA;
-                const visibles = filtradosPorAnio.slice(inicio, inicio + HISTORIAL_POR_PAGINA);
+                const visibles = filtradosFinales.slice(inicio, inicio + HISTORIAL_POR_PAGINA);
                 const desde = inicio + 1;
-                const hasta = Math.min(inicio + HISTORIAL_POR_PAGINA, filtradosPorAnio.length);
+                const hasta = Math.min(inicio + HISTORIAL_POR_PAGINA, filtradosFinales.length);
 
                 const filtroActivo = [
                     historialMesFiltro ? `hila ${historialMesFiltro}` : '',
-                    historialAnioFiltro ? `urtea ${historialAnioFiltro}` : ''
+                    historialAnioFiltro ? `urtea ${historialAnioFiltro}` : '',
+                    historialGidariFiltro ? `gidaria ${historialGidariFiltro}` : '',
+                    historialRemuneracionFiltro === 'con' ? 'dirusariarekin' : (historialRemuneracionFiltro === 'sin' ? 'dirusaririk gabe' : '')
                 ].filter(Boolean).join(' · ');
 
                 const controlesPaginacion = totalPaginas > 1 ? `
                     <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; padding: 10px 12px; background: #f5f7fb; border-radius: 6px;">
-                        <span style="font-size: 13px; color: #666;">Erakutsi ${desde}-${hasta} / ${filtradosPorAnio.length}${filtroActivo ? ` · ${filtroActivo}` : ''}</span>
+                        <span style="font-size: 13px; color: #666;">Erakutsi ${desde}-${hasta} / ${filtradosFinales.length}${filtroActivo ? ` · ${filtroActivo}` : ''}</span>
                         <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                             <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(1)" ${historialPaginaActual === 1 ? 'disabled' : ''}>« Lehenengoa</button>
                             <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(${historialPaginaActual - 1})" ${historialPaginaActual === 1 ? 'disabled' : ''}>‹ Aurrekoa</button>
@@ -1559,6 +1605,12 @@
             });
             document.getElementById('historial-anio-filtro').addEventListener('change', (event) => {
                 SistemaRegistro.cambiarFiltroHistorialAnio(event.target.value);
+            });
+            document.getElementById('historial-gidari-filtro').addEventListener('change', (event) => {
+                SistemaRegistro.cambiarFiltroHistorialGidari(event.target.value);
+            });
+            document.getElementById('historial-remuneracion-filtro').addEventListener('change', (event) => {
+                SistemaRegistro.cambiarFiltroHistorialRemuneracion(event.target.value);
             });
             // Botones Liquidación
             document.getElementById('btn-liquidacion-total').addEventListener('click', registrarLiquidazioOsoa);
