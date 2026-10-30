@@ -2,7 +2,7 @@
   "name": "Kotxea Gipuzkoan Barrena",
   "short_name": "Kotxea",
   "description": "Bidaien eta diruaren kudeaketa taldean",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#667eea",
   "theme_color": "#667eea",

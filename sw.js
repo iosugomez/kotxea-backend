@@ -3,14 +3,19 @@
 // Las peticiones al backend de Render SIEMPRE van a red
 
 const CACHE_NAME = 'kotxea-cache-v1';
+
+// Obtener el path base desde el scope del Service Worker
+// Si la app esta en /kotxea-backend/, el scope es /kotxea-backend/
+const SW_SCOPE = self.registration.scope;
+
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
-  '/icons/icon-apple.png',
-  '/icons/icon-favicon.ico'
+  SW_SCOPE,
+  SW_SCOPE + 'index.html',
+  SW_SCOPE + 'manifest.json',
+  SW_SCOPE + 'icons/icon-192.png',
+  SW_SCOPE + 'icons/icon-512.png',
+  SW_SCOPE + 'icons/icon-apple.png',
+  SW_SCOPE + 'icons/icon-favicon.ico'
 ];
 
 const BACKEND_URL = 'kotxea-backend.onrender.com';
