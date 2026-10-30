@@ -82,7 +82,7 @@ self.addEventListener('fetch', (event) => {
       });
     }).catch(() => {
       // Si todo falla, servir la pagina principal para rutas SPA
-      return caches.match('/index.html');
+      return caches.match(SW_SCOPE + 'index.html');
     })
   );
 });
