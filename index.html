@@ -996,13 +996,11 @@
                         });
                         const data = await res.json();
                         if (data.status === 'ok' && Array.isArray(data.data)) {
-                            // Solo actualizamos el estado local cuando la cola está vacía
-                            // para no sobreescribir cambios locales más recientes con
-                            // respuestas obsoletas del servidor
-                            if (_colaSync.length === 0) {
-                                Storage.setRegistros(data.data);
-                                SistemaRegistro.actualizarVistas();
-                            }
+                            // No actualizamos el estado local: el frontend ya aplicó
+                            // el cambio de forma optimista antes de enviar la petición.
+                            // Esto evita que respuestas del servidor (incluso con micro-retrasos
+                            // en la consistencia de GitHub) sobreescriban cambios locales
+                            // más recientes y provoquen que elementos "reaparezcan".
                         } else if (data.error === 'Authentication failed') {
                             alert('Errorea: token incorrecto. Introduce la clave de nuevo.');
                             localStorage.removeItem(USR_TOKEN_KEY);
