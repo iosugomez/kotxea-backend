@@ -1811,7 +1811,8 @@
       "Itziar"
     ],
     "valorViaje": 0,
-    "dinero": 8.3
+    "dinero": 8.3,
+    "marcado": true
   },
   {
     "id": 1793345420425,
