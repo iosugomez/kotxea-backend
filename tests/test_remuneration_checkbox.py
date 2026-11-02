@@ -17,5 +17,5 @@ def test_checkbox_toggle_persists_to_shared_data():
     html = Path(__file__).resolve().parents[1].joinpath('index.html').read_text(encoding='utf-8')
 
     assert "checkbox.addEventListener('change'" in html
-    assert "sincronizarNube('edit', { registro: registros[index] })" in html
+    assert "sincronizarNube('edit', { registro: registros[index] }, 'check-' + id)" in html
     assert "registros[index].marcado = event.target.checked" in html

@@ -1,6 +1,7 @@
 
 import os
 import json
+import threading
 from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 from github import Github
@@ -16,6 +17,9 @@ CSV_DINERO_PATH = 'datos/dinero.csv'
 
 app = Flask(__name__)
 CORS(app)
+
+# Lock para serializar operaciones de escritura en GitHub (evita race conditions)
+sync_lock = threading.Lock()
 
 def get_github_repo():
     g = Github(GITHUB_TOKEN)
@@ -134,19 +138,20 @@ def save_data():
     token = req['token']
     if token != USR_TOKEN:
         return jsonify({'error': 'Authentication failed'}), 401
-    repo = get_github_repo()
-    try:
-        # Guardar datos.json
-        content_str = json.dumps(data, indent=2, ensure_ascii=False)
-        save_file(repo, DATA_PATH, content_str, f"Update datos.json {datetime.now().isoformat()}")
-        # Guardar CSVs
-        csv_viajes = generar_csv_viajes(data)
-        save_file(repo, CSV_VIAJES_PATH, csv_viajes, f"Update viajes.csv {datetime.now().isoformat()}")
-        csv_dinero = generar_csv_dinero(data)
-        save_file(repo, CSV_DINERO_PATH, csv_dinero, f"Update dinero.csv {datetime.now().isoformat()}")
-        return jsonify({'status': 'ok'})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    with sync_lock:
+        repo = get_github_repo()
+        try:
+            # Guardar datos.json
+            content_str = json.dumps(data, indent=2, ensure_ascii=False)
+            save_file(repo, DATA_PATH, content_str, f"Update datos.json {datetime.now().isoformat()}")
+            # Guardar CSVs
+            csv_viajes = generar_csv_viajes(data)
+            save_file(repo, CSV_VIAJES_PATH, csv_viajes, f"Update viajes.csv {datetime.now().isoformat()}")
+            csv_dinero = generar_csv_dinero(data)
+            save_file(repo, CSV_DINERO_PATH, csv_dinero, f"Update dinero.csv {datetime.now().isoformat()}")
+            return jsonify({'status': 'ok'})
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
 
 def calcular_pagos_minimos(saldos):
     """Calcula los pagos mínimos tipo Tricount para saldar deudas"""
@@ -232,18 +237,19 @@ def add_registro():
         return jsonify({'error': 'No data or token provided'}), 400
     if req['token'] != USR_TOKEN:
         return jsonify({'error': 'Authentication failed'}), 401
-    repo = get_github_repo()
-    try:
-        content = get_file_content(repo, DATA_PATH)
-        registros = json.loads(content) if content else []
-        registros.append(req['registro'])
-        content_str = json.dumps(registros, indent=2, ensure_ascii=False)
-        save_file(repo, DATA_PATH, content_str, f"Add registro {datetime.now().isoformat()}")
-        save_file(repo, CSV_VIAJES_PATH, generar_csv_viajes(registros), f"Update viajes.csv {datetime.now().isoformat()}")
-        save_file(repo, CSV_DINERO_PATH, generar_csv_dinero(registros), f"Update dinero.csv {datetime.now().isoformat()}")
-        return jsonify({'status': 'ok', 'data': registros})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    with sync_lock:
+        repo = get_github_repo()
+        try:
+            content = get_file_content(repo, DATA_PATH)
+            registros = json.loads(content) if content else []
+            registros.append(req['registro'])
+            content_str = json.dumps(registros, indent=2, ensure_ascii=False)
+            save_file(repo, DATA_PATH, content_str, f"Add registro {datetime.now().isoformat()}")
+            save_file(repo, CSV_VIAJES_PATH, generar_csv_viajes(registros), f"Update viajes.csv {datetime.now().isoformat()}")
+            save_file(repo, CSV_DINERO_PATH, generar_csv_dinero(registros), f"Update dinero.csv {datetime.now().isoformat()}")
+            return jsonify({'status': 'ok', 'data': registros})
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
 
 @app.route('/delete', methods=['POST'])
 def delete_registro():
@@ -252,18 +258,19 @@ def delete_registro():
         return jsonify({'error': 'No data or token provided'}), 400
     if req['token'] != USR_TOKEN:
         return jsonify({'error': 'Authentication failed'}), 401
-    repo = get_github_repo()
-    try:
-        content = get_file_content(repo, DATA_PATH)
-        registros = json.loads(content) if content else []
-        registros = [r for r in registros if r.get('id') != req['id']]
-        content_str = json.dumps(registros, indent=2, ensure_ascii=False)
-        save_file(repo, DATA_PATH, content_str, f"Delete registro {req['id']} {datetime.now().isoformat()}")
-        save_file(repo, CSV_VIAJES_PATH, generar_csv_viajes(registros), f"Update viajes.csv {datetime.now().isoformat()}")
-        save_file(repo, CSV_DINERO_PATH, generar_csv_dinero(registros), f"Update dinero.csv {datetime.now().isoformat()}")
-        return jsonify({'status': 'ok', 'data': registros})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    with sync_lock:
+        repo = get_github_repo()
+        try:
+            content = get_file_content(repo, DATA_PATH)
+            registros = json.loads(content) if content else []
+            registros = [r for r in registros if r.get('id') != req['id']]
+            content_str = json.dumps(registros, indent=2, ensure_ascii=False)
+            save_file(repo, DATA_PATH, content_str, f"Delete registro {req['id']} {datetime.now().isoformat()}")
+            save_file(repo, CSV_VIAJES_PATH, generar_csv_viajes(registros), f"Update viajes.csv {datetime.now().isoformat()}")
+            save_file(repo, CSV_DINERO_PATH, generar_csv_dinero(registros), f"Update dinero.csv {datetime.now().isoformat()}")
+            return jsonify({'status': 'ok', 'data': registros})
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
 
 @app.route('/edit', methods=['POST'])
 def edit_registro():
@@ -272,22 +279,23 @@ def edit_registro():
         return jsonify({'error': 'No data or token provided'}), 400
     if req['token'] != USR_TOKEN:
         return jsonify({'error': 'Authentication failed'}), 401
-    repo = get_github_repo()
-    try:
-        content = get_file_content(repo, DATA_PATH)
-        registros = json.loads(content) if content else []
-        idx = next((i for i, r in enumerate(registros) if r.get('id') == req['registro']['id']), None)
-        if idx is not None:
-            registros[idx] = req['registro']
-        else:
-            registros.append(req['registro'])
-        content_str = json.dumps(registros, indent=2, ensure_ascii=False)
-        save_file(repo, DATA_PATH, content_str, f"Edit registro {req['registro']['id']} {datetime.now().isoformat()}")
-        save_file(repo, CSV_VIAJES_PATH, generar_csv_viajes(registros), f"Update viajes.csv {datetime.now().isoformat()}")
-        save_file(repo, CSV_DINERO_PATH, generar_csv_dinero(registros), f"Update dinero.csv {datetime.now().isoformat()}")
-        return jsonify({'status': 'ok', 'data': registros})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    with sync_lock:
+        repo = get_github_repo()
+        try:
+            content = get_file_content(repo, DATA_PATH)
+            registros = json.loads(content) if content else []
+            idx = next((i for i, r in enumerate(registros) if r.get('id') == req['registro']['id']), None)
+            if idx is not None:
+                registros[idx] = req['registro']
+            else:
+                registros.append(req['registro'])
+            content_str = json.dumps(registros, indent=2, ensure_ascii=False)
+            save_file(repo, DATA_PATH, content_str, f"Edit registro {req['registro']['id']} {datetime.now().isoformat()}")
+            save_file(repo, CSV_VIAJES_PATH, generar_csv_viajes(registros), f"Update viajes.csv {datetime.now().isoformat()}")
+            save_file(repo, CSV_DINERO_PATH, generar_csv_dinero(registros), f"Update dinero.csv {datetime.now().isoformat()}")
+            return jsonify({'status': 'ok', 'data': registros})
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
 
 @app.route('/verify-token', methods=['POST'])
 def verify_token():

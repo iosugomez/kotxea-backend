@@ -980,8 +980,13 @@
                     .catch(err => alert('Errorea sarea erabiliz hodeian gordetzean'));
                 }
 
-                // ===== SINCRONIZACIÓN POR OPERACIÓN (evita sobreescrituras) =====
-                async function sincronizarNube(endpoint, payload) {
+                // ===== SINCRONIZACIÓN POR OPERACIÓN CON COLA SERIALIZADA =====
+                // Evita race conditions: solo una petición en vuelo a la vez.
+                // Si llegan varias peticiones mientras una está en curso, se encolan.
+                const _colaSync = [];
+                let _procesandoSync = false;
+
+                async function _ejecutarSincronizacion(endpoint, payload) {
                     const token = getToken();
                     try {
                         const res = await fetch(`https://kotxea-backend.onrender.com/${endpoint}`, {
@@ -1002,6 +1007,32 @@
                         }
                     } catch (err) {
                         alert('Errorea sarea erabiliz hodeian gordetzean');
+                    }
+                }
+
+                async function _procesarColaSync() {
+                    if (_procesandoSync) return;
+                    _procesandoSync = true;
+                    while (_colaSync.length > 0) {
+                        const { endpoint, payload } = _colaSync.shift();
+                        await _ejecutarSincronizacion(endpoint, payload);
+                    }
+                    _procesandoSync = false;
+                }
+
+                // Debounce por clave: evita commits duplicados si el usuario
+                // marca/desmarca la misma casilla rápido (p.ej. doble click).
+                const _debounceSync = {};
+                function sincronizarNube(endpoint, payload, debounceKey) {
+                    if (debounceKey) {
+                        clearTimeout(_debounceSync[debounceKey]);
+                        _debounceSync[debounceKey] = setTimeout(() => {
+                            _colaSync.push({ endpoint, payload });
+                            _procesarColaSync();
+                        }, 400);
+                    } else {
+                        _colaSync.push({ endpoint, payload });
+                        _procesarColaSync();
                     }
                 }
 
@@ -1559,7 +1590,7 @@
 
                         registros[index].marcado = event.target.checked;
                         Storage.setRegistros(registros);
-                        sincronizarNube('edit', { registro: registros[index] });
+                        sincronizarNube('edit', { registro: registros[index] }, 'check-' + id);
                     });
                 });
             },
