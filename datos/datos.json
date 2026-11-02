@@ -1851,18 +1851,6 @@
     "marcado": false
   },
   {
-    "conductor": "Asier",
-    "dinero": 4.18,
-    "fecha": "2026-10-30",
-    "id": 1793600871341,
-    "marcado": false,
-    "pasajeros": [
-      "Lide",
-      "Itziar"
-    ],
-    "valorViaje": 0
-  },
-  {
     "id": 1793610175578,
     "fecha": "2026-11-02",
     "conductor": "Iosu",
