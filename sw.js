@@ -2,7 +2,7 @@
 // Cachea archivos estaticos para funcionamiento offline
 // Las peticiones al backend de Render SIEMPRE van a red
 
-const CACHE_NAME = 'kotxea-cache-v1';
+const CACHE_NAME = 'kotxea-cache-v2';
 
 // Obtener el path base desde el scope del Service Worker
 // Si la app esta en /kotxea-backend/, el scope es /kotxea-backend/
