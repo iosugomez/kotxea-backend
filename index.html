@@ -996,8 +996,13 @@
                         });
                         const data = await res.json();
                         if (data.status === 'ok' && Array.isArray(data.data)) {
-                            Storage.setRegistros(data.data);
-                            SistemaRegistro.actualizarVistas();
+                            // Solo actualizamos el estado local cuando la cola está vacía
+                            // para no sobreescribir cambios locales más recientes con
+                            // respuestas obsoletas del servidor
+                            if (_colaSync.length === 0) {
+                                Storage.setRegistros(data.data);
+                                SistemaRegistro.actualizarVistas();
+                            }
                         } else if (data.error === 'Authentication failed') {
                             alert('Errorea: token incorrecto. Introduce la clave de nuevo.');
                             localStorage.removeItem(USR_TOKEN_KEY);
