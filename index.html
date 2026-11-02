@@ -1736,8 +1736,13 @@
                                     despertarServidor();
                                     // Botón Restaurar desde la nube
                                     document.getElementById('btn-restaurar-nube').addEventListener('click', restaurarDesdeNube);
-                                    // Restaurar automáticamente al iniciar
-                                    restaurarDesdeNube();
+                                    // Restaurar automáticamente al iniciar SOLO si no hay operaciones pendientes
+                                    // Si hay cola pendiente, confiar en el estado local (localStorage) para evitar
+                                    // que elementos borrados "reaparezcan" brevemente antes de que se procese la cola
+                                    const colaPendiente = JSON.parse(localStorage.getItem('colaSyncPendiente') || '[]');
+                                    if (colaPendiente.length === 0) {
+                                        restaurarDesdeNube();
+                                    }
                         // Botón Guardar en la nube
                         document.getElementById('btn-guardar-nube').addEventListener('click', guardarEnLaNube);
             // Establecer fecha actual por defecto
