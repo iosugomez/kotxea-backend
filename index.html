@@ -1460,8 +1460,8 @@
                     historialRemuneracionFiltro === 'con' ? 'dirusariarekin' : (historialRemuneracionFiltro === 'sin' ? 'dirusaririk gabe' : '')
                 ].filter(Boolean).join(' · ');
 
-                const controlesPaginacion = totalPaginas > 1 ? `
-                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; padding: 10px 12px; background: #f5f7fb; border-radius: 6px;">
+                const crearControlesPaginacion = (margen) => totalPaginas > 1 ? `
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; ${margen}; padding: 10px 12px; background: #f5f7fb; border-radius: 6px;">
                         <span style="font-size: 13px; color: #666;">Erakutsi ${desde}-${hasta} / ${filtradosFinales.length}${filtroActivo ? ` · ${filtroActivo}` : ''}</span>
                         <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                             <button class="btn-secundario" type="button" style="padding: 8px 12px; font-size: 12px;" onclick="SistemaRegistro.irPaginaHistorial(1)" ${historialPaginaActual === 1 ? 'disabled' : ''}>« Lehenengoa</button>
@@ -1473,7 +1473,10 @@
                     </div>
                 ` : '';
 
-                const contenido = controlesPaginacion + visibles.map(reg => {
+                const controlesPaginacionArriba = crearControlesPaginacion('margin-bottom: 15px');
+                const controlesPaginacionAbajo = crearControlesPaginacion('margin-top: 15px');
+
+                const contenido = controlesPaginacionArriba + visibles.map(reg => {
                     // Liquidacion total
                     if (reg.tipo === 'liquidacion' && reg.subtipo === 'total') {
                         const detalle = Object.entries(reg.ajustes || {})
@@ -1541,7 +1544,7 @@
                             </div>
                         </div>
                     `;
-                }).join('');
+                }).join('') + controlesPaginacionAbajo;
 
                 historiales.forEach(historial => {
                     historial.innerHTML = contenido;
