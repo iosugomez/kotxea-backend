@@ -1860,16 +1860,5 @@
     ],
     "valorViaje": 0,
     "dinero": 4.19
-  },
-  {
-    "id": 1793610457468,
-    "fecha": "2026-11-02",
-    "conductor": "Iosu",
-    "pasajeros": [
-      "Lide"
-    ],
-    "valorViaje": 1,
-    "dinero": 0,
-    "marcado": false
   }
 ]
