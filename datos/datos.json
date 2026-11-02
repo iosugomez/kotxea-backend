@@ -1871,5 +1871,16 @@
     "valorViaje": 1,
     "dinero": 0,
     "marcado": false
+  },
+  {
+    "id": 1793610328039,
+    "fecha": "2026-11-02",
+    "conductor": "Asier",
+    "pasajeros": [
+      "Itziar"
+    ],
+    "valorViaje": 1,
+    "dinero": 0,
+    "marcado": false
   }
 ]
