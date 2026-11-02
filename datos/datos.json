@@ -1799,7 +1799,8 @@
       "Asier"
     ],
     "valorViaje": 1,
-    "dinero": 4.63
+    "dinero": 4.63,
+    "marcado": true
   },
   {
     "id": 1793183266984,
