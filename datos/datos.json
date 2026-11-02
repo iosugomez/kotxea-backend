@@ -1796,11 +1796,11 @@
     "dinero": 4.63,
     "fecha": "2026-10-28",
     "id": 1793183176327,
-    "marcado": false,
     "pasajeros": [
       "Asier"
     ],
-    "valorViaje": 1
+    "valorViaje": 1,
+    "marcado": false
   },
   {
     "id": 1793183266984,
