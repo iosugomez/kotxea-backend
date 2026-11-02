@@ -2,7 +2,7 @@
 // Cachea archivos estaticos para funcionamiento offline
 // Las peticiones al backend de Render SIEMPRE van a red
 
-const CACHE_NAME = 'kotxea-cache-v2';
+const CACHE_NAME = 'kotxea-cache-v3';
 
 // Obtener el path base desde el scope del Service Worker
 // Si la app esta en /kotxea-backend/, el scope es /kotxea-backend/
@@ -66,7 +66,27 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Para archivos estaticos: cache-first con fallback a red
+  // La pagina principal (HTML): red-first para que los cambios lleguen sin tocar el SW
+  if (event.request.mode === 'navigate' || url.pathname.endsWith('index.html')) {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-cache' }).then((response) => {
+        // Actualizar la cache con la version fresca
+        if (response && response.status === 200 && response.type === 'basic') {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseClone);
+          });
+        }
+        return response;
+      }).catch(() => {
+        // Sin red: servir la version cacheada
+        return caches.match(event.request).then((cached) => cached || caches.match(SW_SCOPE + 'index.html'));
+      })
+    );
+    return;
+  }
+
+  // Otros archivos estaticos (manifest, iconos): cache-first con fallback a red
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
