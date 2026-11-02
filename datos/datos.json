@@ -1846,7 +1846,8 @@
       "Lide"
     ],
     "valorViaje": 0,
-    "dinero": 4.12
+    "dinero": 4.12,
+    "marcado": true
   },
   {
     "id": 1793600871341,
