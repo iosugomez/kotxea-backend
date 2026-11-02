@@ -983,8 +983,15 @@
                 // ===== SINCRONIZACIÓN POR OPERACIÓN CON COLA SERIALIZADA =====
                 // Evita race conditions: solo una petición en vuelo a la vez.
                 // Si llegan varias peticiones mientras una está en curso, se encolan.
-                const _colaSync = [];
+                // La cola se persiste en localStorage para sobrevivir a recargas de página.
+                const COLA_SYNC_KEY = 'colaSyncPendiente';
+                const _colaSync = JSON.parse(localStorage.getItem(COLA_SYNC_KEY) || '[]');
                 let _procesandoSync = false;
+
+                // Persistir la cola en localStorage
+                function _persistirCola() {
+                    localStorage.setItem(COLA_SYNC_KEY, JSON.stringify(_colaSync));
+                }
 
                 async function _ejecutarSincronizacion(endpoint, payload) {
                     const token = getToken();
@@ -1018,6 +1025,7 @@
                     _procesandoSync = true;
                     while (_colaSync.length > 0) {
                         const { endpoint, payload } = _colaSync.shift();
+                        _persistirCola(); // Actualizar localStorage tras eliminar item
                         await _ejecutarSincronizacion(endpoint, payload);
                     }
                     _procesandoSync = false;
@@ -1031,12 +1039,19 @@
                         clearTimeout(_debounceSync[debounceKey]);
                         _debounceSync[debounceKey] = setTimeout(() => {
                             _colaSync.push({ endpoint, payload });
+                            _persistirCola(); // Persistir tras añadir item
                             _procesarColaSync();
                         }, 400);
                     } else {
                         _colaSync.push({ endpoint, payload });
+                        _persistirCola(); // Persistir tras añadir item
                         _procesarColaSync();
                     }
+                }
+
+                // Reanudar procesamiento si había operaciones pendientes de una sesión anterior
+                if (_colaSync.length > 0) {
+                    _procesarColaSync();
                 }
 
                 // ===== LIQUIDAZIOA DESPLEGABLE =====
