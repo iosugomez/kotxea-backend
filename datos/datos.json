@@ -1803,16 +1803,16 @@
     "marcado": true
   },
   {
-    "id": 1793183266984,
-    "fecha": "2026-10-27",
     "conductor": "Asier",
+    "dinero": 8.3,
+    "fecha": "2026-10-27",
+    "id": 1793183266984,
+    "marcado": false,
     "pasajeros": [
       "Lide",
       "Itziar"
     ],
-    "valorViaje": 0,
-    "dinero": 8.3,
-    "marcado": true
+    "valorViaje": 0
   },
   {
     "id": 1793345420425,
