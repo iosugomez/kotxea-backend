@@ -1860,17 +1860,6 @@
     "dinero": 4.18
   },
   {
-    "id": 1793609113554,
-    "fecha": "2026-11-02",
-    "conductor": "Iosu",
-    "pasajeros": [
-      "Itziar"
-    ],
-    "valorViaje": 1,
-    "dinero": 0,
-    "marcado": false
-  },
-  {
     "id": 1793609135442,
     "fecha": "2026-11-02",
     "conductor": "Lide",
