@@ -1861,5 +1861,16 @@
       "Itziar"
     ],
     "valorViaje": 0
+  },
+  {
+    "id": 1793610172922,
+    "fecha": "2026-11-02",
+    "conductor": "Iosu",
+    "pasajeros": [
+      "Lide"
+    ],
+    "valorViaje": 1,
+    "dinero": 0,
+    "marcado": false
   }
 ]
