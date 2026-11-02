@@ -37,6 +37,39 @@ Otras notas del SW:
    - Navegador: recargar la página tras el deploy (la caché HTTP de Pages puede retener la versión vieja hasta ~10 min).
    - PWA instalada en móvil: ver tabla del SW arriba — para `index.html`, al siguiente arranque de la app.
 
+## Despliegue del backend en Render
+
+El backend (`save_to_github.py`, `requirements.txt`) corre en Render (free tier). **No tiene auto-deploy configurado**, así que los cambios no se aplican solos tras el push.
+
+### Cuándo avisar al usuario para reiniciar Render
+
+**AVISA SIEMPRE** tras hacer push si el commit incluye cambios en cualquiera de estos archivos:
+
+| Archivo | ¿Avisar para reiniciar Render? |
+|---|---|
+| `save_to_github.py` | **SÍ** — es el código del backend |
+| `requirements.txt` | **SÍ** — cambia dependencias del backend |
+| Variables de entorno (si las hubiera) | **SÍ** — necesitan redeploy |
+| `index.html` | NO — solo afecta a Pages |
+| `sw.js`, `manifest.json`, `icons/` | NO — solo afectan a la PWA |
+| `datos/*.csv` | NO — son datos, no código |
+| `tests/*` | NO — no afectan al backend desplegado |
+| `AGENTS.md` | NO — es documentación para agentes |
+
+### Cómo avisar
+
+Tras el push, si hay cambios en archivos del backend, añadir un mensaje claro como:
+
+> → **Reinicia Render** para que coja los cambios en `save_to_github.py`.
+
+O similar. El usuario tiene que entrar en el dashboard de Render y hacer "Manual Deploy" o "Restart".
+
+### Notas adicionales
+
+- Render está en free tier y **duerme tras 15 min de inactividad**: el primer request tras dormir tarda ~30-60s (cold start).
+- Si el usuario reporta que el backend "no funciona" tras un push, probablemente es porque no ha reiniciado Render.
+- Los commits automáticos del backend a `datos/` no requieren reinicio (solo tocan datos, no código).
+
 ## Prueba local
 
 - `index.html` se puede abrir directamente en el navegador: la UI funciona porque las llamadas al backend van a la URL absoluta de Render.
