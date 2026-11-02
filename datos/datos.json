@@ -1859,6 +1859,7 @@
       "Itziar"
     ],
     "valorViaje": 0,
-    "dinero": 4.19
+    "dinero": 4.19,
+    "marcado": true
   }
 ]
