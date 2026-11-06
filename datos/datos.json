@@ -75,16 +75,16 @@
     "valorViaje": 1
   },
   {
-    "conductor": "Asier",
-    "dinero": 12.44,
-    "fecha": "2026-01-19",
     "id": 1768903567539,
+    "fecha": "2026-01-19",
+    "conductor": "Asier",
     "pasajeros": [
       "Lide",
       "Itziar"
     ],
-    "marcado": true,
-    "valorViaje": 1
+    "valorViaje": 1,
+    "dinero": 4.94,
+    "marcado": true
   },
   {
     "conductor": "Lide",
