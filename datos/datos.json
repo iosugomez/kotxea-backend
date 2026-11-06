@@ -380,7 +380,8 @@
       "Itziar"
     ],
     "valorViaje": 1,
-    "dinero": 8.15
+    "dinero": 8.15,
+    "marcado": true
   },
   {
     "conductor": "Lide",
