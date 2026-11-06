@@ -309,7 +309,8 @@
     "pasajeros": [
       "Iosu"
     ],
-    "valorViaje": 1
+    "valorViaje": 1,
+    "marcado": true
   },
   {
     "conductor": "Iosu",
