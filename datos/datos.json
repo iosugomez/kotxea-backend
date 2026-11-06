@@ -1916,6 +1916,7 @@
       "Iosu"
     ],
     "valorViaje": 0,
-    "dinero": 2.1
+    "dinero": 2.1,
+    "marcado": true
   }
 ]
