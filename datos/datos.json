@@ -1097,7 +1097,8 @@
       "Iosu"
     ],
     "valorViaje": 1.8,
-    "dinero": 8.34
+    "dinero": 8.34,
+    "marcado": true
   },
   {
     "id": 1782199502721,
