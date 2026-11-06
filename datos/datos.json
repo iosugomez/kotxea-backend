@@ -381,7 +381,7 @@
     ],
     "valorViaje": 1,
     "dinero": 8.15,
-    "marcado": true
+    "marcado": false
   },
   {
     "conductor": "Lide",
