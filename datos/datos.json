@@ -8,7 +8,7 @@
       "Asier",
       "Itziar"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -19,7 +19,7 @@
     "pasajeros": [
       "Iosu"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -32,7 +32,7 @@
       "Lide",
       "Asier"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -45,7 +45,7 @@
       "Asier",
       "Itziar"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -59,7 +59,7 @@
     ],
     "valorViaje": 1,
     "dinero": 10.41,
-    "marcado": true
+    "marcado": false
   },
   {
     "conductor": "Itziar",
@@ -71,7 +71,7 @@
       "Lide",
       "Asier"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -84,7 +84,7 @@
     ],
     "valorViaje": 1,
     "dinero": 4.94,
-    "marcado": true
+    "marcado": false
   },
   {
     "conductor": "Lide",
@@ -96,7 +96,7 @@
       "Asier",
       "Itziar"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -109,7 +109,7 @@
       "Asier",
       "Itziar"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -122,7 +122,7 @@
       "Lide",
       "Asier"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -135,7 +135,7 @@
       "Asier",
       "Itziar"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 0
   },
   {
@@ -147,7 +147,7 @@
       "Iosu",
       "Itziar"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -160,7 +160,7 @@
       "Asier",
       "Itziar"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -173,7 +173,7 @@
       "Asier",
       "Itziar"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -186,7 +186,7 @@
       "Lide",
       "Asier"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -199,7 +199,7 @@
       "Lide",
       "Itziar"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 0
   },
   {
@@ -212,7 +212,7 @@
       "Lide",
       "Asier"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 0
   },
   {
@@ -225,7 +225,7 @@
       "Lide",
       "Itziar"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -250,7 +250,7 @@
       "Asier",
       "Itziar"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 0
   },
   {
@@ -262,7 +262,7 @@
       "Asier",
       "Itziar"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -275,7 +275,7 @@
       "Lide",
       "Asier"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 1
   },
   {
@@ -298,7 +298,7 @@
       "Iosu",
       "Asier"
     ],
-    "marcado": true,
+    "marcado": false,
     "valorViaje": 0
   },
   {
