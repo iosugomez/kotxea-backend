@@ -1111,13 +1111,9 @@
             return registros.map(reg => {
                 if (!reg || typeof reg !== 'object') return reg;
 
-                const fecha = reg.fecha;
                 const dinero = Number(reg.dinero) || 0;
-                const esHistoricoConDinero = !!fecha && fecha < '2026-03-01' && dinero > 0;
 
-                if (esHistoricoConDinero) {
-                    reg.marcado = true;
-                } else if (dinero <= 0) {
+                if (dinero <= 0) {
                     reg.marcado = false;
                 }
 

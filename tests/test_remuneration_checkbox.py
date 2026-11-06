@@ -10,7 +10,7 @@ def test_remuneration_history_rows_include_checkbox_for_positive_amounts():
     assert 'Egiaztatu' in html
     assert 'Markatu' not in html
     assert 'normalizarMarcadoHistorico' in html
-    assert 'reg.marcado = true' in html
+    assert 'reg.marcado = true' not in html
 
 
 def test_checkbox_toggle_persists_to_shared_data():
